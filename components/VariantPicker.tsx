@@ -1,133 +1,188 @@
 // components/VariantPicker.tsx
 "use client";
-import { useMemo, useState } from "react";
-import { findVariantId, VariantNode } from "@/lib/variant";
+
+import { useState } from "react";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
 
-type ProductForPicker = {
-  options?: { name: string; values: string[] }[];   // make optional
-  variants: { edges: { node: VariantNode }[] };
-  title?: string;
-  featuredImage?: { url: string; altText: string };
-};
+interface VariantPickerProps {
+  product: {
+    options: { name: string; values: string[] }[];
+    variants: { edges: { node: any }[] };
+    title?: string;
+    featuredImage?: { url: string; altText?: string };
+    descriptionHtml?: string;
+  };
+}
 
-export default function VariantPicker({ product }: { product: ProductForPicker }) {
-  const options = product.options ?? [];
+export default function VariantPicker({ product }: VariantPickerProps) {
+  const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
+  const [quantity, setQuantity] = useState(1);
 
-  // If no options, just render qty + Add to Cart + Buy Now for the first variant
-  if (options.length === 0) {
-    const first = product.variants.edges[0]?.node;
-    return (
-      <div className="space-y-4">
-        <QtyAndButtons 
-          merchandiseId={first?.id} 
-          title={product.title}
-          price={first?.price?.amount}
-          image={product.featuredImage?.url}
-        />
-      </div>
-    );
-  }
+  // Get all options (Frame, Gold Leaf, etc.)
+  const allOptions = product.options;
+  
+  // Check if we actually have meaningful variants to select from
+  const hasMultipleVariants = product.variants.edges.length > 1;
+  
+  // Find matching variant
+  const findMatchingVariant = () => {
+    // If no options are selected, return the first variant
+    if (Object.keys(selectedOptions).length === 0) {
+      return product.variants.edges[0]?.node;
+    }
 
-  const defaultSelected = useMemo(() => {
-    const s: Record<string, string> = {};
-    for (const opt of options) s[opt.name] = opt.values[0];
-    return s;
-  }, [options]);
+    // Find variant that matches selected options
+    return product.variants.edges.find(({ node }: { node: any }) => {
+      return node.selectedOptions.every((option: any) => {
+        // If this option isn't selected, skip it
+        if (!selectedOptions[option.name]) return true;
+        // If this option is selected, check if it matches
+        return selectedOptions[option.name] === option.value;
+      });
+    })?.node;
+  };
 
-  const [selected, setSelected] = useState<Record<string, string>>(defaultSelected);
-  const [qty, setQty] = useState(1);
-  const variant = findVariantId(product.variants, selected);
+  const selectedVariant = findMatchingVariant();
+
+  // Get the base price (lowest price variant)
+  const allVariants = product.variants.edges.map(({ node }: { node: any }) => node);
+  const baseVariant = allVariants.reduce((lowest, current) => {
+    const lowestPrice = parseFloat(lowest.price?.amount || '0');
+    const currentPrice = parseFloat(current.price?.amount || '0');
+    return currentPrice < lowestPrice ? current : lowest;
+  });
+  const basePrice = baseVariant?.price?.amount || '0';
+  const selectedPrice = selectedVariant?.price?.amount || basePrice;
+  
+  // Format prices for display
+  const formatPrice = (price: string) => {
+    const numPrice = parseFloat(price);
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(numPrice);
+  };
+
+  // Debug logging
+  console.log('Product options:', product.options);
+  console.log('Selected options:', selectedOptions);
+  console.log('Selected variant:', selectedVariant);
+  console.log('All variants:', product.variants.edges);
+  console.log('Base variant:', baseVariant);
+  console.log('Base price:', basePrice, 'Selected price:', selectedPrice);
+  console.log('Has multiple variants:', hasMultipleVariants);
 
   return (
     <div className="space-y-4">
-      {options.map((opt) => (
-        <div key={opt.name}>
-          <div className="mb-2 text-sm font-medium">{opt.name}</div>
-          <div className="flex flex-wrap gap-2">
-            {opt.values.map((val) => {
-              const active = selected[opt.name] === val;
-              return (
-                <button
-                  key={val}
-                  type="button"
-                  onClick={() => setSelected((s) => ({ ...s, [opt.name]: val }))}
-                  className={`rounded-lg border px-3 py-1.5 text-sm ${
-                    active ? "border-black bg-black text-white" : "border-gray-300"
-                  }`}
-                >
-                  {val}
-                </button>
-              );
-            })}
-          </div>
+      {/* Dynamic Price Display */}
+      <div className="text-lg font-semibold text-gray-900">
+        <span className="text-gray-600">Price: </span>
+        {formatPrice(selectedPrice)}
+        {selectedPrice !== basePrice && (
+          <span className="text-sm text-gray-500 ml-2">
+            (Base: {formatPrice(basePrice)})
+          </span>
+        )}
+      </div>
+
+      {/* Product Description */}
+      {product.descriptionHtml && (
+        <div
+          className="prose text-sm text-gray-600"
+          dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
+        />
+      )}
+
+      {/* Dynamic Option Selection - Show ALL options when there are multiple variants */}
+      {hasMultipleVariants && allOptions.map((option) => (
+        <div key={option.name}>
+          <label className="block text-sm font-medium text-gray-700 mb-2">
+            {option.name}
+          </label>
+          <select
+            value={selectedOptions[option.name] || ''}
+            onChange={(e) => setSelectedOptions(prev => ({
+              ...prev,
+              [option.name]: e.target.value
+            }))}
+            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          >
+            <option value="">Select {option.name}</option>
+            {option.values.map((value) => (
+              <option key={value} value={value}>
+                {value}
+              </option>
+            ))}
+          </select>
         </div>
       ))}
 
-      <QtyAndButtons 
-        merchandiseId={variant?.id} 
-        unavailable={!variant?.availableForSale} 
-        qty={qty} 
-        setQty={setQty}
-        title={product.title}
-        price={variant?.price?.amount}
-        image={product.featuredImage?.url}
-      />
-    </div>
-  );
-}
+      {/* Helpful message when options aren't selected */}
+      {hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '') && (
+        <div className="text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-200">
+          <p className="font-medium">Please select all options to add to cart</p>
+          <p className="text-xs mt-1">Choose your preferences above to enable the Add to Cart button</p>
+        </div>
+      )}
 
-function QtyAndButtons({
-  merchandiseId,
-  qty = 1,
-  setQty,
-  unavailable,
-  title = "",
-  price = "",
-  image = "",
-}: {
-  merchandiseId?: string;
-  qty?: number;
-  setQty?: (n: number) => void;
-  unavailable?: boolean;
-  title?: string;
-  price?: string;
-  image?: string;
-}) {
-  return (
-    <>
-      <div className="flex items-center gap-3">
-        <label className="text-sm font-medium">Quantity</label>
+      {/* Quantity */}
+      <div>
+        <label className="block text-sm font-medium text-gray-700 mb-2">
+          Quantity
+        </label>
         <input
           type="number"
-          min={1}
-          value={qty}
-          onChange={(e) => setQty?.(Math.max(1, Number(e.target.value) || 1))}
-          className="w-20 rounded-lg border border-gray-300 px-3 py-1.5"
+          min="1"
+          value={quantity}
+          onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
+          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
         />
       </div>
 
-      <div className="flex gap-3">
-        <AddToCartButton
-          merchandiseId={merchandiseId || ""}
-          quantity={qty}
-          title={title}
-          price={price}
-          image={image}
-          className="flex-1 rounded-lg px-4 py-3 bg-black text-white disabled:opacity-50"
-        />
-        
-        <BuyNowButton
-          merchandiseId={merchandiseId || ""}
-          quantity={qty}
-          className="flex-1 rounded-lg px-4 py-3 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50"
-        />
+      {/* Action Buttons */}
+      <div className="space-y-2">
+        {selectedVariant ? (
+          <>
+            <AddToCartButton
+              merchandiseId={selectedVariant.id}
+              quantity={quantity}
+              title={product.title || 'Product'}
+              price={selectedVariant.price?.amount || '0'}
+              image={product.featuredImage?.url}
+              variantOptions={selectedOptions}
+              variantTitle={selectedVariant.title}
+              disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
+            />
+            <BuyNowButton
+              merchandiseId={selectedVariant.id}
+              quantity={quantity}
+              disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
+            />
+          </>
+        ) : (
+          // Fallback: show buttons for first variant if no match
+          product.variants.edges[0]?.node && (
+            <>
+              <AddToCartButton
+                merchandiseId={product.variants.edges[0].node.id}
+                quantity={quantity}
+                title={product.title || 'Product'}
+                price={product.variants.edges[0].node.price?.amount || '0'}
+                image={product.featuredImage?.url}
+                variantOptions={{}}
+                variantTitle={product.variants.edges[0].node.title}
+                disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
+              />
+              <BuyNowButton
+                merchandiseId={product.variants.edges[0].node.id}
+                quantity={quantity}
+                disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
+              />
+            </>
+          )
+        )}
       </div>
-      
-      {unavailable === true && (
-        <div className="text-sm text-red-600">This variant is currently unavailable.</div>
-      )}
-    </>
+    </div>
   );
 }

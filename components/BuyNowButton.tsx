@@ -7,10 +7,12 @@ export default function BuyNowButton({
   merchandiseId,
   quantity = 1,
   className = "",
+  disabled = false,
 }: { 
   merchandiseId: string; 
   quantity?: number; 
   className?: string;
+  disabled?: boolean;
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -30,8 +32,8 @@ export default function BuyNowButton({
 
   return (
     <button
-      className={className || "w-full rounded-lg px-4 py-3 bg-green-600 hover:bg-green-700 text-white"}
-      disabled={loading || !merchandiseId}
+      className={className || "w-full rounded-lg px-4 py-3 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"}
+      disabled={loading || !merchandiseId || disabled}
       onClick={handleBuyNow}
     >
       {loading ? "Redirecting..." : "Buy Now"}

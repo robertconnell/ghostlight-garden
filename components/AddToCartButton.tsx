@@ -10,6 +10,9 @@ export default function AddToCartButton({
   title = "",
   price = "",
   image = "",
+  variantOptions,
+  variantTitle,
+  disabled = false,
 }: { 
   merchandiseId: string; 
   quantity?: number; 
@@ -17,6 +20,9 @@ export default function AddToCartButton({
   title?: string;
   price?: string;
   image?: string;
+  variantOptions?: Record<string, string>;
+  variantTitle?: string;
+  disabled?: boolean;
 }) {
   const [loading, setLoading] = useState(false);
   const { addItem } = useCart();
@@ -31,7 +37,9 @@ export default function AddToCartButton({
         quantity,
         title,
         price,
-        image
+        image,
+        variantOptions,
+        variantTitle
       });
       
       // Optional: Show success message or animation
@@ -47,8 +55,8 @@ export default function AddToCartButton({
 
   return (
     <button
-      className={className || "w-full rounded-lg px-4 py-3 bg-black text-white"}
-      disabled={loading || !merchandiseId}
+      className={className || "w-full rounded-lg px-4 py-3 bg-black text-white disabled:opacity-50 disabled:cursor-not-allowed"}
+      disabled={loading || !merchandiseId || disabled}
       onClick={handleAddToCart}
     >
       {loading ? "Adding..." : "Add to Cart"}

@@ -9,7 +9,7 @@ export default function CartCheckoutButton({
   className?: string;
 }) {
   const [loading, setLoading] = useState(false);
-  const { items, clearCart, totalItems } = useCart();
+  const { items, clearCart, totalItems, markCartAsOrdered } = useCart();
 
   const handleCheckout = async () => {
     if (items.length === 0) {
@@ -71,8 +71,13 @@ export default function CartCheckoutButton({
           throw new Error('No checkout URL returned');
         }
         
-        // Clear the client-side cart and redirect to Shopify
-        clearCart();
+        // Mark this cart as ordered so we can clear it after payment
+        markCartAsOrdered(cartId);
+        
+        // Don't clear the cart yet - let Shopify handle the payment first
+        // The cart will be cleared when they return from successful payment
+        // or we can implement a webhook to clear it after payment confirmation
+        console.log('Redirecting to Shopify checkout...');
         window.location.href = checkoutUrl;
       } catch (error) {
         console.error("Failed to get checkout URL:", error);
@@ -89,7 +94,7 @@ export default function CartCheckoutButton({
 
   return (
     <button
-      className={className || "w-full rounded-lg px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white"}
+      className={className || "w-full rounded-lg px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold"}
       disabled={loading || items.length === 0}
       onClick={handleCheckout}
     >

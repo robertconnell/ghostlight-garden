@@ -3,12 +3,16 @@ import Image from "next/image";
 import { shopifyFetch } from "@/lib/shopify";
 import { PRODUCT_BY_HANDLE } from "@/lib/queries";
 import VariantPicker from "@/components/VariantPicker";
+import BackButton from "@/components/BackButton";
 
-export default async function ProductPage({ params }: { params: { handle: string } }) {
+export default async function ProductPage({ params }: { params: Promise<{ handle: string }> }) {
   try {
+    // Await params in Next.js 15
+    const { handle } = await params;
+    
     // Fetch the product (make sure PRODUCT_BY_HANDLE includes `options { name values }`)
     const { product } = await shopifyFetch<{ product: any }>(PRODUCT_BY_HANDLE, {
-      handle: params.handle,
+      handle: handle,
     });
 
     if (!product) {
@@ -19,7 +23,13 @@ export default async function ProductPage({ params }: { params: { handle: string
     const firstVariant = product.variants?.edges?.[0]?.node;
 
     return (
-      <main className="mx-auto max-w-6xl p-6 grid gap-8 md:grid-cols-2">
+      <main className="mx-auto max-w-6xl p-6">
+        {/* Back Button */}
+        <div className="mb-6">
+          <BackButton />
+        </div>
+
+        <div className="grid gap-8 md:grid-cols-2">
         {/* Gallery */}
         <div>
           {firstImg ? (
@@ -42,13 +52,6 @@ export default async function ProductPage({ params }: { params: { handle: string
         <div>
           <h1 className="text-3xl font-bold">{product.title}</h1>
 
-          {/* Baseline price from first variant (optional; we can live-update later) */}
-          {firstVariant?.price ? (
-            <p className="mt-2 text-lg opacity-80">
-              {Number(firstVariant.price.amount).toFixed(2)} {firstVariant.price.currencyCode}
-            </p>
-          ) : null}
-
           {/* Variant & quantity picker + Buy Now */}
           <div className="mt-6">
             <VariantPicker
@@ -56,6 +59,7 @@ export default async function ProductPage({ params }: { params: { handle: string
                 options: product.options,     // requires options { name, values } in the query
                 variants: product.variants,   // requires variants { id, price, selectedOptions, availableForSale }
                 title: product.title,
+                descriptionHtml: product.descriptionHtml,
                 featuredImage: firstImg ? {
                   url: firstImg.url,
                   altText: firstImg.altText || product.title
@@ -64,16 +68,9 @@ export default async function ProductPage({ params }: { params: { handle: string
             />
           </div>
 
-          {/* Description */}
-          {product.descriptionHtml ? (
-            <div
-              className="prose mt-8"
-              dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
-            />
-          ) : (
-            <p className="mt-8 text-gray-600">No description available.</p>
-          )}
+          {/* Description - Removed since it's now in VariantPicker */}
         </div>
+      </div>
       </main>
     );
   } catch (error) {

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useCart } from "./CartContext";
 import { useState, useEffect, useRef } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 import CartDisplay from "./CartDisplay";
 
 export default function Navigation() {
@@ -54,7 +55,7 @@ export default function Navigation() {
             <div className="relative" ref={cartRef}>
               <button
                 onClick={() => setIsCartOpen(!isCartOpen)}
-                className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors"
+                className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
                 aria-label="Shopping cart"
               >
                 <svg 
@@ -73,18 +74,54 @@ export default function Navigation() {
                 
                 {/* Cart Badge */}
                 {totalItems > 0 && (
-                  <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium">
+                  <motion.span 
+                    className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium"
+                    initial={{ scale: 0 }}
+                    animate={{ scale: 1 }}
+                    transition={{ type: "spring", stiffness: 500, damping: 30 }}
+                  >
                     {totalItems > 99 ? '99+' : totalItems}
-                  </span>
+                  </motion.span>
                 )}
               </button>
 
-              {/* Cart Dropdown */}
-              {isCartOpen && (
-                <div className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50">
-                  <CartDisplay />
-                </div>
-              )}
+              {/* Cart Dropdown with Animation */}
+              <AnimatePresence>
+                {isCartOpen && (
+                  <motion.div
+                    initial={{ 
+                      opacity: 0, 
+                      scale: 0.95, 
+                      y: -10,
+                      height: 0,
+                      x: 20
+                    }}
+                    animate={{ 
+                      opacity: 1, 
+                      scale: 1, 
+                      y: 0,
+                      height: "auto",
+                      x: 0
+                    }}
+                    exit={{ 
+                      opacity: 0, 
+                      scale: 0.95, 
+                      y: -10,
+                      height: 0,
+                      x: 20
+                    }}
+                    transition={{ 
+                      type: "spring", 
+                      stiffness: 300, 
+                      damping: 30,
+                      duration: 0.2
+                    }}
+                    className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden"
+                  >
+                    <CartDisplay />
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
 
             {/* Mobile Menu Button */}
@@ -109,41 +146,66 @@ export default function Navigation() {
           </div>
         </div>
 
-        {/* Mobile Navigation Menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden border-t border-gray-200 py-4">
-            <div className="flex flex-col space-y-4">
-              <Link 
-                href="/home" 
-                className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-2"
+        {/* Mobile Navigation Menu with Animation - Now Overlays Content */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <>
+              {/* Backdrop Overlay - Positioned below navigation bar */}
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-40 md:hidden"
                 onClick={() => setIsMobileMenuOpen(false)}
+              />
+              
+              {/* Mobile Menu Overlay - Height Animation */}
+              <motion.div 
+                initial={{ height: 0, opacity: 0 }}
+                animate={{ height: "auto", opacity: 1 }}
+                exit={{ height: 0, opacity: 0 }}
+                transition={{ 
+                  duration: 0.3, 
+                  ease: "easeInOut",
+                  height: { duration: 0.3, ease: "easeInOut" }
+                }}
+                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50 md:hidden overflow-hidden"
               >
-                Home
-              </Link>
-                             <Link 
-                 href="/shop" 
-                 className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-2"
-                 onClick={() => setIsMobileMenuOpen(false)}
-               >
-                 Shop
-               </Link>
-              <Link 
-                href="/about" 
-                className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                About
-              </Link>
-              <Link 
-                href="/contact" 
-                className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-2"
-                onClick={() => setIsMobileMenuOpen(false)}
-              >
-                Contact
-              </Link>
-            </div>
-          </div>
-        )}
+                <div className="py-4 space-y-1 px-6">
+                  <Link 
+                    href="/home" 
+                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Home
+                  </Link>
+                  <Link 
+                    href="/shop" 
+                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Shop
+                  </Link>
+                  <Link 
+                    href="/about" 
+                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    About
+                  </Link>
+                  <Link 
+                    href="/contact" 
+                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Contact
+                  </Link>
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
       </div>
     </nav>
   );
