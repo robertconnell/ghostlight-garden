@@ -1,5 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto } from "next/font/google";
+import { CartProvider } from "@/components/CartContext";
+import ConditionalNavigation from "@/components/ConditionalNavigation";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -39,8 +41,8 @@ const aboreto = Aboreto({
 });
 
 export const metadata: Metadata = {
-  title: "Ghostlight",
-  description: "Welcome to Ghostlight",
+  title: "Ghostlight Garden",
+  description: "Welcome to Ghostlight Garden",
 };
 
 export default function RootLayout({
@@ -53,7 +55,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} antialiased`}
       >
-        {children}
+        <CartProvider>
+          <ConditionalNavigation />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );
