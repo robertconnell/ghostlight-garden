@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto } from "next/font/google";
 import { CartProvider } from "@/components/CartContext";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
+import GlobalFooter from "@/components/GlobalFooter";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -55,10 +56,10 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} antialiased`}
       >
-        <CartProvider>
-          <ConditionalNavigation />
-          {children}
-        </CartProvider>
+                                        <CartProvider>
+                   <ConditionalNavigation />
+                   {children}
+                 </CartProvider>
       </body>
     </html>
   );

@@ -2,9 +2,32 @@
 
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import GlobalFooter from "@/components/GlobalFooter";
 
 export default function LandingPage() {
   const router = useRouter();
+
+  // Animation variables for consistent timing across PC and mobile
+  const welcomeAnimation = {
+    initial: { opacity: 0, y: 30 },
+    animate: { opacity: 1, y: 0 },
+    transition: { duration: 0.8, delay: 0.4 }
+  };
+
+  const ghostlightAnimation = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 1.4, delay: 1.2 }
+  };
+
+  const buttonAnimation = {
+    initial: { opacity: 0, y: 15 },
+    animate: { opacity: 1, y: 0 },
+    transition: { 
+      opacity: { duration: 1, delay: 2.6, ease: "easeOut" as const },
+      y: { duration: 1, delay: 2.6, ease: "easeOut" as const }
+    }
+  };
 
   const handleNavigateToHome = () => {
     router.push('/home');
@@ -29,9 +52,7 @@ export default function LandingPage() {
       <div className="hidden md:flex relative z-10 flex-1 flex-col items-center justify-start pt-[25vh]">
         <motion.h1 
           className="text-6xl font-bold text-center mb-12 text-white drop-shadow-lg welcome-font"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.4 }}
+          {...welcomeAnimation}
         >
           Welcome to
         </motion.h1>
@@ -39,9 +60,7 @@ export default function LandingPage() {
         {/* Placeholder for brand name - PC size */}
         <motion.div 
           className="mb-16 w-full text-center px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.6, delay: 1.4 }}
+          {...ghostlightAnimation}
         >
           <span className="text-[clamp(2.5rem,8vw,8rem)] font-bold text-white drop-shadow-lg leading-none whitespace-nowrap embossed-text ghostlight-font">Ghostlight Garden</span>
         </motion.div>
@@ -49,17 +68,15 @@ export default function LandingPage() {
         {/* Enter the garden button - PC size */}
         <motion.button
           onClick={handleNavigateToHome}
-          className="rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-3xl h-16 px-12 shadow-lg cursor-pointer button-font"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[8A6D9B]/90 text-white font-bold text-3xl h-16 px-12 shadow-lg cursor-pointer button-font"
+          {...buttonAnimation}
           whileHover={{
             scale: 1.02,
             boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
           }}
           whileTap={{ scale: 0.95 }}
           transition={{
-            opacity: { duration: 1, delay: 2.6, ease: "easeOut" },
-            y: { duration: 1, delay: 2.6, ease: "easeOut" },
+            ...buttonAnimation.transition,
             boxShadow: { duration: 0.4, ease: "easeInOut" }
           }}
         >
@@ -67,43 +84,35 @@ export default function LandingPage() {
         </motion.button>
       </div>
 
-      {/* Mobile UI - Hidden on PC */}
-      <div
-        className="md:hidden relative z-10 flex-1 flex flex-col items-center justify-start pt-16"
-      >
-        <motion.h1
-          className="text-2xl font-bold text-center mb-6 text-white drop-shadow-lg welcome-font"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-        >
-          Welcome to
-        </motion.h1>
+      {/* Mobile UI */}
+      <div className="md:hidden relative z-10 flex-1">
+        {/* Welcome to Ghostlight Garden - Positioned in upper area */}
+        <div className="absolute top-1/6 left-1/2 transform -translate-x-1/2 w-full px-4">
+          <motion.h1
+            className="text-2xl font-bold text-center mb-4 text-white drop-shadow-lg welcome-font"
+            {...welcomeAnimation}
+          >
+            Welcome to
+          </motion.h1>
+          <motion.div
+            className="w-full text-center px-2"
+            {...ghostlightAnimation}
+          >
+            <span className="text-[8vw] font-bold text-white drop-shadow-lg leading-tight embossed-text ghostlight-font whitespace-nowrap">Ghostlight Garden</span>
+          </motion.div>
+        </div>
 
-        {/* Placeholder for brand name - Mobile size */}
-        <motion.div 
-          className="mb-8 w-full text-center px-4"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 1.4, delay: 0.8 }}
-        >
-          <span className="text-[9.5vw] font-bold text-white drop-shadow-lg leading-none whitespace-nowrap ghostlight-font">Ghostlight Garden</span>
-        </motion.div>
-
-        {/* Enter the garden button - Mobile size */}
+        {/* Enter the Garden Button - Positioned in lower area */}
         <motion.button
           onClick={handleNavigateToHome}
-          className="absolute bottom-12 left-1/2 transform -translate-x-1/2 rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-lg h-14 px-8 shadow-lg cursor-pointer w-full max-w-xs button-font"
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
+          className="absolute bottom-1/6 left-1/2 transform -translate-x-1/2 rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl h-14 px-8 shadow-lg cursor-pointer button-font whitespace-nowrap"
+          {...buttonAnimation}
           whileHover={{
-            scale: 1.02,
             boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
           }}
           whileTap={{ scale: 0.95 }}
           transition={{
-            opacity: { duration: 0.8, delay: 1.2, ease: "easeOut" },
-            y: { duration: 0.8, delay: 1.2, ease: "easeOut" },
+            ...buttonAnimation.transition,
             boxShadow: { duration: 0.4, ease: "easeInOut" }
           }}
         >
@@ -111,15 +120,12 @@ export default function LandingPage() {
         </motion.button>
       </div>
       
-      {/* Footer - Responsive */}
-      <motion.footer 
-        className="absolute bottom-0 left-0 right-0 z-10 p-4 md:p-8 flex justify-center"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
-      >
-        <span className="text-xs md:text-sm text-white/80 drop-shadow-sm font-serif">© 2024 Ghostlight</span>
-      </motion.footer>
+      {/* Footer */}
+      <footer className="absolute bottom-0 left-0 right-0 py-6 px-4 text-center z-20">
+        <p className="text-sm text-white drop-shadow-lg">
+          © 2025 Ghostlight Garden. All rights reserved.
+        </p>
+      </footer>
     </div>
   );
 }

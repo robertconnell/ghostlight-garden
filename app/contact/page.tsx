@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import GlobalFooter from "@/components/GlobalFooter";
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -36,9 +37,9 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
       {/* Hero Section */}
-      <div className="relative py-20 px-6">
+      <div className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
           <h1 className="text-5xl font-bold text-gray-900 mb-6">Get in Touch</h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
@@ -48,7 +49,7 @@ export default function ContactPage() {
       </div>
 
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 pb-20">
+      <div className="flex-1 max-w-6xl mx-auto px-6 mb-16">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -212,6 +213,8 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
+      
+      <GlobalFooter />
     </div>
   );
 }

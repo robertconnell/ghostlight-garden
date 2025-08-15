@@ -39,3 +39,39 @@ body {
 .button-font {
   font-family: var(--font-aboreto), serif;
 }
+
+  .glow-button {
+    transition: box-shadow 0.4s ease-in-out;
+  }
+  
+  /* Custom Splide carousel styling */
+  .splide__slide {
+    transition: all 0.2s ease-in-out;
+  }
+  
+  /* Highlight the focused slide */
+  .splide__slide.is-active {
+    opacity: 1;
+    transform: scale(1);
+  }
+  
+  .splide__slide.is-active .splide__slide-content {
+    border-color: rgba(255, 255, 255, 0.4);
+    background-color: rgba(255, 255, 255, 0.1);
+  }
+  
+  /* Dim the non-focused slides */
+  .splide__slide:not(.is-active) {
+    opacity: 0.4;
+    transform: scale(0.95);
+  }
+  
+  .splide__slide:not(.is-active) .splide__slide-content {
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+  
+  /* Smooth transitions for all slides */
+  .splide__slide * {
+    transition: all 0.15s ease-in-out;
+  }

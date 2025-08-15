@@ -1,9 +1,12 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, AnimatePresence } from "framer-motion";
+import { Splide, SplideSlide } from '@splidejs/react-splide';
+// Default theme
+import '@splidejs/react-splide/css';
+import '@splidejs/react-splide/css/core';
 
 interface Product {
   id: string;
@@ -26,39 +29,41 @@ interface ProductCarouselProps {
 }
 
 export default function ProductCarousel({ products }: ProductCarouselProps) {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
-
-  // Auto-advance carousel
-  useEffect(() => {
-    if (!isAutoPlaying) return;
-    
-    const interval = setInterval(() => {
-      setCurrentIndex((prev) => (prev + 1) % products.length);
-    }, 4000);
-
-    return () => clearInterval(interval);
-  }, [isAutoPlaying, products.length]);
-
-  const nextSlide = () => {
-    setCurrentIndex((prev) => (prev + 1) % products.length);
-    setIsAutoPlaying(false);
-    // Resume auto-play after 10 seconds
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
-  const prevSlide = () => {
-    setCurrentIndex((prev) => (prev - 1 + products.length) % products.length);
-    setIsAutoPlaying(false);
-    // Resume auto-play after 10 seconds
-    setTimeout(() => setIsAutoPlaying(true), 10000);
-  };
-
-  const goToSlide = (index: number) => {
-    setCurrentIndex(index);
-    setIsAutoPlaying(false);
-    // Resume auto-play after 10 seconds
-    setTimeout(() => setIsAutoPlaying(true), 10000);
+  // Splide carousel configuration options
+  const splideOptions = {
+    type: "loop", // Loop back to the beginning when reaching the end
+    perPage: 3, // Number of items visible per page
+    perMove: 1, // Move one item at a time
+    rewind: true, // Rewind to start when the end is reached
+    pagination: false, // Disable pagination dots
+    autoplay: true, // Enable autoplay
+    interval: 4000, // 4 seconds between slides
+    pauseOnHover: true, // Pause on hover
+    arrows: true, // Show navigation arrows
+    gap: "1.5rem", // Gap between slides
+    padding: "2rem", // Padding around the carousel
+    start: 0, // Start from the first slide
+    focus: 1, // Focus on the second slide (center of 3)
+    breakpoints: {
+      1024: {
+        perPage: 2,
+        gap: "1.5rem",
+        padding: "1.5rem",
+        focus: "center", // Use center focus for 2 slides on iPad Pro
+      },
+      768: {
+        perPage: 2,
+        gap: "1rem",
+        padding: "1rem",
+        focus: "center", // Use center focus for 2 slides on iPad Air
+      },
+      640: {
+        perPage: 1,
+        gap: "0.75rem",
+        padding: "0.75rem",
+        focus: "center", // Use center focus for 1 slide
+      },
+    },
   };
 
   if (!products || products.length === 0) {
@@ -73,93 +78,42 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     <div className="relative w-full max-w-6xl mx-auto">
       {/* Carousel Container */}
       <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
-        {/* Products */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={currentIndex}
-            initial={{ opacity: 0, x: 100 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.5, ease: "easeInOut" }}
-            className="relative"
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-8">
-              {products.slice(currentIndex, currentIndex + 3).map((product, index) => (
-                <Link
-                  key={product.id}
-                  href={`/products/${product.handle}`}
-                  className="group block"
-                >
-                  <motion.div
-                    whileHover={{ scale: 1.02 }}
-                    transition={{ duration: 0.2 }}
-                    className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300"
-                  >
-                    {/* Product Image */}
-                    <div className="relative aspect-square mb-4 overflow-hidden rounded-lg">
-                      {product.featuredImage ? (
-                        <Image
-                          src={product.featuredImage.url}
-                          alt={product.featuredImage.altText || product.title}
-                          fill
-                          className="object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gray-200 flex items-center justify-center">
-                          <span className="text-gray-400">No image</span>
-                        </div>
-                      )}
-                    </div>
+        {/* Splide component with configuration options */}
+        <Splide options={splideOptions}>
+          {products.map((product) => (
+            <SplideSlide key={product.id}>
+              <Link
+                href={`/products/${product.handle}`}
+                className="group block"
+              >
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-64 md:w-80 mx-auto">
+                  {/* Product Image */}
+                  <div className="relative aspect-square mb-4 overflow-hidden rounded-lg">
+                    {product.featuredImage ? (
+                      <Image
+                        src={product.featuredImage.url}
+                        alt={product.featuredImage.altText || product.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                      />
+                    ) : (
+                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                        <span className="text-gray-400">No image</span>
+                      </div>
+                    )}
+                  </div>
 
-                    {/* Product Info */}
-                    <div className="text-center">
-                      <h3 className="font-semibold text-white mb-2 group-hover:text-purple-200 transition-colors">
-                        {product.title}
-                      </h3>
-                    </div>
-                  </motion.div>
-                </Link>
-              ))}
-            </div>
-          </motion.div>
-        </AnimatePresence>
-
-        {/* Navigation Arrows */}
-        <button
-          onClick={prevSlide}
-          className="absolute left-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 text-white transition-all duration-200 hover:scale-110"
-          aria-label="Previous slide"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
-        </button>
-
-        <button
-          onClick={nextSlide}
-          className="absolute right-4 top-1/2 -translate-y-1/2 bg-white/20 hover:bg-white/30 backdrop-blur-sm rounded-full p-3 text-white transition-all duration-200 hover:scale-110"
-          aria-label="Next slide"
-        >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
-        </button>
-
-        {/* Dots Indicator */}
-        <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex space-x-2">
-          {products.map((_, index) => (
-            <button
-              key={index}
-              onClick={() => goToSlide(index)}
-              className={`w-3 h-3 rounded-full transition-all duration-200 ${
-                index === currentIndex
-                  ? "bg-white scale-125"
-                  : "bg-white/40 hover:bg-white/60"
-              }`}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+                  {/* Product Info */}
+                  <div className="text-center">
+                    <h3 className="font-semibold text-white mb-2 group-hover:text-purple-200 transition-colors">
+                      {product.title}
+                    </h3>
+                  </div>
+                </div>
+              </Link>
+            </SplideSlide>
           ))}
-        </div>
+        </Splide>
       </div>
 
       {/* View All Products Button */}

@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import ProductCarousel from "@/components/ProductCarousel";
+import GlobalFooter from "@/components/GlobalFooter";
 
 interface Product {
   id: string;
@@ -43,7 +44,7 @@ export default function HomePage() {
   }, []);
 
   return (
-    <div className="min-h-screen">
+    <div>
       {/* PC Background */}
       <div className="hidden md:block fixed inset-0 z-0">
         <div 
@@ -61,11 +62,11 @@ export default function HomePage() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 min-h-screen">
+      <div className="relative z-10">
         {/* Hero Section */}
         <div className="flex flex-col items-center justify-center min-h-screen text-white text-center px-4">
           <h1 className="text-4xl md:text-6xl font-bold mb-6">
-            Welcome to Ghostlight Garden
+            Where soft shadows bloom
           </h1>
           <p className="text-xl md:text-2xl mb-8 max-w-2xl">
             Discover unique art pieces that bring beauty and inspiration to your space
@@ -78,7 +79,7 @@ export default function HomePage() {
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
           
           {/* Content */}
-          <div className="relative pt-32 pb-16 px-4">
+          <div className="relative pt-32 px-4">
             {/* Featured Products Section */}
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">
@@ -101,7 +102,7 @@ export default function HomePage() {
             </div>
 
             {/* About Section */}
-            <div className="max-w-4xl mx-auto mt-20 text-center">
+            <div className="max-w-4xl mx-auto mt-20 mb-16 text-center">
               <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
                 About Ghostlight Garden
               </h2>
@@ -112,6 +113,8 @@ export default function HomePage() {
               </p>
             </div>
           </div>
+          
+          <GlobalFooter />
         </div>
       </div>
     </div>
