@@ -4,6 +4,7 @@ import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
+import { IMAGE_PROTECTION_ENABLED } from '@/lib/config';
 // Default theme
 import '@splidejs/react-splide/css';
 import '@splidejs/react-splide/css/core';
@@ -88,13 +89,24 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
               >
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-64 md:w-80 mx-auto">
                   {/* Product Image */}
-                  <div className="relative aspect-square mb-4 overflow-hidden rounded-lg">
+                  <div 
+                    className="relative aspect-square mb-4 overflow-hidden rounded-lg"
+                    {...(IMAGE_PROTECTION_ENABLED ? {
+                      onContextMenu: (e) => e.preventDefault(),
+                      onDragStart: (e) => e.preventDefault()
+                    } : {})}
+                  >
                     {product.featuredImage ? (
                       <Image
                         src={product.featuredImage.url}
                         alt={product.featuredImage.altText || product.title}
                         fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-300"
+                        className={`object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none pointer-events-none' : ''}`}
+                        draggable={!IMAGE_PROTECTION_ENABLED}
+                        {...(IMAGE_PROTECTION_ENABLED ? {
+                          onContextMenu: (e) => e.preventDefault(),
+                          onDragStart: (e) => e.preventDefault()
+                        } : {})}
                       />
                     ) : (
                       <div className="w-full h-full bg-gray-200 flex items-center justify-center">
@@ -122,7 +134,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
           href="/shop"
           className="inline-flex items-center px-12 py-4 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl rounded-full border-2 border-white shadow-lg cursor-pointer transition-all duration-200 hover:scale-105"
         >
-          Explore Collection
+          Adopt a Gloomie
           <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
           </svg>

@@ -5,10 +5,12 @@ import { useCart } from "./CartContext";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CartDisplay from "./CartDisplay";
+import SearchModal from "./SearchModal";
 
 export default function Navigation() {
   const { totalItems } = useCart();
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
 
@@ -24,6 +26,37 @@ export default function Navigation() {
     return () => document.removeEventListener("mousedown", handleClickOutside);
   }, []);
 
+  // Close other modals when one opens
+  const handleCartToggle = () => {
+    if (isCartOpen) {
+      setIsCartOpen(false);
+    } else {
+      setIsSearchOpen(false);
+      setIsMobileMenuOpen(false);
+      setIsCartOpen(true);
+    }
+  };
+
+  const handleSearchToggle = () => {
+    if (isSearchOpen) {
+      setIsSearchOpen(false);
+    } else {
+      setIsCartOpen(false);
+      setIsMobileMenuOpen(false);
+      setIsSearchOpen(true);
+    }
+  };
+
+  const handleMobileMenuToggle = () => {
+    if (isMobileMenuOpen) {
+      setIsMobileMenuOpen(false);
+    } else {
+      setIsCartOpen(false);
+      setIsSearchOpen(false);
+      setIsMobileMenuOpen(true);
+    }
+  };
+
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
       <div className="max-w-6xl mx-auto px-6">
@@ -35,9 +68,9 @@ export default function Navigation() {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-                         <Link href="/home" className="text-gray-600 hover:text-gray-900 transition-colors">
-               Home
-             </Link>
+            <Link href="/home" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Home
+            </Link>
             <Link href="/shop" className="text-gray-600 hover:text-gray-900 transition-colors">
               Shop
             </Link>
@@ -49,12 +82,45 @@ export default function Navigation() {
             </Link>
           </div>
 
-          {/* Right side - Cart and Mobile Menu */}
+          {/* Right side - Search, Cart and Mobile Menu */}
           <div className="flex items-center space-x-4">
+            {/* Search Icon */}
+            <div className="relative">
+              <button
+                onClick={handleSearchToggle}
+                className="p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                aria-label="Search artwork"
+              >
+                <svg 
+                  className="w-6 h-6" 
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path 
+                    strokeLinecap="round" 
+                    strokeLinejoin="round" 
+                    strokeWidth={2} 
+                    d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" 
+                  />
+                </svg>
+              </button>
+
+              {/* Search Dropdown with Animation */}
+              <AnimatePresence>
+                {isSearchOpen && (
+                  <SearchModal 
+                    isOpen={isSearchOpen}
+                    onClose={() => setIsSearchOpen(false)}
+                  />
+                )}
+              </AnimatePresence>
+            </div>
+
             {/* Cart Icon */}
             <div className="relative" ref={cartRef}>
               <button
-                onClick={() => setIsCartOpen(!isCartOpen)}
+                onClick={handleCartToggle}
                 className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
                 aria-label="Shopping cart"
               >
@@ -116,7 +182,7 @@ export default function Navigation() {
                       damping: 30,
                       duration: 0.2
                     }}
-                    className="absolute right-0 top-full mt-2 w-80 bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden"
+                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden"
                   >
                     <CartDisplay />
                   </motion.div>
@@ -126,7 +192,7 @@ export default function Navigation() {
 
             {/* Mobile Menu Button */}
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={handleMobileMenuToggle}
               className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
               aria-label="Toggle mobile menu"
             >
@@ -173,13 +239,13 @@ export default function Navigation() {
                 className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50 md:hidden overflow-hidden"
               >
                 <div className="py-4 space-y-1 px-6">
-                                     <Link 
-                     href="/home" 
-                     className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
-                     onClick={() => setIsMobileMenuOpen(false)}
-                   >
-                     Home
-                   </Link>
+                  <Link 
+                    href="/home" 
+                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Home
+                  </Link>
                   <Link 
                     href="/shop" 
                     className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"

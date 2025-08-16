@@ -105,15 +105,11 @@ export default function LandingPage() {
         {/* Enter the Garden Button - Positioned in lower area */}
         <motion.button
           onClick={handleNavigateToHome}
-          className="absolute bottom-1/6 left-1/2 transform -translate-x-1/2 rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl h-14 px-8 shadow-lg cursor-pointer button-font whitespace-nowrap"
+          className="absolute bottom-1/6 left-1/2 transform -translate-x-1/2 rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl h-14 px-8 shadow-lg cursor-pointer button-font whitespace-nowrap mobile-button-glow"
           {...buttonAnimation}
-          whileHover={{
-            boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
-          }}
           whileTap={{ scale: 0.95 }}
           transition={{
-            ...buttonAnimation.transition,
-            boxShadow: { duration: 0.4, ease: "easeInOut" }
+            ...buttonAnimation.transition
           }}
         >
           Enter the Garden

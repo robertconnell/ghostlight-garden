@@ -10,6 +10,7 @@ interface VariantPickerProps {
     options: { name: string; values: string[] }[];
     variants: { edges: { node: any }[] };
     title?: string;
+    handle?: string; // Add handle to the interface
     featuredImage?: { url: string; altText?: string };
     descriptionHtml?: string;
   };
@@ -63,15 +64,6 @@ export default function VariantPicker({ product }: VariantPickerProps) {
       currency: 'USD'
     }).format(numPrice);
   };
-
-  // Debug logging
-  console.log('Product options:', product.options);
-  console.log('Selected options:', selectedOptions);
-  console.log('Selected variant:', selectedVariant);
-  console.log('All variants:', product.variants.edges);
-  console.log('Base variant:', baseVariant);
-  console.log('Base price:', basePrice, 'Selected price:', selectedPrice);
-  console.log('Has multiple variants:', hasMultipleVariants);
 
   return (
     <div className="space-y-4">
@@ -150,6 +142,7 @@ export default function VariantPicker({ product }: VariantPickerProps) {
               title={product.title || 'Product'}
               price={selectedVariant.price?.amount || '0'}
               image={product.featuredImage?.url}
+              handle={product.handle}
               variantOptions={selectedOptions}
               variantTitle={selectedVariant.title}
               disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
@@ -170,6 +163,7 @@ export default function VariantPicker({ product }: VariantPickerProps) {
                 title={product.title || 'Product'}
                 price={product.variants.edges[0].node.price?.amount || '0'}
                 image={product.featuredImage?.url}
+                handle={product.handle}
                 variantOptions={{}}
                 variantTitle={product.variants.edges[0].node.title}
                 disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}

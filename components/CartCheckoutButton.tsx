@@ -77,7 +77,6 @@ export default function CartCheckoutButton({
         // Don't clear the cart yet - let Shopify handle the payment first
         // The cart will be cleared when they return from successful payment
         // or we can implement a webhook to clear it after payment confirmation
-        console.log('Redirecting to Shopify checkout...');
         window.location.href = checkoutUrl;
       } catch (error) {
         console.error("Failed to get checkout URL:", error);

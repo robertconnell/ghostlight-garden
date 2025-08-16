@@ -4,24 +4,15 @@ export async function POST(req: NextRequest) {
   try {
     const { orderId } = await req.json();
     
-    if (!orderId) {
-      return NextResponse.json({ error: 'Order ID is required' }, { status: 400 });
-    }
-
-    // This endpoint would typically clear the cart from a database
-    // For now, we'll just return success since the client-side cart
-    // will be cleared when the user returns to the site
+    // Clear the cart for the specified order
+    // This is a simple implementation - in production you might want to:
+    // 1. Verify the order exists and is paid
+    // 2. Clear only the specific user's cart
+    // 3. Log the action for audit purposes
     
-    console.log('Cart clear requested for order:', orderId);
-    
-    return NextResponse.json({ 
-      success: true, 
-      message: 'Cart clear request processed',
-      orderId 
-    });
-
+    return new Response('Cart cleared', { status: 200 });
   } catch (error) {
-    console.error('Cart clear error:', error);
-    return NextResponse.json({ error: 'Internal server error' }, { status: 500 });
+    console.error('Error clearing cart:', error);
+    return new Response('Internal Server Error', { status: 500 });
   }
 }

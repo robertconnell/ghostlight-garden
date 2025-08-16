@@ -2,6 +2,7 @@
 
 import { useCart } from "./CartContext";
 import CartCheckoutButton from "./CartCheckoutButton";
+import Link from "next/link";
 
 export default function CartDisplay() {
   const { items, removeItem, updateQuantity, totalItems, totalPrice } = useCart();
@@ -20,65 +21,142 @@ export default function CartDisplay() {
       
       <div className="space-y-3 mb-4">
         {items.map((item) => (
-          <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg">
-            {item.image && (
-              <img 
-                src={item.image} 
-                alt={item.title || 'Product'} 
-                className="w-16 h-16 object-cover rounded"
-              />
-            )}
-            
-            <div className="flex-1">
-              <h4 className="font-medium text-black">
-                {item.title || 'Product Unavailable'}
-              </h4>
-              
-              {/* Variant Information */}
-              {item.variantTitle && (
-                <p className="text-sm text-gray-600 mb-1">
-                  {item.variantTitle}
-                </p>
-              )}
-              
-              {/* Individual Variant Options */}
-              {item.variantOptions && Object.keys(item.variantOptions).length > 0 && (
-                <div className="text-xs text-gray-500 space-y-1 mb-1">
-                  {Object.entries(item.variantOptions).map(([optionName, optionValue]) => (
-                    <div key={optionName}>
-                      <span className="font-medium">{optionName}:</span> {optionValue}
+          item.handle ? (
+            <Link 
+              key={item.id} 
+              href={`/products/${item.handle}`}
+              className="block"
+            >
+              <div className="flex items-center gap-3 p-3 border rounded-lg transition-all duration-200 hover:border-blue-300 hover:shadow-md cursor-pointer">
+                {item.image && (
+                  <img 
+                    src={item.image} 
+                    alt={item.title || 'Product'} 
+                    className="w-16 h-16 object-cover rounded"
+                  />
+                )}
+                
+                <div className="flex-1">
+                  <h4 className="font-medium text-black hover:text-blue-600 transition-colors">
+                    {item.title || 'Product Unavailable'}
+                  </h4>
+                  
+                  {/* Variant Information */}
+                  {item.variantTitle && item.variantTitle !== "Default Title" && (
+                    <p className="text-sm text-gray-600 mb-1">
+                      {item.variantTitle}
+                    </p>
+                  )}
+                  
+                  {/* Individual Variant Options */}
+                  {item.variantOptions && Object.keys(item.variantOptions).length > 0 && (
+                    <div className="text-xs text-gray-500 space-y-1 mb-1">
+                      {Object.entries(item.variantOptions).map(([optionName, optionValue]) => (
+                        <div key={optionName}>
+                          <span className="font-medium">{optionName}:</span> {optionValue}
+                        </div>
+                      ))}
                     </div>
-                  ))}
+                  )}
+                  
+                  {item.price ? (
+                    <p className="text-sm text-black">${parseFloat(item.price).toFixed(2)}</p>
+                  ) : (
+                    <p className="text-sm text-red-500">Price unavailable</p>
+                  )}
+                  {!item.title && (
+                    <p className="text-xs text-red-500">This product may no longer be available</p>
+                  )}
                 </div>
+                
+                <div className="flex items-center gap-2">
+                  <input
+                    type="number"
+                    min="1"
+                    value={item.quantity}
+                    onChange={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      updateQuantity(item.id, Math.max(1, Number(e.target.value) || 1));
+                    }}
+                    className="w-16 rounded border px-2 py-1 text-sm text-black"
+                    onClick={(e) => e.stopPropagation()}
+                  />
+                  
+                  <button
+                    onClick={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      removeItem(item.id);
+                    }}
+                    className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
+                  >
+                    Remove
+                  </button>
+                </div>
+              </div>
+            </Link>
+          ) : (
+            <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg">
+              {item.image && (
+                <img 
+                  src={item.image} 
+                  alt={item.title || 'Product'} 
+                  className="w-16 h-16 object-cover rounded"
+                />
               )}
               
-              {item.price ? (
-                <p className="text-sm text-black">${parseFloat(item.price).toFixed(2)}</p>
-              ) : (
-                <p className="text-sm text-red-500">Price unavailable</p>
-              )}
-              {!item.title && (
-                <p className="text-xs text-red-500">This product may no longer be available</p>
-              )}
-            </div>
-            
-            <div className="flex items-center gap-2">
-              <input
-                type="number"
-                min="1"
-                value={item.quantity}
-                onChange={(e) => updateQuantity(item.id, Math.max(1, Number(e.target.value) || 1))}
-                className="w-16 rounded border px-2 py-1 text-sm text-black"
-              />
+              <div className="flex-1">
+                <h4 className="font-medium text-black">
+                  {item.title || 'Product Unavailable'}
+                </h4>
+                
+                {/* Variant Information */}
+                {item.variantTitle && item.variantTitle !== "Default Title" && (
+                  <p className="text-sm text-gray-600 mb-1">
+                    {item.variantTitle}
+                  </p>
+                )}
+                
+                {/* Individual Variant Options */}
+                {item.variantOptions && Object.keys(item.variantOptions).length > 0 && (
+                  <div className="text-xs text-gray-500 space-y-1 mb-1">
+                    {Object.entries(item.variantOptions).map(([optionName, optionValue]) => (
+                      <div key={optionName}>
+                        <span className="font-medium">{optionName}:</span> {optionValue}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {item.price ? (
+                  <p className="text-sm text-black">${parseFloat(item.price).toFixed(2)}</p>
+                ) : (
+                  <p className="text-sm text-red-500">Price unavailable</p>
+                )}
+                {!item.title && (
+                  <p className="text-xs text-red-500">This product may no longer be available</p>
+                )}
+              </div>
               
-              <button
-                onClick={() => removeItem(item.id)}
-                className="text-red-500 hover:text-red-700 text-sm"
-              >
-                Remove
-              </button>
+              <div className="flex items-center gap-2">
+                <input
+                  type="number"
+                  min="1"
+                  value={item.quantity}
+                  onChange={(e) => updateQuantity(item.id, Math.max(1, Number(e.target.value) || 1))}
+                  className="w-16 rounded border px-2 py-1 text-sm text-black"
+                />
+                
+                <button
+                  onClick={() => removeItem(item.id)}
+                  className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
+                >
+                  Remove
+                </button>
+              </div>
             </div>
-          </div>
+          )
         ))}
       </div>
       

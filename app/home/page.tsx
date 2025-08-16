@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { motion } from 'framer-motion';
 import ProductCarousel from "@/components/ProductCarousel";
 import GlobalFooter from "@/components/GlobalFooter";
 
@@ -43,6 +44,42 @@ export default function HomePage() {
     fetchProducts();
   }, []);
 
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut" as const
+      }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut" as const
+      }
+    }
+  };
+
   return (
     <div>
       {/* PC Background */}
@@ -64,14 +101,25 @@ export default function HomePage() {
       {/* Main Content */}
       <div className="relative z-10">
         {/* Hero Section */}
-        <div className="flex flex-col items-center justify-center min-h-screen text-white text-center px-4">
-          <h1 className="text-4xl md:text-6xl font-bold mb-6">
+        <motion.div 
+          className="flex flex-col items-center justify-center min-h-screen text-white text-center px-4"
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
+        >
+          <motion.h1 
+            className="text-4xl md:text-6xl font-bold mb-6"
+            variants={itemVariants}
+          >
             Where soft shadows bloom
-          </h1>
-          <p className="text-xl md:text-2xl mb-8 max-w-2xl">
+          </motion.h1>
+          <motion.p 
+            className="text-xl md:text-2xl mb-8 max-w-2xl"
+            variants={itemVariants}
+          >
             Discover unique art pieces that bring beauty and inspiration to your space
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
 
         {/* White Content Section with Misty Transition */}
         <div className="relative bg-white">
@@ -81,37 +129,78 @@ export default function HomePage() {
           {/* Content */}
           <div className="relative pt-32 px-4">
             {/* Featured Products Section */}
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <motion.div 
+              className="max-w-6xl mx-auto"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <motion.div 
+                className="text-center mb-12"
+                variants={itemVariants}
+              >
+                <motion.h2 
+                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                  whileHover={{ scale: 1.02 }}
+                  transition={{ duration: 0.2 }}
+                >
                   Featured Artwork
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                </motion.h2>
+                <motion.p 
+                  className="text-lg text-gray-600 max-w-2xl mx-auto"
+                  variants={itemVariants}
+                >
                   Discover our curated collection of unique pieces, each telling its own story
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               {/* Product Carousel */}
               {isLoading ? (
-                <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                <motion.div 
+                  className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ duration: 0.5 }}
+                >
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-                </div>
+                </motion.div>
               ) : (
-                <ProductCarousel products={products} />
+                <motion.div
+                  initial={{ opacity: 0, y: 30 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <ProductCarousel products={products} />
+                </motion.div>
               )}
-            </div>
+            </motion.div>
 
             {/* About Section */}
-            <div className="max-w-4xl mx-auto mt-20 mb-16 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+            <motion.div 
+              className="max-w-4xl mx-auto mt-20 mb-16 text-center"
+              variants={containerVariants}
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, amount: 0.3 }}
+            >
+              <motion.h2 
+                className="text-3xl md:text-4xl font-bold text-gray-900 mb-6"
+                variants={itemVariants}
+                whileHover={{ scale: 1.02 }}
+                transition={{ duration: 0.2 }}
+              >
                 About Ghostlight Garden
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
+              </motion.h2>
+              <motion.p 
+                className="text-lg text-gray-600 leading-relaxed"
+                variants={itemVariants}
+              >
                 We curate and showcase exceptional artwork from talented artists, bringing unique pieces 
                 that transform spaces and inspire creativity. Each piece in our collection is carefully 
                 selected for its quality, craftsmanship, and artistic vision.
-              </p>
-            </div>
+              </motion.p>
+            </motion.div>
           </div>
           
           <GlobalFooter />

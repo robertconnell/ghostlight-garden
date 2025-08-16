@@ -9,6 +9,7 @@ export interface CartItem {
   title?: string;
   price?: string;
   image?: string;
+  handle?: string; // Product handle for linking to detail page
   addedAt: number; // Timestamp when item was added
   variantOptions?: Record<string, string>; // e.g., { "Frame": "Yes", "Gold Leaf": "No" }
   variantTitle?: string; // e.g., "Yes / No" or "None / Yes"
@@ -78,7 +79,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     
     if (validItems.length !== items.length) {
       setItems(validItems);
-      console.log('Expired cart items cleared');
     }
   };
 
@@ -95,7 +95,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
       
       if (validItems.length !== items.length) {
         setItems(validItems);
-        console.log('Invalid cart items removed');
       }
     } catch (error) {
       console.error('Error validating cart items:', error);
@@ -111,7 +110,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
   // Mark cart as ordered (store order ID in localStorage)
   const markCartAsOrdered = (orderId: string) => {
     localStorage.setItem('ghostlight-ordered-cart', orderId);
-    console.log('Cart marked as ordered:', orderId);
   };
 
   // Clear cart by order ID (called when webhook confirms payment)
@@ -120,7 +118,6 @@ export function CartProvider({ children }: { children: ReactNode }) {
     if (storedOrderId === orderId) {
       clearCart();
       localStorage.removeItem('ghostlight-ordered-cart');
-      console.log('Cart cleared after successful payment for order:', orderId);
     }
   };
 
@@ -129,13 +126,10 @@ export function CartProvider({ children }: { children: ReactNode }) {
     const checkForOrderCompletion = async () => {
       const orderedCartId = localStorage.getItem('ghostlight-ordered-cart');
       if (orderedCartId) {
-        console.log('Cart was marked as ordered, clearing automatically:', orderedCartId);
-        
         // Simple approach: clear cart immediately when returning from checkout
         // This assumes the user completed payment if they're back on the site
         clearCart();
         localStorage.removeItem('ghostlight-ordered-cart');
-        console.log('Cart cleared after checkout return');
       }
     };
     

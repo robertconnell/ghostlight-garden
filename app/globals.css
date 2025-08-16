@@ -40,6 +40,87 @@ body {
   font-family: var(--font-aboreto), serif;
 }
 
+/* 🎨 Custom glow effects */
+.mobile-button-glow {
+  animation: glowFadeIn 3s ease-in-out infinite;
+  box-shadow: 
+    0 0 20px rgba(255, 255, 255, 0.15),
+    0 0 40px rgba(255, 255, 255, 0.1),
+    0 0 60px rgba(255, 255, 255, 0.05);
+}
+
+/* Enhanced hover glow for mobile button */
+.mobile-button-glow:hover {
+  box-shadow: 
+    0 0 25px rgba(255, 255, 255, 0.25),
+    0 0 50px rgba(255, 255, 255, 0.2),
+    0 0 75px rgba(255, 255, 255, 0.15);
+}
+
+/* Glow fade-in animation */
+@keyframes glowFadeIn {
+  0% {
+    box-shadow: 
+      0 0 0px rgba(255, 255, 255, 0),
+      0 0 0px rgba(255, 255, 255, 0),
+      0 0 0px rgba(255, 255, 255, 0);
+  }
+  50% {
+    box-shadow: 
+      0 0 20px rgba(255, 255, 255, 0.15),
+      0 0 40px rgba(255, 255, 255, 0.1),
+      0 0 60px rgba(255, 255, 255, 0.05);
+  }
+  100% {
+    box-shadow: 
+      0 0 0px rgba(255, 255, 255, 0),
+      0 0 0px rgba(255, 255, 255, 0),
+      0 0 0px rgba(255, 255, 255, 0);
+  }
+}
+
+/* 🎛️ IMAGE PROTECTION CSS - Controlled by JavaScript, automatically disabled when IMAGE_PROTECTION_ENABLED = false */
+:root {
+  --image-protection-enabled: 0; /* 0 = disabled, 1 = enabled */
+}
+
+img {
+  -webkit-user-select: var(--image-protection-enabled);
+  -moz-user-select: var(--image-protection-enabled);
+  -ms-user-select: var(--image-protection-enabled);
+  user-select: var(--image-protection-enabled);
+  -webkit-user-drag: var(--image-protection-enabled);
+  -khtml-user-drag: var(--image-protection-enabled);
+  -moz-user-drag: var(--image-protection-enabled);
+  -o-user-drag: var(--image-protection-enabled);
+  user-drag: var(--image-protection-enabled);
+  pointer-events: var(--image-protection-enabled);
+}
+
+* {
+  -webkit-touch-callout: var(--image-protection-enabled);
+  -webkit-user-select: var(--image-protection-enabled);
+  -khtml-user-select: var(--image-protection-enabled);
+  -moz-user-select: var(--image-protection-enabled);
+  -ms-user-select: var(--image-protection-enabled);
+  user-select: var(--image-protection-enabled);
+}
+
+p, h1, h2, h3, h4, h5, h6, span, div, button, input, textarea, a {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+  pointer-events: auto;
+}
+
+img {
+  -webkit-context-menu: var(--image-protection-enabled);
+  -moz-context-menu: var(--image-protection-enabled);
+  -ms-context-menu: var(--image-protection-enabled);
+  context-menu: var(--image-protection-enabled);
+}
+
   .glow-button {
     transition: box-shadow 0.4s ease-in-out;
   }

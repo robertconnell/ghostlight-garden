@@ -36,8 +36,6 @@ export async function POST(req: NextRequest) {
     const data = JSON.parse(body);
     const topic = req.headers.get('x-shopify-topic');
     
-    console.log('Shopify webhook received:', { topic, orderId: data.id });
-
     // Handle different webhook topics
     switch (topic) {
       case 'orders/paid':
@@ -47,16 +45,15 @@ export async function POST(req: NextRequest) {
         
       case 'orders/fulfilled':
         // Order was fulfilled - could also clear cart here
-        console.log('Order fulfilled:', data.id);
         break;
         
       case 'orders/cancelled':
         // Order was cancelled - don't clear cart, let user keep items
-        console.log('Order cancelled:', data.id);
         break;
         
       default:
-        console.log('Unhandled webhook topic:', topic);
+        // Unhandled webhook topic
+        break;
     }
 
     return NextResponse.json({ success: true });
@@ -69,26 +66,26 @@ export async function POST(req: NextRequest) {
 
 async function handleOrderPaid(orderData: any) {
   try {
-    console.log('Order paid, processing cart clearance for order:', orderData.id);
-    
-    // Extract customer information if available
-    const customerEmail = orderData.customer?.email;
-    const orderId = orderData.id;
-    
-    // For now, we'll clear all carts since we can't easily match them
-    // In a production app, you might want to:
-    // 1. Store cart IDs with user sessions
-    // 2. Use customer email to find and clear specific carts
-    // 3. Implement a more sophisticated cart-user mapping
-    
-    console.log('Order completed successfully. Cart should be cleared.');
-    
-    // You could implement cart clearing logic here:
-    // - Clear from database if using server-side carts
-    // - Send a message to client to clear localStorage
-    // - Set a flag to clear cart on next page load
-    
+    // Process the order data
+    if (orderData && orderData.financial_status === 'paid') {
+      // Order was paid - clear the cart for this order
+      try {
+        // Clear cart by order ID
+        await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/cart/clear`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ orderId: orderData.id }),
+        });
+      } catch (error) {
+        console.error('Failed to clear cart:', error);
+      }
+    }
+
+    return new Response('OK', { status: 200 });
   } catch (error) {
-    console.error('Error handling order paid:', error);
+    console.error('Webhook processing error:', error);
+    return new Response('Internal Server Error', { status: 500 });
   }
 }

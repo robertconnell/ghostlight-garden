@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto } from "
 import { CartProvider } from "@/components/CartContext";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 import GlobalFooter from "@/components/GlobalFooter";
+import ImageProtection from "@/components/ImageProtection";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -56,10 +57,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} antialiased`}
       >
-                                        <CartProvider>
-                   <ConditionalNavigation />
-                   {children}
-                 </CartProvider>
+        <ImageProtection />
+        <CartProvider>
+          <ConditionalNavigation />
+          {children}
+        </CartProvider>
       </body>
     </html>
   );

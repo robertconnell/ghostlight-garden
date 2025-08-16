@@ -59,6 +59,7 @@ export default async function ProductPage({ params }: { params: Promise<{ handle
                 options: product.options,     // requires options { name, values } in the query
                 variants: product.variants,   // requires variants { id, price, selectedOptions, availableForSale }
                 title: product.title,
+                handle: product.handle,       // Add the handle for cart linking
                 descriptionHtml: product.descriptionHtml,
                 featuredImage: firstImg ? {
                   url: firstImg.url,
