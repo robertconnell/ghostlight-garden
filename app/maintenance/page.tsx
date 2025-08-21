@@ -1,6 +1,7 @@
 import Link from 'next/link';
 
 export default function MaintenancePage() {
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center">
       <div className="max-w-6xl mx-auto text-center px-6">
@@ -65,11 +66,13 @@ export default function MaintenancePage() {
           </div>
         </div>
 
-        {/* Status Updates */}
+        {/* Status Updates - Commented out for now, will implement email functionality later */}
+        {/* 
         <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 mb-12 shadow-lg border border-white/20">
           <h3 className="text-2xl font-semibold text-gray-900 mb-4">Get Status Updates</h3>
           <p className="text-gray-600 mb-6">We'll notify you when maintenance is complete</p>
-          <div className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+          
+          <form className="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
             <input
               type="email"
               placeholder="your.email@example.com"
@@ -78,8 +81,13 @@ export default function MaintenancePage() {
             <button className="bg-purple-600 hover:bg-purple-700 text-white font-semibold px-6 py-3 rounded-lg transition-colors">
               Notify Me
             </button>
-          </div>
+          </form>
+          
+          <p className="text-sm text-gray-500 mt-4">
+            We'll only use this email to send you maintenance updates.
+          </p>
         </div>
+        */}
 
         {/* Contact Info */}
         <div className="text-gray-600">
@@ -90,7 +98,7 @@ export default function MaintenancePage() {
         {/* Footer */}
         <div className="mt-16 pt-8 border-t border-gray-200">
           <p className="text-sm text-gray-500">
-            © 2024 Ghostlight Garden. All rights reserved.
+            © 2025 Ghostlight Garden. All rights reserved.
           </p>
         </div>
       </div>
