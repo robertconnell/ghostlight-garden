@@ -5,18 +5,22 @@ export default function MaintenancePage() {
   return (
     <div className="min-h-screen relative bg-transparent" style={{ background: 'transparent' }}>
       {/* PC Background - Only for XL screens */}
-      <div className="hidden xl:block fixed inset-0 z-0">
-        <div 
-          className="w-full h-full bg-cover bg-center bg-no-repeat bg-[url('/img/pc_maintenance_background.png')]"
-        />
-      </div>
+      <div 
+        className="hidden xl:block fixed inset-0 w-full h-screen bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/img/pc_maintenance_background.png)',
+          zIndex: -1
+        }}
+      />
 
       {/* Mobile & iPad Background - For everything else */}
-      <div className="xl:hidden fixed inset-0 z-0" style={{ transform: 'translateZ(0)' }}>
-        <div 
-          className="w-full h-full bg-cover bg-center bg-no-repeat bg-[url('/img/mobile_maintenance_background.png')]"
-        />
-      </div>
+      <div 
+        className="xl:hidden fixed inset-0 w-full h-screen bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: 'url(/img/mobile_maintenance_background.png)',
+          zIndex: -1
+        }}
+      />
 
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-black/10 pointer-events-none"></div>
