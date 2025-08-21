@@ -19,9 +19,9 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     const products = data.products.edges.map(e => e.node);
 
     return (
-      <div className="min-h-screen bg-gray flex flex-col">
+      <div className="sticky-footer-container bg-gray">
         {/* Main Content */}
-        <main className="flex-1 mx-auto max-w-6xl p-6">
+        <main className="sticky-footer-content mx-auto max-w-6xl p-6">
           <h1 className="text-3xl font-bold mb-6">Shop</h1>
           
           {/* Product list */}
@@ -37,8 +37,8 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
     
     // Provide a user-friendly error message
     return (
-      <div className="min-h-screen bg-gray flex flex-col">
-        <main className="flex-1 mx-auto max-w-6xl p-6">
+      <div className="sticky-footer-container bg-gray">
+        <main className="sticky-footer-content mx-auto max-w-6xl p-6">
           <h1 className="text-3xl font-bold mb-6">Shop</h1>
           
           <div className="bg-red-50 border border-red-200 rounded-lg p-8 text-center">

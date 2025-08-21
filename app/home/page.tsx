@@ -88,7 +88,7 @@ export default function HomePage() {
   };
 
   return (
-    <div>
+    <div className="sticky-footer-container">
       {/* PC Background */}
       <div className="hidden md:block fixed inset-0 z-0">
         <div 
@@ -106,7 +106,7 @@ export default function HomePage() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10">
+      <div className="relative z-10 sticky-footer-content">
         {/* Hero Section */}
         <motion.div 
           className="flex flex-col min-h-screen text-white px-4 relative"
@@ -143,12 +143,12 @@ export default function HomePage() {
         </motion.div>
 
         {/* White Content Section with Misty Transition */}
-        <div className="relative bg-white">
+        <div className="relative bg-white flex-1 flex flex-col">
           {/* Misty Transition Overlay */}
           <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
           
           {/* Content */}
-          <div className="relative pt-32 px-4">
+          <div className="relative pt-32 px-4 flex-1">
             {/* Featured Products Section */}
             <motion.div 
               className="max-w-6xl mx-auto"

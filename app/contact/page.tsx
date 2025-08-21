@@ -51,7 +51,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-gray-50 to-white flex flex-col">
+    <div className="sticky-footer-container bg-gradient-to-b from-gray-50 to-white">
       {/* Hero Section */}
       <div className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -63,7 +63,7 @@ export default function ContactPage() {
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 max-w-6xl mx-auto px-6 mb-16">
+      <div className="sticky-footer-content max-w-6xl mx-auto px-6 mb-16">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-8">

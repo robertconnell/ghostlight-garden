@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function GlobalFooter() {
   return (
-    <footer className="w-full py-8 px-4 text-center bg-gray-50 border-t border-gray-200">
+    <footer className="w-full py-8 px-4 text-center bg-gray-50 border-t border-gray-200 sticky-footer">
       <div className="max-w-4xl mx-auto">
         {/* Policy Links */}
         <div className="flex flex-wrap justify-center gap-6 mb-6">
