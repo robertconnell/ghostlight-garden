@@ -7,6 +7,15 @@ import GlobalFooter from "@/components/GlobalFooter";
 export default function LandingPage() {
   const router = useRouter();
 
+  // Check if maintenance mode is enabled
+  const isMaintenanceMode = process.env.NEXT_PUBLIC_MAINTENANCE_MODE === 'true';
+  
+  // If in maintenance mode, redirect to maintenance page
+  if (isMaintenanceMode) {
+    router.push('/maintenance');
+    return null;
+  }
+
   // Animation variables for consistent timing across PC and mobile
   const welcomeAnimation = {
     initial: { opacity: 0, y: 30 },

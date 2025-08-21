@@ -1,5 +1,8 @@
-// 🎛️ GLOBAL CONFIGURATION - Change this one flag to control all image protection
-export const IMAGE_PROTECTION_ENABLED = false; // Set to true when going live
+// 🎛️ GLOBAL CONFIGURATION - Image protection controlled via .env
+// Use NEXT_PUBLIC_ prefix for client-side access
+export const IMAGE_PROTECTION_ENABLED = process.env.NEXT_PUBLIC_IMAGE_PROTECTION_ENABLED === 'true';
+
+
 
 // You can also add other global configuration flags here
 export const SITE_CONFIG = {

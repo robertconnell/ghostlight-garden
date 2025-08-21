@@ -30,6 +30,18 @@ body {
   font-family: var(--font-cinzel), serif;
 }
 
+/* Coming soon page title - ensure proper font rendering */
+.coming-soon-title {
+  line-height: 1.1;
+  padding-bottom: 0.1em;
+  margin-bottom: 0.1em;
+  overflow: visible;
+  word-break: keep-all;
+  hyphens: none;
+  max-width: 100%;
+  overflow-wrap: normal;
+}
+
 /* Custom class for Welcome to text */
 .welcome-font {
   font-family: var(--font-pinyon-script), serif;
@@ -38,6 +50,11 @@ body {
 /* Custom class for button text */
 .button-font {
   font-family: var(--font-aboreto), serif;
+}
+
+/* Custom class for Alex Brush font */
+.font-alex-brush {
+  font-family: var(--font-alex-brush), cursive;
 }
 
 /* 🎨 Custom glow effects */
@@ -85,16 +102,16 @@ body {
 }
 
 img {
-  -webkit-user-select: var(--image-protection-enabled);
-  -moz-user-select: var(--image-protection-enabled);
-  -ms-user-select: var(--image-protection-enabled);
-  user-select: var(--image-protection-enabled);
-  -webkit-user-drag: var(--image-protection-enabled);
-  -khtml-user-drag: var(--image-protection-enabled);
-  -moz-user-drag: var(--image-protection-enabled);
-  -o-user-drag: var(--image-protection-enabled);
-  user-drag: var(--image-protection-enabled);
-  pointer-events: var(--image-protection-enabled);
+  -webkit-user-select: var(--image-protection-enabled, 0);
+  -moz-user-select: var(--image-protection-enabled, 0);
+  -ms-user-select: var(--image-protection-enabled, 0);
+  user-select: var(--image-protection-enabled, 0);
+  -webkit-user-drag: var(--image-protection-enabled, 0);
+  -khtml-user-drag: var(--image-protection-enabled, 0);
+  -moz-user-drag: var(--image-protection-enabled, 0);
+  -o-user-drag: var(--image-protection-enabled, 0);
+  user-drag: var(--image-protection-enabled, 0);
+  pointer-events: auto;
 }
 
 * {

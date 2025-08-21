@@ -17,12 +17,26 @@ export default function ContactPage() {
     e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulate form submission (replace with actual form handling)
     try {
-      await new Promise(resolve => setTimeout(resolve, 1000));
-      setSubmitStatus("success");
-      setFormData({ name: "", email: "", subject: "", message: "" });
+      const response = await fetch('/api/contact', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+      });
+
+      const result = await response.json();
+
+      if (response.ok && result.success) {
+        setSubmitStatus("success");
+        setFormData({ name: "", email: "", subject: "", message: "" });
+      } else {
+        setSubmitStatus("error");
+        console.error('Contact form error:', result.error);
+      }
     } catch (error) {
+      console.error('Contact form submission failed:', error);
       setSubmitStatus("error");
     } finally {
       setIsSubmitting(false);
@@ -160,7 +174,7 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-900 mb-1">Email</h3>
-                  <p className="text-gray-600">hello@ghostlightgarden.com</p>
+                  <p className="text-gray-600">info@ghostlightgarden.com</p>
                   <p className="text-sm text-gray-500">We typically respond within 24 hours</p>
                 </div>
               </div>

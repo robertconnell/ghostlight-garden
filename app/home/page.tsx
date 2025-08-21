@@ -80,6 +80,13 @@ export default function HomePage() {
     }
   };
 
+  // Animation for "where soft shadows bloom" text
+  const softShadowsAnimation = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 2, delay: 0.6 }
+  };
+
   return (
     <div>
       {/* PC Background */}
@@ -102,23 +109,37 @@ export default function HomePage() {
       <div className="relative z-10">
         {/* Hero Section */}
         <motion.div 
-          className="flex flex-col items-center justify-center min-h-screen text-white text-center px-4"
+          className="flex flex-col min-h-screen text-white px-4 relative"
           variants={containerVariants}
           initial="hidden"
           animate="visible"
         >
-          <motion.h1 
-            className="text-4xl md:text-6xl font-bold mb-6"
-            variants={itemVariants}
+          {/* Container with maxWidth constraint */}
+          <div style={{ 
+            maxWidth: 'clamp(60%, 70vw, 80%)',
+            overflow: 'visible'
+          }}>
+            <motion.h1 
+            className="font-alex-brush 
+            text-4xl 
+            md:text-6xl
+            lg:text-7xl
+            xl:text-8xl  
+            text-left 
+            absolute 
+            top-1/4 
+            md:top-1/5 
+            lg:top-1/5
+            xl:top-1/5
+            left-1/9 
+            md:left-1/8
+            lg:left-1/7
+            xl:left-1/5"
+            {...softShadowsAnimation}
           >
-            Where soft shadows bloom
-          </motion.h1>
-          <motion.p 
-            className="text-xl md:text-2xl mb-8 max-w-2xl"
-            variants={itemVariants}
-          >
-            Discover unique art pieces that bring beauty and inspiration to your space
-          </motion.p>
+            where soft shadows bloom
+            </motion.h1>
+          </div>
         </motion.div>
 
         {/* White Content Section with Misty Transition */}

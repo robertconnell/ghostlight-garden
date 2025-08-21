@@ -114,14 +114,30 @@ export default function PrivacyPolicy() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Contact Us</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. North Carolina Privacy Compliance</h2>
+            <p className="text-gray-700 mb-4">
+              As a business operating in North Carolina, we comply with all applicable state privacy laws and regulations, including:
+            </p>
+            <ul className="list-disc pl-6 text-gray-700 mb-4">
+              <li>North Carolina Identity Theft Protection Act</li>
+              <li>North Carolina Consumer Protection Act</li>
+              <li>Federal privacy laws including COPPA and CAN-SPAM</li>
+              <li>All applicable data breach notification requirements</li>
+            </ul>
+            <p className="text-gray-700 mb-4">
+              In the event of a data breach affecting North Carolina residents, we will comply with all notification requirements under North Carolina law.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Contact Us</h2>
             <p className="text-gray-700 mb-4">
               If you have any questions about this privacy policy or our data practices, 
               please contact us:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-gray-700 mb-2">
-                <strong>Email:</strong> privacy@ghostlightgarden.com
+                <strong>Email:</strong> info@ghostlightgarden.com
               </p>
               <p className="text-gray-700 mb-2">
                 <strong>Address:</strong> [Your Business Address]

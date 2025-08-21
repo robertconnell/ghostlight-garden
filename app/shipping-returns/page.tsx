@@ -65,6 +65,20 @@ export default function ShippingReturns() {
               your artwork arrives safely and on time. Tracking information will be sent to your 
               email once your order ships.
             </p>
+
+            <h3 className="text-xl font-semibold text-gray-900 mb-3">Sales Tax</h3>
+            <div className="bg-purple-50 border-l-4 border-purple-400 p-6 mb-6">
+              <h4 className="text-lg font-semibold text-purple-900 mb-2">North Carolina Sales Tax</h4>
+              <p className="text-purple-800 mb-3">
+                As a North Carolina business, we are required to collect sales tax on all orders shipped to North Carolina addresses.
+              </p>
+              <ul className="text-purple-800 space-y-1">
+                <li>• State sales tax: 4.75%</li>
+                <li>• Local taxes may apply based on destination</li>
+                <li>• Tax is calculated and added at checkout</li>
+                <li>• Orders shipped outside NC may have different tax rates</li>
+              </ul>
+            </div>
           </section>
 
           {/* Returns Section */}
@@ -185,7 +199,7 @@ export default function ShippingReturns() {
               <div className="grid md:grid-cols-2 gap-4">
                 <div>
                   <p className="text-gray-700 mb-2">
-                    <strong>Email:</strong> support@ghostlightgarden.com
+                    <strong>Email:</strong> info@ghostlightgarden.com
                   </p>
                   <p className="text-gray-700 mb-2">
                     <strong>Phone:</strong> [Your Business Phone]

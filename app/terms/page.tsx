@@ -54,6 +54,9 @@ export default function TermsOfService() {
             <p className="text-gray-700 mb-4">
               Payment is processed securely through Shopify's payment gateway. All transactions are encrypted and secure.
             </p>
+            <p className="text-gray-700 mb-4">
+              <strong>Sales Tax:</strong> All applicable state and local sales taxes will be added to your order total. As we are located in North Carolina, orders shipped to North Carolina addresses will include the applicable state sales tax rate of 4.75% plus any applicable local taxes. Orders shipped to other states may be subject to different tax rates based on local regulations.
+            </p>
           </section>
 
           <section className="mb-8">
@@ -108,7 +111,7 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Governing Law</h2>
             <p className="text-gray-700 mb-4">
-              These terms shall be governed by and construed in accordance with the laws of [Your State/Country], without regard to its conflict of law provisions.
+              These terms shall be governed by and construed in accordance with the laws of the State of North Carolina, United States, without regard to its conflict of law provisions. Any disputes arising from these terms or your use of our services will be subject to the exclusive jurisdiction of the courts of North Carolina.
             </p>
           </section>
 
@@ -120,13 +123,29 @@ export default function TermsOfService() {
           </section>
 
           <section className="mb-8">
-            <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. Contact Information</h2>
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. North Carolina Legal Compliance</h2>
+            <p className="text-gray-700 mb-4">
+              As a business operating in North Carolina, we comply with all applicable state and local laws, including:
+            </p>
+            <ul className="list-disc pl-6 text-gray-700 mb-4">
+              <li>North Carolina Consumer Protection Act</li>
+              <li>North Carolina Sales and Use Tax laws</li>
+              <li>North Carolina Business Corporation Act</li>
+              <li>All applicable local business licensing requirements</li>
+            </ul>
+            <p className="text-gray-700 mb-4">
+              For questions about our compliance with North Carolina laws, please contact us using the information below.
+            </p>
+          </section>
+
+          <section className="mb-8">
+            <h2 className="text-2xl font-semibold text-gray-900 mb-4">14. Contact Information</h2>
             <p className="text-gray-700 mb-4">
               If you have any questions about these Terms of Service, please contact us:
             </p>
             <div className="bg-gray-50 p-4 rounded-lg">
               <p className="text-gray-700 mb-2">
-                <strong>Email:</strong> legal@ghostlightgarden.com
+                <strong>Email:</strong> info@ghostlightgarden.com
               </p>
               <p className="text-gray-700 mb-2">
                 <strong>Address:</strong> [Your Business Address]

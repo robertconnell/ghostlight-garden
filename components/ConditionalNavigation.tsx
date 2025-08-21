@@ -6,8 +6,8 @@ import Navigation from "./Navigation";
 export default function ConditionalNavigation() {
   const pathname = usePathname();
   
-  // Don't show navigation on the landing page (root path)
-  if (pathname === "/") {
+  // Don't show navigation on the landing page (root path) or maintenance page
+  if (pathname === "/" || pathname === "/maintenance") {
     return null;
   }
   

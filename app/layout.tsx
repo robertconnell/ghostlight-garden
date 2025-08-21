@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto } from "next/font/google";
+import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto, Alex_Brush } from "next/font/google";
 import { CartProvider } from "@/components/CartContext";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 import GlobalFooter from "@/components/GlobalFooter";
@@ -42,6 +42,13 @@ const aboreto = Aboreto({
   display: "swap",
 });
 
+const alexBrush = Alex_Brush({
+  variable: "--font-alex-brush",
+  subsets: ["latin"],
+  weight: ["400"],
+  display: "swap",
+});
+
 export const metadata: Metadata = {
   title: "Ghostlight Garden",
   description: "Welcome to Ghostlight Garden",
@@ -55,7 +62,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} ${alexBrush.variable} antialiased`}
       >
         <ImageProtection />
         <CartProvider>

@@ -5,6 +5,12 @@ import { IMAGE_PROTECTION_ENABLED } from '@/lib/config';
 
 export default function ImageProtection() {
   useEffect(() => {
+    // Debug logging
+    console.log('🔍 ImageProtection Component:', {
+      IMAGE_PROTECTION_ENABLED,
+      willSetCSS: IMAGE_PROTECTION_ENABLED ? '1' : '0'
+    });
+
     // Set CSS custom property for conditional CSS protection
     document.documentElement.style.setProperty(
       '--image-protection-enabled', 
@@ -13,8 +19,11 @@ export default function ImageProtection() {
 
     // Check if image protection is enabled via global config
     if (!IMAGE_PROTECTION_ENABLED) {
+      console.log('🚫 Image protection disabled, returning early');
       return;
     }
+
+    console.log('✅ Image protection enabled, setting up event listeners');
 
     // Prevent right-click context menu
     const handleContextMenu = (e: MouseEvent) => {
