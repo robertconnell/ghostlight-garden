@@ -3,67 +3,66 @@ import Link from 'next/link';
 export default function MaintenancePage() {
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-purple-50 via-white to-blue-50 flex items-center justify-center">
-      <div className="max-w-6xl mx-auto text-center px-6">
+    <div className="min-h-screen relative bg-transparent" style={{ background: 'transparent' }}>
+      {/* PC Background - Only for XL screens */}
+      <div className="hidden xl:block fixed inset-0 z-0">
+        <div 
+          className="w-full h-full bg-cover bg-center bg-no-repeat bg-[url('/img/pc_maintenance_background.png')]"
+        />
+      </div>
+
+      {/* Mobile & iPad Background - For everything else */}
+      <div className="xl:hidden fixed inset-0 z-0">
+        <div 
+          className="w-full h-full bg-cover bg-center bg-no-repeat bg-[url('/img/mobile_maintenance_background.png')]"
+        />
+      </div>
+
+      {/* Background overlay for better text readability */}
+      <div className="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
+      <div className="relative z-10 pt-8 md:pt-16 pb-8 px-2 sm:px-4 lg:px-0">
+        <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         {/* Logo/Brand */}
-        <div className="mb-12">
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-10 leading-tight ghostlight-font coming-soon-title">
+        <div className="mb-12 px-2 sm:px-4">
+          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#FFF9F5] to-[#9A77CC] bg-clip-text text-transparent mb-10 leading-tight ghostlight-font coming-soon-title drop-shadow-lg">
             Ghostlight Garden
           </h1>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-500 to-blue-500 mx-auto rounded-full"></div>
+          <div className="w-24 h-1 bg-gradient-to-r from-[#FFF9F5] to-[#9A77CC] mx-auto rounded-full"></div>
         </div>
 
         {/* Main Message */}
         <div className="mb-12">
-          <h2 className="text-3xl md:text-4xl font-semibold text-gray-900 mb-6">
+          <h2 className="text-2xl md:text-4xl font-semibold text-white mb-6 drop-shadow-lg">
             We're Making Things Better
           </h2>
-          <p className="text-xl text-gray-600 leading-relaxed max-w-2xl mx-auto">
+          <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-lg">
             We're currently performing maintenance to improve your experience. Our team is working hard to bring you 
             something even more beautiful and functional.
           </p>
         </div>
 
         {/* Status */}
-        <div className="bg-white/80 backdrop-blur-sm rounded-2xl p-8 mb-12 shadow-lg border border-white/20">
-          <h3 className="text-2xl font-semibold text-gray-900 mb-4">Status</h3>
-          <div className="text-4xl md:text-5xl font-bold text-purple-600 mb-2">
+        <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-8 mb-12 shadow-lg border border-white/30 max-w-3xl mx-auto">
+          <h3 className="text-2xl font-semibold text-gray-600 mb-4">Status</h3>
+          <div className="text-4xl md:text-5xl text-white mb-2 font-alex-brush">
             Under Maintenance
           </div>
           <p className="text-gray-600">We'll be back soon with improvements</p>
         </div>
 
-        {/* Features Preview */}
-        <div className="grid md:grid-cols-3 gap-8 mb-12">
-          <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/20">
-            <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">Curated Artwork</h4>
-            <p className="text-gray-600">Discover unique pieces that tell their own stories</p>
-          </div>
-
-          <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/20">
-            <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">Seamless Experience</h4>
-            <p className="text-gray-600">Beautiful, intuitive design that feels natural</p>
-          </div>
-
-          <div className="bg-white/60 backdrop-blur-sm rounded-xl p-6 shadow-lg border border-white/20">
-            <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-              </svg>
-            </div>
-            <h4 className="text-lg font-semibold text-gray-900 mb-2">Quality Assured</h4>
-            <p className="text-gray-600">Every piece carefully selected for excellence</p>
-          </div>
+        {/* Brand Logo */}
+        <div className="flex justify-center mb-12">
+          <img 
+            src="/img/brand_logo_transparent.png" 
+            alt="Ghostlight Garden Logo" 
+            className="w-48 h-48 md:w-64 md:h-64 object-contain bg-transparent"
+            style={{ 
+              background: 'transparent', 
+              backgroundColor: 'transparent',
+              backgroundImage: 'none'
+            }}
+          />
         </div>
 
         {/* Status Updates - Commented out for now, will implement email functionality later */}
@@ -90,18 +89,21 @@ export default function MaintenancePage() {
         */}
 
         {/* Contact Info */}
-        <div className="text-gray-600">
+        <div className="text-white/90 drop-shadow-lg mb-16">
           <p className="mb-2">Questions? We'd love to hear from you</p>
           <p className="font-medium">info@ghostlightgarden.com</p>
         </div>
 
         {/* Footer */}
-        <div className="mt-16 pt-8 border-t border-gray-200">
-          <p className="text-sm text-gray-500">
+        <div className="pt-8 pb-4 md:pb-0 border-t border-white/30 mt-32">
+          <p className="text-sm text-white/80">
             © 2025 Ghostlight Garden. All rights reserved.
           </p>
         </div>
+        </div>
       </div>
+      
+
     </div>
   );
 }
