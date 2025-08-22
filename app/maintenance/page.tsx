@@ -22,8 +22,7 @@ export default function MaintenancePage() {
         }}
       />
 
-      {/* Background overlay for better text readability */}
-      <div className="absolute inset-0 bg-black/10 pointer-events-none"></div>
+
 
       <div className="relative z-10 pt-8 md:pt-16 pb-8 px-2 sm:px-4 lg:px-0">
         <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
