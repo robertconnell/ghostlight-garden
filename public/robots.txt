@@ -1,0 +1,11 @@
+# *
+User-agent: *
+Allow: /
+Disallow: /maintenance
+Disallow: /api/*
+
+# Host
+Host: https://ghostlightgarden.com
+
+# Sitemaps
+Sitemap: https://ghostlightgarden.com/sitemap.xml

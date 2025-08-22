@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto, Alex_Brush } from "next/font/google";
-import { CartProvider } from "@/components/CartContext";
-import ConditionalNavigation from "@/components/ConditionalNavigation";
-import GlobalFooter from "@/components/GlobalFooter";
-import ImageProtection from "@/components/ImageProtection";
+// import { CartProvider } from "@/components/CartContext";
+// import ConditionalNavigation from "@/components/ConditionalNavigation";
+// import GlobalFooter from "@/components/GlobalFooter";
+// import ImageProtection from "@/components/ImageProtection";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -54,10 +54,9 @@ export const metadata: Metadata = {
   description: "Welcome to Ghostlight Garden",
   icons: {
     icon: [
-      { url: '/favicon.ico', sizes: 'any' },
       { url: '/ghost_favicon.png', sizes: '32x32', type: 'image/png' },
     ],
-    shortcut: '/favicon.ico',
+    shortcut: '/ghost_favicon.png',
     apple: '/ghost_favicon.png',
   },
 };
@@ -72,11 +71,11 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} ${alexBrush.variable} antialiased`}
       >
-        <ImageProtection />
-        <CartProvider>
-          <ConditionalNavigation />
+        {/* <ImageProtection /> */}
+        {/* <CartProvider> */}
+          {/* <ConditionalNavigation /> */}
           {children}
-        </CartProvider>
+        {/* </CartProvider> */}
       </body>
     </html>
   );
