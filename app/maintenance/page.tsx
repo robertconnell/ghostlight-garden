@@ -37,11 +37,11 @@ export default function MaintenancePage() {
         {/* Main Message */}
         <div className="mb-12">
           <h2 className="text-2xl md:text-4xl font-semibold text-white mb-6 drop-shadow-lg">
-            We're Making Things Better
+            We're Growing Something New
           </h2>
           <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-lg">
-            We're currently performing maintenance to improve your experience. Our team is working hard to bring you 
-            something even more beautiful and functional.
+            Our little garden is getting a magical makeover. We're tending to the shadows and nurturing new blooms 
+            to bring you something new and exciting.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export default function MaintenancePage() {
           <div className="text-4xl md:text-5xl text-white mb-2 font-alex-brush">
             Under Maintenance
           </div>
-          <p className="text-gray-600">We'll be back soon with improvements</p>
+          <p className="text-gray-600">New blooms are sprouting soon</p>
         </div>
 
         {/* Brand Logo */}
@@ -93,7 +93,7 @@ export default function MaintenancePage() {
 
         {/* Contact Info */}
         <div className="text-white/90 drop-shadow-lg mb-16">
-          <p className="mb-2">Questions? We'd love to hear from you</p>
+          <p className="mb-2">Lost in the garden? We'd love to help you find your way!</p>
           <p className="font-medium">info@ghostlightgarden.com</p>
         </div>
 

@@ -52,6 +52,14 @@ const alexBrush = Alex_Brush({
 export const metadata: Metadata = {
   title: "Ghostlight Garden",
   description: "Welcome to Ghostlight Garden",
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/ghost_favicon.png', sizes: '32x32', type: 'image/png' },
+    ],
+    shortcut: '/favicon.ico',
+    apple: '/ghost_favicon.png',
+  },
 };
 
 export default function RootLayout({
