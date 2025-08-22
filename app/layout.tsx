@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto, Alex_Brush } from "next/font/google";
-// import { CartProvider } from "@/components/CartContext";
-// import ConditionalNavigation from "@/components/ConditionalNavigation";
+import { CartProvider } from "@/components/CartContext";
+import ConditionalNavigation from "@/components/ConditionalNavigation";
 // import GlobalFooter from "@/components/GlobalFooter";
 // import ImageProtection from "@/components/ImageProtection";
 import "./globals.css";
@@ -72,10 +72,10 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} ${alexBrush.variable} antialiased`}
       >
         {/* <ImageProtection /> */}
-        {/* <CartProvider> */}
-          {/* <ConditionalNavigation /> */}
+        <CartProvider>
+          <ConditionalNavigation />
           {children}
-        {/* </CartProvider> */}
+        </CartProvider>
       </body>
     </html>
   );
