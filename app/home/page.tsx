@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
+import { NextSeo } from 'next-seo';
 import ProductCarousel from "@/components/ProductCarousel";
 import GlobalFooter from "@/components/GlobalFooter";
 
@@ -24,6 +25,94 @@ interface Product {
 export default function HomePage() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  // Fetch products for the carousel
+  useEffect(() => {
+    const fetchProducts = async () => {
+      try {
+        const response = await fetch('/api/products');
+        if (response.ok) {
+          const data = await response.json();
+          setProducts(data.products || []);
+        }
+      } catch (error) {
+        console.error('Error fetching products:', error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchProducts();
+  }, []);
+
+  // Animation variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.3,
+        delayChildren: 0.2
+      }
+    }
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut" as const
+      }
+    }
+  };
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 50 },
+    visible: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 0.8,
+        ease: "easeOut" as const
+      }
+    }
+  };
+
+  // Animation for "where soft shadows bloom" text
+  const softShadowsAnimation = {
+    initial: { opacity: 0 },
+    animate: { opacity: 1 },
+    transition: { duration: 2, delay: 0.6 }
+  };
+
+  return (
+    <>
+      <NextSeo
+        title="Ghostlight Garden - Where Soft Shadows Bloom"
+        description="Discover curated artwork from talented artists. Unique pieces that transform spaces and inspire creativity. Where spooky meets cute and soft shadows bloom."
+        openGraph={{
+          title: "Ghostlight Garden - Where Soft Shadows Bloom",
+          description: "Discover curated artwork from talented artists. Unique pieces that transform spaces and inspire creativity.",
+          images: [
+            {
+              url: "https://ghostlightgarden.com/img/brand_logo_transparent.png",
+              width: 800,
+              height: 600,
+              alt: "Ghostlight Garden - Curated Art Collection",
+            },
+          ],
+        }}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content: "curated artwork, original art, spooky cute art, ghost art, garden art, unique paintings, art collection, artist marketplace, soft shadows bloom"
+          }
+        ]}
+      />
+      <div className="sticky-footer-container">
 
   // Fetch products for the carousel
   useEffect(() => {
@@ -228,5 +317,8 @@ export default function HomePage() {
         </div>
       </div>
     </div>
+    </>
+  );
+}
   );
 }

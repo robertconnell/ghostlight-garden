@@ -40,8 +40,8 @@ export default function MaintenancePage() {
             We're Growing Something New
           </h2>
           <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-lg">
-            Our little garden is getting a magical makeover. We're tending to the shadows and nurturing new blooms 
-            to bring you something new and exciting.
+            Our little garden is getting a magical makeover. We're tending to the shadows and nurturing our blooms 
+            to bring you something fresh and exciting.
           </p>
         </div>
 
@@ -51,7 +51,7 @@ export default function MaintenancePage() {
           <div className="text-4xl md:text-5xl text-white mb-2 font-alex-brush">
             Under Maintenance
           </div>
-          <p className="text-gray-600">New blooms are sprouting soon</p>
+          <p className="text-gray-600">blooming soon</p>
         </div>
 
         {/* Brand Logo */}
