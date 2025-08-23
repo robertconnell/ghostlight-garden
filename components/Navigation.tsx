@@ -71,9 +71,9 @@ export default function Navigation() {
             <Link href="/home" className="text-gray-600 hover:text-gray-900 transition-colors">
               Home
             </Link>
-            <Link href="/shop" className="text-gray-600 hover:text-gray-900 transition-colors">
-              Shop
-            </Link>
+                              <Link href="/collection" className="text-gray-600 hover:text-gray-900 transition-colors">
+                    Collection
+                  </Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
               About
             </Link>
@@ -182,7 +182,7 @@ export default function Navigation() {
                       damping: 30,
                       duration: 0.2
                     }}
-                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white border border-gray-200 rounded-lg shadow-lg z-50 overflow-hidden"
+                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-50 overflow-hidden"
                   >
                     <CartDisplay />
                   </motion.div>
@@ -247,11 +247,11 @@ export default function Navigation() {
                     Home
                   </Link>
                   <Link 
-                    href="/shop" 
+                    href="/collection" 
                     className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Shop
+                    Collection
                   </Link>
                   <Link 
                     href="/about" 

@@ -84,7 +84,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
           {products.map((product) => (
             <SplideSlide key={product.id}>
               <Link
-                href={`/products/${product.handle}`}
+                href={`/collection/${product.handle}`}
                 className="group block"
               >
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-64 md:w-80 mx-auto">

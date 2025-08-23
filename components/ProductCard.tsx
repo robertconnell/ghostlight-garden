@@ -31,7 +31,7 @@ export default function ProductCard({
   };
 
   return (
-    <Link href={`/products/${product.handle}`} className="group block">
+    <Link href={`/collection/${product.handle}`} className="group block">
       <div 
         className="relative rounded-xl overflow-hidden bg-gray-100 aspect-square"
         {...(IMAGE_PROTECTION_ENABLED ? {
@@ -63,10 +63,6 @@ export default function ProductCard({
       </div>
       <div className="mt-3">
         <h3 className="font-medium leading-tight group-hover:underline">{product.title}</h3>
-        <p className="text-sm opacity-70">
-          {Number(product.priceRange.minVariantPrice.amount).toFixed(2)}{" "}
-          {product.priceRange.minVariantPrice.currencyCode}
-        </p>
         {!isAvailable && (
           <p className="text-xs text-red-500 mt-1">Out of Stock</p>
         )}

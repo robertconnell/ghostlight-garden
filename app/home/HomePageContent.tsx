@@ -49,7 +49,13 @@ export default function HomePageContent() {
       <div className="hidden md:block fixed inset-0 z-0">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/img/pc_home_background.png)' }}
+          style={{ 
+            backgroundImage: 'url(/img/pc_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
         />
       </div>
 
@@ -57,14 +63,20 @@ export default function HomePageContent() {
       <div className="md:hidden fixed inset-0 z-0">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: 'url(/img/mobile_home_background.png)' }}
+          style={{ 
+            backgroundImage: 'url(/img/mobile_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
         />
       </div>
 
       {/* Main Content */}
       <div className="relative z-10 sticky-footer-content">
-        {/* Hero Section */}
-        <div className="flex flex-col min-h-screen text-white px-4 relative">
+        {/* Hero Section - account for navigation bar height */}
+        <div className="flex flex-col text-white px-4 relative" style={{ height: 'calc(100vh - 4rem)' }}>
           {/* Container with maxWidth constraint */}
           <div style={{
             maxWidth: 'clamp(60%, 70vw, 80%)',
@@ -89,15 +101,67 @@ export default function HomePageContent() {
               where soft shadows bloom
             </h1>
           </div>
+
+          {/* Animated Misty Fog Transition - at bottom of adjusted viewport */}
+          <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none overflow-hidden z-20">
+            {/* Animated fog layers */}
+            <div className="absolute inset-0">
+              {/* Fog Layer 1 - Slow drift left */}
+              <div 
+                className="absolute top-0 left-0 w-full h-full opacity-60"
+                style={{
+                  background: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 200\'%3E%3Cdefs%3E%3Cfilter id=\'fog\' x=\'-50%25\' y=\'-50%25\' width=\'200%25\' height=\'200%25\'%3E%3CfeGaussianBlur stdDeviation=\'15\'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d=\'M0,50 Q200,20 400,50 T800,50 T1200,50 L1200,200 L0,200 Z\' fill=\'%23f0f0f0\' filter=\'url(%23fog)\'/%3E%3C/svg%3E")',
+                  backgroundSize: '1200px 200px',
+                  backgroundRepeat: 'repeat-x',
+                  animation: 'fog-drift-left 20s linear infinite'
+                }}
+              />
+              
+              {/* Fog Layer 2 - Medium drift right */}
+              <div 
+                className="absolute top-0 left-0 w-full h-full opacity-40"
+                style={{
+                  background: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 200\'%3E%3Cdefs%3E%3Cfilter id=\'fog2\' x=\'-50%25\' y=\'-50%25\' width=\'200%25\' height=\'200%25\'%3E%3CfeGaussianBlur stdDeviation=\'20\'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d=\'M0,80 Q300,40 600,80 T900,80 T1200,80 L1200,200 L0,200 Z\' fill=\'%23e8e8e8\' filter=\'url(%23fog2)\'/%3E%3C/svg%3E")',
+                  backgroundSize: '1200px 200px',
+                  backgroundRepeat: 'repeat-x',
+                  animation: 'fog-drift-right 15s linear infinite'
+                }}
+              />
+              
+              {/* Fog Layer 3 - Fast drift left with opacity variation */}
+              <div 
+                className="absolute top-0 left-0 w-full h-full opacity-50"
+                style={{
+                  background: 'url("data:image/svg+xml,%3Csvg xmlns=\'http://www.w3.org/2000/svg\' viewBox=\'0 0 1200 200\'%3E%3Cdefs%3E%3Cfilter id=\'fog3\' x=\'-50%25\' y=\'-50%25\' width=\'200%25\' height=\'200%25\'%3E%3CfeGaussianBlur stdDeviation=\'25\'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d=\'M0,30 Q250,10 500,30 T1000,30 T1200,30 L1200,200 L0,200 Z\' fill=\'%23f8f8f8\' filter=\'url(%23fog3)\'/%3E%3C/svg%3E")',
+                  backgroundSize: '1200px 200px',
+                  backgroundRepeat: 'repeat-x',
+                  animation: 'fog-drift-left 12s linear infinite'
+                }}
+              />
+              
+              {/* Subtle wispy fog particles */}
+              <div className="absolute inset-0">
+                {[...Array(6)].map((_, i) => (
+                  <div
+                    key={i}
+                    className="absolute w-3 h-3 bg-gray-200/60 rounded-full"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                      animation: `fog-float ${8 + Math.random() * 8}s ease-in-out infinite`,
+                      animationDelay: `${Math.random() * 5}s`
+                    }}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
         </div>
 
-        {/* White Content Section with Misty Transition */}
+        {/* White Content Section - starts immediately after fog */}
         <div className="relative bg-white flex-1 flex flex-col">
-          {/* Misty Transition Overlay */}
-          <div className="absolute top-0 left-0 right-0 h-32 bg-gradient-to-b from-transparent to-white pointer-events-none" />
-
           {/* Content */}
-          <div className="relative pt-32 px-4 flex-1">
+          <div className="relative pt-6 px-4 flex-1">
             {/* Featured Products Section */}
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-12">

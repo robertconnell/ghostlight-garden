@@ -78,7 +78,17 @@ export default function ShopContent({ products, searchTerm = "" }: ShopContentPr
         transition={{ duration: 0.5 }}
       >
         <p className="text-lg text-gray-600 mb-2">No products found for "{searchTerm}"</p>
-        <p className="text-sm text-gray-500">Try a different search term</p>
+        <p className="text-sm text-gray-500 mb-4">Try a different search term</p>
+        <button
+          onClick={() => window.location.href = '/collection'}
+          className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+          title="Clear search and show all products"
+        >
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+          </svg>
+          Clear Search & Show All
+        </button>
       </motion.div>
     );
   }
@@ -93,9 +103,21 @@ export default function ShopContent({ products, searchTerm = "" }: ShopContentPr
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
         >
-          <h2 className="text-xl font-semibold text-gray-900 mb-2">
-            Search Results for "{searchTerm}"
-          </h2>
+          <div className="flex items-center justify-between mb-2">
+            <h2 className="text-xl font-semibold text-gray-900">
+              Search Results for "{searchTerm}"
+            </h2>
+            <button
+              onClick={() => window.location.href = '/collection'}
+              className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              title="Clear search and show all products"
+            >
+              <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              Clear Search
+            </button>
+          </div>
           <p className="text-sm text-gray-600">
             Showing {filteredProducts.length} of {products.length} products
           </p>

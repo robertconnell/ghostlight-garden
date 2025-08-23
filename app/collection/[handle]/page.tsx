@@ -1,4 +1,4 @@
-// app/products/[handle]/page.tsx
+// app/collection/[handle]/page.tsx
 import Image from "next/image";
 import { shopifyFetch } from "@/lib/shopify";
 import { PRODUCT_BY_HANDLE } from "@/lib/queries";

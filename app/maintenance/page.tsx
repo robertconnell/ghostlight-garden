@@ -9,8 +9,12 @@ export default function MaintenancePage() {
         className="hidden xl:block fixed inset-0 w-full h-screen bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url(/img/pc_maintenance_background.png)',
-          zIndex: -1
+          zIndex: -1,
+          willChange: 'transform',
+          transform: 'translateZ(0)'
         }}
+        role="img"
+        aria-label="PC maintenance background: Artistic garden scene with soft shadows"
       />
 
       {/* Mobile & iPad Background - For everything else */}
@@ -18,8 +22,12 @@ export default function MaintenancePage() {
         className="xl:hidden fixed inset-0 w-full h-screen bg-cover bg-center bg-no-repeat"
         style={{
           backgroundImage: 'url(/img/mobile_maintenance_background.png)',
-          zIndex: -1
+          zIndex: -1,
+          willChange: 'transform',
+          transform: 'translateZ(0)'
         }}
+        role="img"
+        aria-label="Mobile maintenance background: Artistic garden scene with soft shadows"
       />
 
 
@@ -57,7 +65,7 @@ export default function MaintenancePage() {
         {/* Brand Logo */}
         <div className="flex justify-center mb-12">
           <img 
-            src="/img/brand_logo_transparent.png" 
+            src="/img/brand_logo.png" 
             alt="Ghostlight Garden Logo" 
             className="w-48 h-48 md:w-64 md:h-64 object-contain bg-transparent"
             style={{ 
