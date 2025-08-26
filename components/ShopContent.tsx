@@ -80,7 +80,7 @@ export default function ShopContent({ products, searchTerm = "" }: ShopContentPr
         <p className="text-lg text-gray-600 mb-2">No products found for "{searchTerm}"</p>
         <p className="text-sm text-gray-500 mb-4">Try a different search term</p>
         <button
-          onClick={() => window.location.href = '/collection'}
+          onClick={() => window.location.href = '/collections'}
           className="inline-flex items-center gap-2 px-4 py-2 text-sm text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
           title="Clear search and show all products"
         >
@@ -108,8 +108,8 @@ export default function ShopContent({ products, searchTerm = "" }: ShopContentPr
               Search Results for "{searchTerm}"
             </h2>
             <button
-              onClick={() => window.location.href = '/collection'}
-              className="flex items-center gap-2 px-3 py-1.5 text-sm text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
+              onClick={() => window.location.href = '/collections'}
+              className="flex items-center gap-2 px-3 py-1.5 text-gray-600 hover:text-gray-800 bg-gray-100 hover:bg-gray-200 rounded-lg transition-colors"
               title="Clear search and show all products"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -142,7 +142,7 @@ export default function ShopContent({ products, searchTerm = "" }: ShopContentPr
             }}
             whileTap={{ scale: 0.98 }}
           >
-            <ProductCard product={product} />
+            <ProductCard product={product} collectionHandle="all" />
           </motion.div>
         ))}
       </motion.div>

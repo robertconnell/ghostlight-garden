@@ -58,8 +58,8 @@ export default function Navigation() {
   };
 
   return (
-    <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
-      <div className="max-w-6xl mx-auto px-6">
+    <nav className="fixed top-0 left-0 right-0 z-[9999] bg-white/95 backdrop-blur-sm border-b border-gray-200 shadow-sm">
+      <div className="w-full px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
           <Link href="/" className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
@@ -71,9 +71,9 @@ export default function Navigation() {
             <Link href="/home" className="text-gray-600 hover:text-gray-900 transition-colors">
               Home
             </Link>
-                              <Link href="/collection" className="text-gray-600 hover:text-gray-900 transition-colors">
-                    Collection
-                  </Link>
+                                          <Link href="/collections" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Collections
+            </Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
               About
             </Link>
@@ -182,7 +182,7 @@ export default function Navigation() {
                       damping: 30,
                       duration: 0.2
                     }}
-                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-50 overflow-hidden"
+                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-[9999] overflow-hidden"
                   >
                     <CartDisplay />
                   </motion.div>
@@ -222,7 +222,7 @@ export default function Navigation() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-40 md:hidden"
+                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-[9998] md:hidden"
                 onClick={() => setIsMobileMenuOpen(false)}
               />
               
@@ -236,7 +236,7 @@ export default function Navigation() {
                   ease: "easeInOut",
                   height: { duration: 0.3, ease: "easeInOut" }
                 }}
-                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-50 md:hidden overflow-hidden"
+                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-[9999] md:hidden overflow-hidden"
               >
                 <div className="py-4 space-y-1 px-6">
                   <Link 
@@ -247,11 +247,11 @@ export default function Navigation() {
                     Home
                   </Link>
                   <Link 
-                    href="/collection" 
+                    href="/collections" 
                     className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
-                    Collection
+                    Collections
                   </Link>
                   <Link 
                     href="/about" 

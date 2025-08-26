@@ -1,12 +1,29 @@
-import Link from 'next/link';
-import GlobalFooter from '@/components/GlobalFooter';
+import { Metadata } from 'next';
+import BackButton from '@/components/BackButton';
+
+export const metadata: Metadata = {
+  title: 'Privacy Policy | Ghostlight Garden',
+  description: 'Learn about how Ghostlight Garden collects, uses, and protects your personal information. Our privacy policy ensures transparency and compliance with North Carolina privacy laws.',
+  keywords: 'privacy policy, data protection, North Carolina privacy laws, Ghostlight Garden, personal information',
+  openGraph: {
+    title: 'Privacy Policy | Ghostlight Garden',
+    description: 'Learn about how Ghostlight Garden collects, uses, and protects your personal information.',
+    type: 'website',
+    url: 'https://ghostlightgarden.com/privacy',
+  },
+};
 
 export default function PrivacyPolicy() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white h-full">
       {/* Header */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-12">
+          {/* Back Button */}
+          <div className="mb-6">
+            <BackButton />
+          </div>
+          
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
           <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </div>
@@ -148,18 +165,9 @@ export default function PrivacyPolicy() {
             </div>
           </section>
 
-          <div className="border-t border-gray-200 pt-8 mt-12">
-            <Link 
-              href="/shop" 
-              className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium"
-            >
-              ← Back to Shop
-            </Link>
-          </div>
+          
         </div>
       </div>
-
-      <GlobalFooter />
     </div>
   );
 }

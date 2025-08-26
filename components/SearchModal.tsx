@@ -38,7 +38,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-      router.push(`/collection?search=${encodeURIComponent(searchTerm.trim())}`);
+              router.push(`/collections?search=${encodeURIComponent(searchTerm.trim())}`);
       onClose();
       setSearchTerm("");
     }

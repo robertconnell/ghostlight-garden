@@ -2,7 +2,6 @@
 
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
-import GlobalFooter from "@/components/GlobalFooter";
 
 export default function LandingPage() {
   const router = useRouter();
@@ -43,7 +42,7 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="font-sans min-h-screen flex flex-col">
+    <div className="font-sans min-h-screen w-full relative overflow-hidden">
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20 dark:bg-black/40 pointer-events-none"></div>
 
@@ -94,9 +93,9 @@ export default function LandingPage() {
       </div>
 
       {/* Mobile UI */}
-      <div className="md:hidden relative z-10 flex-1">
+      <div className="md:hidden relative z-10 min-h-screen flex flex-col">
         {/* Welcome to Ghostlight Garden - Positioned in upper area */}
-        <div className="absolute top-1/6 left-1/2 transform -translate-x-1/2 w-full px-4">
+        <div className="flex-1 flex flex-col justify-center items-center px-4">
           <motion.h1
             className="text-2xl font-bold text-center mb-4 text-white drop-shadow-lg welcome-font"
             {...welcomeAnimation}
@@ -112,20 +111,22 @@ export default function LandingPage() {
         </div>
 
         {/* Enter the Garden Button - Positioned in lower area */}
-        <motion.button
-          onClick={handleNavigateToHome}
-          className="absolute bottom-1/6 left-1/2 transform -translate-x-1/2 rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl h-14 px-8 shadow-lg cursor-pointer button-font whitespace-nowrap mobile-button-glow"
-          {...buttonAnimation}
-          whileTap={{ scale: 0.95 }}
-          transition={{
-            ...buttonAnimation.transition
-          }}
-        >
-          Enter the Garden
-        </motion.button>
+        <div className="flex-1 flex flex-col justify-center items-center">
+          <motion.button
+            onClick={handleNavigateToHome}
+            className="rounded-full border-2 border-white flex items-center justify-center bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl h-14 px-8 shadow-lg cursor-pointer button-font whitespace-nowrap mobile-button-glow"
+            {...buttonAnimation}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              ...buttonAnimation.transition
+            }}
+          >
+            Enter the Garden
+          </motion.button>
+        </div>
       </div>
       
-      {/* Footer */}
+      {/* Root Page Footer - Only for this page */}
       <footer className="absolute bottom-0 left-0 right-0 py-6 px-4 text-center z-20">
         <p className="text-sm text-white drop-shadow-lg">
           © 2025 Ghostlight Garden. All rights reserved.

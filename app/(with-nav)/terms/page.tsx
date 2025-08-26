@@ -1,12 +1,29 @@
-import Link from 'next/link';
-import GlobalFooter from '@/components/GlobalFooter';
+import { Metadata } from 'next';
+import BackButton from '@/components/BackButton';
+
+export const metadata: Metadata = {
+  title: 'Terms of Service | Ghostlight Garden',
+  description: 'Read Ghostlight Garden\'s terms of service. Learn about our policies, user agreements, and legal compliance for North Carolina businesses.',
+  keywords: 'terms of service, user agreement, North Carolina business laws, Ghostlight Garden, legal compliance',
+  openGraph: {
+    title: 'Terms of Service | Ghostlight Garden',
+    description: 'Read Ghostlight Garden\'s terms of service and user agreements.',
+    type: 'website',
+    url: 'https://ghostlightgarden.com/terms',
+  },
+};
 
 export default function TermsOfService() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="bg-white h-full">
       {/* Header */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-12">
+          {/* Back Button */}
+          <div className="mb-6">
+            <BackButton />
+          </div>
+          
           <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
           <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
         </div>
@@ -156,18 +173,9 @@ export default function TermsOfService() {
             </div>
           </section>
 
-          <div className="border-t border-gray-200 pt-8 mt-12">
-            <Link 
-              href="/shop" 
-              className="inline-flex items-center text-purple-600 hover:text-purple-700 font-medium"
-            >
-              ← Back to Shop
-            </Link>
-          </div>
+          
         </div>
-      </div>
-
-      <GlobalFooter />
+            </div>
     </div>
   );
 }

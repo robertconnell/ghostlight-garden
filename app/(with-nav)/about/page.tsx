@@ -1,8 +1,22 @@
-import GlobalFooter from "@/components/GlobalFooter";
+
+
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'About Us | Ghostlight Garden',
+  description: 'Discover the story behind Ghostlight Garden. Learn about our mission, values, and commitment to creating beautiful digital experiences.',
+  keywords: 'about us, Ghostlight Garden, digital experiences, creativity, mission, values',
+  openGraph: {
+    title: 'About Us | Ghostlight Garden',
+    description: 'Discover the story behind Ghostlight Garden and our mission.',
+    type: 'website',
+    url: 'https://ghostlightgarden.com/about',
+  },
+};
 
 export default function AboutPage() {
   return (
-    <div className="sticky-footer-container bg-gradient-to-b from-gray-50 to-white">
+    <div className="bg-gradient-to-b from-gray-50 to-white h-full">
       {/* Hero Section */}
       <div className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -14,7 +28,7 @@ export default function AboutPage() {
       </div>
 
       {/* Main Content */}
-      <div className="sticky-footer-content max-w-4xl mx-auto px-6 mb-16">
+      <div className="max-w-4xl mx-auto px-6 mb-16">
         <div className="grid gap-12 md:grid-cols-2">
           {/* Our Story */}
           <div>
@@ -83,8 +97,6 @@ export default function AboutPage() {
           </div>
         </div>
       </div>
-      
-      <GlobalFooter />
     </div>
   );
 }

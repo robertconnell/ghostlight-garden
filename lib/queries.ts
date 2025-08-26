@@ -74,3 +74,104 @@ export const PRODUCT_BY_HANDLE = /* GraphQL */ `
     }
   }
 `;
+
+export const GET_COLLECTIONS = /* GraphQL */ `
+  query GetCollections($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+          description
+          image {
+            url
+            altText
+            width
+            height
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_COLLECTIONS_WITH_PRODUCTS = /* GraphQL */ `
+  query GetCollectionsWithProducts($first: Int!) {
+    collections(first: $first) {
+      edges {
+        node {
+          id
+          title
+          handle
+          description
+          image {
+            url
+            altText
+            width
+            height
+          }
+          products(first: 50) {
+            edges {
+              node {
+                id
+                title
+                handle
+                featuredImage {
+                  url
+                  altText
+                  width
+                  height
+                }
+                priceRange {
+                  minVariantPrice {
+                    amount
+                    currencyCode
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_COLLECTION_BY_HANDLE = /* GraphQL */ `
+  query CollectionByHandle($handle: String!) {
+    collection(handle: $handle) {
+      id
+      title
+      handle
+      description
+      image {
+        url
+        altText
+        width
+        height
+      }
+      products(first: 50) {
+        edges {
+          node {
+            id
+            title
+            handle
+            featuredImage {
+              url
+              altText
+              width
+              height
+            }
+            priceRange {
+              minVariantPrice {
+                amount
+                currencyCode
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`;

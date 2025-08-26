@@ -4,13 +4,17 @@ import { IMAGE_PROTECTION_ENABLED } from '@/lib/config';
 
 export default function ProductCard({
   product,
-}: { product: {
-  title: string; 
-  handle: string;
-  featuredImage?: { url: string; altText?: string; width: number; height: number } | null;
-  priceRange: { minVariantPrice: { amount: string; currencyCode: string } };
-  availableForSale?: boolean;
-}}) {
+  collectionHandle,
+}: { 
+  product: {
+    title: string; 
+    handle: string;
+    featuredImage?: { url: string; altText?: string; width: number; height: number } | null;
+    priceRange: { minVariantPrice: { amount: string; currencyCode: string } };
+    availableForSale?: boolean;
+  };
+  collectionHandle?: string;
+}) {
   const img = product.featuredImage;
   const isAvailable = product.availableForSale !== false;
 
@@ -31,7 +35,7 @@ export default function ProductCard({
   };
 
   return (
-    <Link href={`/collection/${product.handle}`} className="group block">
+          <Link href={`/collections/${collectionHandle || 'all'}/${product.handle}`} className="group block">
       <div 
         className="relative rounded-xl overflow-hidden bg-gray-100 aspect-square"
         {...(IMAGE_PROTECTION_ENABLED ? {

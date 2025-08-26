@@ -1,7 +1,9 @@
 "use client";
 
 import { useState } from "react";
-import GlobalFooter from "@/components/GlobalFooter";
+
+// Note: Client components can't export metadata, but we can add it to the parent layout
+// or create a separate metadata file if needed
 
 export default function ContactPage() {
   const [formData, setFormData] = useState({
@@ -51,7 +53,7 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="sticky-footer-container bg-gradient-to-b from-gray-50 to-white">
+    <div className="bg-gradient-to-b from-gray-50 to-white h-full">
       {/* Hero Section */}
       <div className="py-20 px-6">
         <div className="max-w-4xl mx-auto text-center">
@@ -63,7 +65,7 @@ export default function ContactPage() {
       </div>
 
       {/* Main Content */}
-      <div className="sticky-footer-content max-w-6xl mx-auto px-6 mb-16">
+      <div className="max-w-6xl mx-auto px-6 mb-16">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -227,8 +229,6 @@ export default function ContactPage() {
           </div>
         </div>
       </div>
-      
-      <GlobalFooter />
     </div>
   );
 }

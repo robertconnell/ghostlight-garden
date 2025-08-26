@@ -84,7 +84,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
           {products.map((product) => (
             <SplideSlide key={product.id}>
               <Link
-                href={`/collection/${product.handle}`}
+                href={`/collections/featured-artwork/${product.handle}`}
                 className="group block"
               >
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-64 md:w-80 mx-auto">
@@ -131,7 +131,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       {/* View All Products Button */}
       <div className="text-center mt-8">
         <Link
-          href="/shop"
+                          href="/collections"
           className="inline-flex items-center px-12 py-4 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl rounded-full border-2 border-white shadow-lg cursor-pointer transition-all duration-200 hover:scale-105"
         >
           Adopt a Gloomie

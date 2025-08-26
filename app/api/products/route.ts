@@ -1,17 +1,20 @@
 import { NextResponse } from 'next/server';
 import { shopifyFetch } from '@/lib/shopify';
-import { GET_PRODUCTS } from '@/lib/queries';
+import { GET_COLLECTION_BY_HANDLE } from '@/lib/queries';
 
 export async function GET() {
   try {
-    const data = await shopifyFetch<{ products: any }>(GET_PRODUCTS, { first: 10 });
+    // Fetch only products from the "Featured Artwork" collection
+    const data = await shopifyFetch<{ collection: any }>(GET_COLLECTION_BY_HANDLE, { 
+      handle: 'featured-artwork' 
+    });
     
-    if (!data.products?.edges) {
+    if (!data.collection?.products?.edges) {
       return NextResponse.json({ products: [] });
     }
 
     // Transform the data to match the carousel interface
-    const products = data.products.edges.map(({ node }: { node: any }) => ({
+    const products = data.collection.products.edges.map(({ node }: { node: any }) => ({
       id: node.id,
       title: node.title,
       handle: node.handle,
@@ -21,7 +24,7 @@ export async function GET() {
 
     return NextResponse.json({ products });
   } catch (error) {
-    console.error('Error fetching products:', error);
+    console.error('Error fetching featured products:', error);
     return NextResponse.json({ products: [] }, { status: 500 });
   }
 }

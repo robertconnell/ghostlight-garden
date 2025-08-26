@@ -1,8 +1,8 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import ProductCarousel from "@/components/ProductCarousel";
-import GlobalFooter from "@/components/GlobalFooter";
 
 interface Product {
   id: string;
@@ -44,7 +44,7 @@ export default function HomePageContent() {
   }, []);
 
   return (
-    <div className="sticky-footer-container">
+    <div>
       {/* PC Background */}
       <div className="hidden md:block fixed inset-0 z-0">
         <div
@@ -74,7 +74,7 @@ export default function HomePageContent() {
       </div>
 
       {/* Main Content */}
-      <div className="relative z-10 sticky-footer-content">
+      <div className="relative z-10">
         {/* Hero Section - account for navigation bar height */}
         <div className="flex flex-col text-white px-4 relative" style={{ height: 'calc(100vh - 4rem)' }}>
           {/* Container with maxWidth constraint */}
@@ -82,31 +82,38 @@ export default function HomePageContent() {
             maxWidth: 'clamp(60%, 70vw, 80%)',
             overflow: 'visible'
           }}>
-            <h1 className="font-alex-brush
-              text-4xl
-              md:text-6xl
-              lg:text-7xl
-              xl:text-8xl
-              text-left
-              absolute
-              top-1/4
-              md:top-1/5
-              lg:top-1/5
-              xl:top-1/5
-              left-1/9
-              md:left-1/8
-              lg:left-1/7
-              xl:left-1/5"
+            <motion.h1 
+              className="font-alex-brush
+                text-4xl
+                md:text-6xl
+                lg:text-7xl
+                xl:text-8xl
+                text-left
+                absolute
+                top-1/4
+                md:top-1/5
+                lg:top-1/5
+                xl:top-1/5
+                left-1/9
+                md:left-1/8
+                lg:left-1/7
+                xl:left-1/5"
+              initial={{ opacity: 0, x: 10 }}
+              animate={{ opacity: 1, x: 0}}
+              transition={{ 
+                duration: 1.2, 
+                delay: 1.2,
+                ease: "easeOut"
+              }}
             >
               where soft shadows bloom
-            </h1>
+            </motion.h1>
           </div>
 
           {/* Animated Misty Fog Transition - at bottom of adjusted viewport */}
+          {/* Temporarily hidden until custom media is ready
           <div className="absolute bottom-0 left-0 right-0 h-24 pointer-events-none overflow-hidden z-20">
-            {/* Animated fog layers */}
             <div className="absolute inset-0">
-              {/* Fog Layer 1 - Slow drift left */}
               <div 
                 className="absolute top-0 left-0 w-full h-full opacity-60"
                 style={{
@@ -117,7 +124,6 @@ export default function HomePageContent() {
                 }}
               />
               
-              {/* Fog Layer 2 - Medium drift right */}
               <div 
                 className="absolute top-0 left-0 w-full h-full opacity-40"
                 style={{
@@ -128,7 +134,6 @@ export default function HomePageContent() {
                 }}
               />
               
-              {/* Fog Layer 3 - Fast drift left with opacity variation */}
               <div 
                 className="absolute top-0 left-0 w-full h-full opacity-50"
                 style={{
@@ -139,7 +144,6 @@ export default function HomePageContent() {
                 }}
               />
               
-              {/* Subtle wispy fog particles */}
               <div className="absolute inset-0">
                 {[...Array(6)].map((_, i) => (
                   <div
@@ -156,6 +160,7 @@ export default function HomePageContent() {
               </div>
             </div>
           </div>
+          */}
         </div>
 
         {/* White Content Section - starts immediately after fog */}
@@ -163,40 +168,92 @@ export default function HomePageContent() {
           {/* Content */}
           <div className="relative pt-6 px-4 flex-1">
             {/* Featured Products Section */}
-            <div className="max-w-6xl mx-auto">
-              <div className="text-center mb-12">
-                <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-4">
+            <div className="max-w-6xl mx-auto pt-8">
+              <motion.div 
+                className="text-center mb-12"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 1.8,
+                  ease: "easeOut"
+                }}
+              >
+                <motion.h2 
+                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 1.0, 
+                    delay: 2.0,
+                    ease: "easeOut"
+                  }}
+                >
                   Featured Artwork
-                </h2>
-                <p className="text-lg text-gray-600 max-w-2xl mx-auto">
+                </motion.h2>
+                <motion.p 
+                  className="text-lg text-gray-600 max-w-2xl mx-auto"
+                  initial={{ opacity: 0, y: 15 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ 
+                    duration: 1.0, 
+                    delay: 2.2,
+                    ease: "easeOut"
+                  }}
+                >
                   Discover our curated collection of unique pieces, each telling its own story
-                </p>
-              </div>
+                </motion.p>
+              </motion.div>
 
               {/* Product Carousel */}
-              {isLoading ? (
-                <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
-                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
-                </div>
-              ) : (
-                <ProductCarousel products={products} />
-              )}
+              <motion.div
+                initial={{ opacity: 0, y: 25 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ 
+                  duration: 1.2, 
+                  delay: 2.4,
+                  ease: "easeOut"
+                }}
+              >
+                {isLoading ? (
+                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                    <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
+                  </div>
+                ) : (
+                  <ProductCarousel products={products} />
+                )}
+              </motion.div>
             </div>
 
-            {/* About Section */}
-            <div className="max-w-4xl mx-auto mt-20 mb-16 text-center">
-              <h2 className="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
-                About Ghostlight Garden
-              </h2>
-              <p className="text-lg text-gray-600 leading-relaxed">
-                We curate and showcase exceptional artwork from talented artists, bringing unique pieces
-                that transform spaces and inspire creativity. Each piece in our collection is carefully
-                selected for its quality, craftsmanship, and artistic vision.
-              </p>
-            </div>
+            {/* Brand Logo Section */}
+            <motion.div 
+              className="max-w-4xl mx-auto pt-8 pb-8 text-center"
+              initial={{ opacity: 0, y: 30 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 1.2, 
+                delay: 2.8,
+                ease: "easeOut"
+              }}
+            >
+              <motion.div
+                initial={{ opacity: 0, scale: 0.9 }}
+                animate={{ opacity: 1, scale: 1 }}
+                transition={{ 
+                  duration: 1.0, 
+                  delay: 3.0,
+                  ease: "easeOut"
+                }}
+              >
+                <img 
+                  src="/img/brand_logo.png" 
+                  alt="Ghostlight Garden - Where Soft Shadows Bloom" 
+                  className="mx-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg"
+                />
+              </motion.div>
+            </motion.div>
           </div>
 
-          <GlobalFooter />
         </div>
       </div>
     </div>

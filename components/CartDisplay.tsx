@@ -25,7 +25,7 @@ export default function CartDisplay() {
             <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg transition-all duration-200 hover:border-blue-300 hover:shadow-md">
                              {/* Clickable Image */}
                {item.image && (
-                 <Link href={`/collection/${item.handle}`}>
+                 <Link href={`/collections/all/${item.handle}`}>
                    <img 
                      src={item.image} 
                      alt={item.title || 'Product'} 
@@ -36,7 +36,7 @@ export default function CartDisplay() {
               
               <div className="flex-1">
                                  {/* Clickable Title */}
-                 <Link href={`/collection/${item.handle}`}>
+                 <Link href={`/collections/all/${item.handle}`}>
                    <h4 className="font-medium text-black hover:text-blue-600 transition-colors cursor-pointer">
                      {item.title || 'Product Unavailable'}
                    </h4>

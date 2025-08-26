@@ -56,7 +56,7 @@ export default function HomePage() {
             "url": "https://ghostlightgarden.com/home",
                          "potentialAction": {
                "@type": "SearchAction",
-               "target": "https://ghostlightgarden.com/collection?q={search_term_string}",
+               "target": "https://ghostlightgarden.com/collections?q={search_term_string}",
                "query-input": "required name=search_term_string"
              },
             "publisher": {
