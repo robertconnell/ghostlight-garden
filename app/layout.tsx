@@ -126,7 +126,6 @@ export default function RootLayout({
       >
         <StructuredData />
         <GoogleAnalytics />
-        <ConversionTracking />
         {/* <ImageProtection /> */}
         <CartProvider>
           <ConditionalSpacer />

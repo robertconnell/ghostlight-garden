@@ -7,9 +7,9 @@ export default function HomeLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="flex flex-col">
+    <div className="h-[95vh] flex flex-col">
       <Navigation />
-      <main>
+      <main className="flex-1">
         {children}
       </main>
       <GlobalFooter />

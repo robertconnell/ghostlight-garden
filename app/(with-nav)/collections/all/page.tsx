@@ -163,7 +163,7 @@ export default async function AllProductsPage() {
           }}
         />
 
-        <div>
+        <div className="min-h-screen">
           {/* PC Background */}
           <div className="hidden md:block fixed inset-0 z-0">
             <div
@@ -193,7 +193,8 @@ export default async function AllProductsPage() {
           </div>
 
           {/* Main Content */}
-          <main className="mx-auto max-w-6xl p-6 relative z-10">
+          <div className="relative z-10 min-h-screen">
+            <div className="mx-auto max-w-6xl p-6">
             {/* Breadcrumb Navigation */}
             <div className="mb-6">
               <div className="flex items-center space-x-2 text-sm text-gray-600 mb-4">
@@ -296,7 +297,8 @@ export default async function AllProductsPage() {
                 </Link>
               </div>
             )}
-          </main>
+            </div>
+          </div>
         </div>
       </>
     );

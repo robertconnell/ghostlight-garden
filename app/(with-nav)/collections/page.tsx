@@ -175,9 +175,8 @@ export default function CollectionsPage() {
         {/* Collections Grid */}
         <div className="flex flex-wrap gap-8 justify-center">
           {collections.map((collection: any) => (
-            <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm">
+            <div key={collection.id} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm">
               <Link 
-                key={collection.id} 
                 href={`/collections/${collection.handle}`}
                 className="group block"
               >

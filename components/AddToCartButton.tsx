@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useCart } from "./CartContext";
+import ConversionTracking from "./ConversionTracking";
 
 export default function AddToCartButton({
   merchandiseId,
@@ -47,9 +48,25 @@ export default function AddToCartButton({
         variantTitle
       });
       
+      // Track the add to cart event
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'add_to_cart', {
+          event_category: 'ecommerce',
+          event_label: title || 'product',
+          value: price ? parseFloat(price) : 0,
+          currency: 'USD',
+          items: [{
+            item_id: merchandiseId,
+            item_name: title,
+            price: price ? parseFloat(price) : 0,
+            quantity: quantity
+          }]
+        });
+      }
+      
       // Show success state briefly
       setSuccess(true);
-      setTimeout(() => setSuccess(false), 1500);
+      setTimeout(() => setSuccess(false), 2000);
       
     } catch (e) {
       console.error(e);
