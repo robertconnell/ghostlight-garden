@@ -33,9 +33,17 @@ export async function POST(request: NextRequest) {
       );
     }
 
+    // Log the email attempt
+    console.log('Attempting to send email:', {
+      from: 'noreply@ghostlightgarden.com',
+      to: 'info@ghostlightgarden.com',
+      subject: `Contact Form: ${subject}`,
+      hasApiKey: !!process.env.RESEND_API_KEY
+    });
+
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'onboarding@resend.dev', // Use Resend's test domain for now
+      from: 'noreply@ghostlightgarden.com', // Use your verified domain
       to: 'info@ghostlightgarden.com',
       subject: `Contact Form: ${subject}`,
       html: `
@@ -52,6 +60,7 @@ export async function POST(request: NextRequest) {
     
     if (error) {
       console.error('Email sending failed:', error);
+      console.error('Full error details:', JSON.stringify(error, null, 2));
       return NextResponse.json(
         { error: 'Failed to send email. Please try again later.' },
         { status: 500 }
@@ -59,6 +68,7 @@ export async function POST(request: NextRequest) {
     }
 
     console.log('Email sent successfully:', data);
+    console.log('Full success details:', JSON.stringify(data, null, 2));
 
     return NextResponse.json({ 
       success: true, 

@@ -173,13 +173,14 @@ export default function CollectionsPage() {
         </div>
         
         {/* Collections Grid */}
-        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+        <div className="flex flex-wrap gap-8 justify-center">
           {collections.map((collection: any) => (
-            <Link 
-              key={collection.id} 
-              href={`/collections/${collection.handle}`}
-              className="group block"
-            >
+            <div className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm">
+              <Link 
+                key={collection.id} 
+                href={`/collections/${collection.handle}`}
+                className="group block"
+              >
               <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
                 {/* Collection Image */}
                 <div className="aspect-square overflow-hidden">
@@ -213,11 +214,12 @@ export default function CollectionsPage() {
                       View Collection →
                     </span>
                   </div>
-                </div>
-              </div>
-            </Link>
-          ))}
-        </div>
+                                 </div>
+               </div>
+             </Link>
+            </div>
+            ))}
+          </div>
       </div>
     </div>
   );

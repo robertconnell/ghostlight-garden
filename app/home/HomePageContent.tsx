@@ -175,12 +175,12 @@ export default function HomePageContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
                   duration: 1.2, 
-                  delay: 1.8,
+                  delay: 1,
                   ease: "easeOut"
                 }}
               >
                 <motion.h2 
-                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-4"
+                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 ghostlight-font"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
