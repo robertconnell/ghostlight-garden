@@ -11,6 +11,11 @@ export default function ImageProtection() {
       IMAGE_PROTECTION_ENABLED ? '1' : '0'
     );
 
+    // Only add event listeners if image protection is enabled
+    if (!IMAGE_PROTECTION_ENABLED) {
+      return;
+    }
+
     // Prevent right-click context menu
     const handleContextMenu = (e: MouseEvent) => {
       e.preventDefault();
