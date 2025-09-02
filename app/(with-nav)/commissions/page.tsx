@@ -3,11 +3,11 @@ import CommissionForm from './CommissionForm';
 
 export const metadata: Metadata = {
   title: 'Commission Custom Art | Ghostlight Garden',
-  description: 'Request a custom art commission from Ghostlight Garden. Bring your vision to life with personalized digital artwork, illustrations, and creative solutions.',
-  keywords: 'custom art, commission art, digital art commission, illustration commission, custom artwork, personalized art, Ghostlight Garden',
+  description: 'Request a custom art commission from Ghostlight Garden. Bring your vision to life with personalized artwork, illustrations, and spooky-cute creations.',
+  keywords: 'custom art, commission art, hand-painted commission, mixed-media commission, custom artwork, personalized art, spooky-cute art, Ghostlight Garden',
   openGraph: {
     title: 'Commission Custom Art | Ghostlight Garden',
-    description: 'Request a custom art commission from Ghostlight Garden. Bring your vision to life with personalized digital artwork.',
+    description: 'Request a custom art commission from Ghostlight Garden. Bring your vision to life with personalized spooky-cute creations.',
     type: 'website',
     url: 'https://ghostlightgarden.com/commissions',
     images: [
@@ -22,7 +22,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Commission Custom Art | Ghostlight Garden',
-    description: 'Request a custom art commission from Ghostlight Garden. Bring your vision to life with personalized digital artwork.',
+    description: 'Request a custom art commission from Ghostlight Garden. Bring your vision to life with personalized spooky-cute creations.',
     images: ['/img/brand_logo.png'],
   },
   robots: {
@@ -45,7 +45,7 @@ export default function CommissionsPage() {
             "@context": "https://schema.org",
             "@type": "Service",
             "name": "Custom Art Commission Service",
-            "description": "Professional custom art commission service by Ghostlight Garden. Digital artwork, illustrations, character design, and more.",
+            "description": "Professional custom art commission service by Ghostlight Garden. Artwork, spooky-cute character design, and more.",
             "provider": {
               "@type": "Organization",
               "name": "Ghostlight Garden",

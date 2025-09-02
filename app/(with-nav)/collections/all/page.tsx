@@ -71,10 +71,10 @@ export default async function AllProductsPage() {
     // Generate metadata
     const metadata: Metadata = {
       title: "All Artwork - Ghostlight Garden | Complete Art Catalog",
-      description: "Browse our complete collection of unique artwork, prints, and digital art from talented artists. Find the perfect piece for your space.",
+      description: "Browse our complete collection of unique hand-painted, mixed-media artwork and custom commissions. All artwork comes framed. Find the perfect spooky-cute piece for your space.",
       openGraph: {
         title: "All Artwork - Ghostlight Garden",
-        description: "Browse our complete collection of unique artwork, prints, and digital art.",
+        description: "Browse our complete collection of unique hand-painted, mixed-media artwork and custom commissions. All artwork comes framed.",
         images: [
           {
             url: "https://ghostlightgarden.com/img/brand_logo.png",
@@ -98,7 +98,7 @@ export default async function AllProductsPage() {
               "@context": "https://schema.org",
               "@type": "CollectionPage",
               "name": "All Artwork - Ghostlight Garden",
-              "description": "Complete catalog of artwork, prints, and digital art",
+              "description": "Complete catalog of hand-painted, mixed-media artwork and custom commissions. All artwork comes framed.",
               "url": "https://ghostlightgarden.com/collections/all",
               "image": "https://ghostlightgarden.com/img/brand_logo.png",
               "mainEntity": {
@@ -216,8 +216,8 @@ export default async function AllProductsPage() {
                 All Artwork
               </h1>
               <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
-                Browse our complete catalog of unique artwork, prints, and digital art. 
-                Discover pieces from all our collections in one place.
+                Browse our complete catalog of unique hand-painted, mixed-media artwork and custom commissions. 
+                All artwork comes framed. Discover spooky-cute pieces from all our collections in one place.
               </p>
               <div className="w-48 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto rounded-full"></div>
             </div>

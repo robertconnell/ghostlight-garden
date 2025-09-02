@@ -5,7 +5,7 @@ export default function StructuredData() {
     "name": "Ghostlight Garden",
     "url": "https://ghostlightgarden.com",
     "logo": "https://ghostlightgarden.com/img/brand_logo.png",
-    "description": "Ghostlight Garden offers unique digital artwork, creative solutions, and innovative digital experiences. Based in North Carolina, we specialize in artistic digital products and custom solutions.",
+    "description": "Ghostlight Garden creates unique hand-painted, mixed-media, spooky-cute artwork and custom commissions. All artwork comes framed. Based in North Carolina, we specialize in original artwork.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "US",
@@ -22,27 +22,27 @@ export default function StructuredData() {
       "https://twitter.com/ghostlightgarden",
       "https://linkedin.com/company/ghostlightgarden"
     ],
-    "foundingDate": "2024",
+    "foundingDate": "2025",
     "areaServed": "United States",
-    "serviceType": ["Digital Art", "Creative Solutions", "Custom Development"],
+    "serviceType": ["Spooky-Cute Art", "Custom Commissions"],
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
-      "name": "Digital Products & Services",
+      "name": "Artwork and Custom Commissions",
       "itemListElement": [
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Digital Artwork",
-            "description": "Unique digital artwork and creative designs"
+            "name": "Artwork",
+            "description": "Unique spooky-cute artwork and creations"
           }
         },
         {
           "@type": "Offer",
           "itemOffered": {
             "@type": "Service",
-            "name": "Creative Solutions",
-            "description": "Custom digital solutions and creative consulting"
+            "name": "Custom Artwork",
+            "description": "Custom artwork and commissions"
           }
         }
       ]

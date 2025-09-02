@@ -56,11 +56,11 @@ const alexBrush = Alex_Brush({
 
 export const metadata: Metadata = {
   title: {
-    default: "Ghostlight Garden | Digital Art & Creative Solutions",
+    default: "Ghostlight Garden | Spooky-Cute Creations",
     template: "%s | Ghostlight Garden"
   },
-  description: "Ghostlight Garden offers unique digital artwork, creative solutions, and innovative digital experiences. Based in North Carolina, we specialize in artistic digital products and custom solutions.",
-  keywords: ["digital art", "creative solutions", "North Carolina", "digital experiences", "artwork", "custom solutions", "Ghostlight Garden"],
+  description: "Ghostlight Garden creates unique hand-painted, mixed-media, spooky-cute artwork and custom commissions. All artwork comes framed. Based in North Carolina, we specialize in original artwork.",
+  keywords: ["spooky art", "cute creations", "North Carolina", "artwork", "custom artwork", "framed artwork", "hand-painted art", "mixed-media art", "Ghostlight Garden"],
   authors: [{ name: "Ghostlight Garden" }],
   creator: "Ghostlight Garden",
   publisher: "Ghostlight Garden",
@@ -78,21 +78,21 @@ export const metadata: Metadata = {
     locale: 'en_US',
     url: 'https://ghostlightgarden.com',
     siteName: 'Ghostlight Garden',
-    title: 'Ghostlight Garden | Digital Art & Creative Solutions',
-    description: 'Unique digital artwork and creative solutions from North Carolina',
+    title: 'Ghostlight Garden | Spooky-Cute Creations',
+    description: 'Unique hand-painted, mixed-media, spooky-cute artwork and custom commissions from North Carolina. All artwork comes framed.',
     images: [
       {
         url: '/img/brand_logo.png',
         width: 1200,
         height: 630,
-        alt: 'Ghostlight Garden - Digital Art & Creative Solutions',
+        alt: 'Ghostlight Garden - Spooky-Cute Creations',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Ghostlight Garden | Digital Art & Creative Solutions',
-    description: 'Unique digital artwork and creative solutions from North Carolina',
+    title: 'Ghostlight Garden | Spooky-Cute Creations',
+    description: 'Unique hand-painted, mixed-media, spooky-cute artwork and custom commissions from North Carolina. All artwork comes framed.',
     images: ['/img/brand_logo.png'],
   },
   robots: {

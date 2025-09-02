@@ -4,8 +4,8 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: 'About Us | Ghostlight Garden',
-  description: 'Discover the story behind Ghostlight Garden. Learn about our mission, values, and commitment to creating beautiful digital experiences.',
-  keywords: 'about us, Ghostlight Garden, digital experiences, creativity, mission, values',
+  description: 'Discover the story behind Ghostlight Garden. Learn about our mission, values, and commitment to creating unique hand-painted, mixed-media artwork.',
+  keywords: 'about us, Ghostlight Garden, hand-painted art, mixed-media artwork, spooky-cute art, custom commissions, creativity, mission, values',
   openGraph: {
     title: 'About Us | Ghostlight Garden',
     description: 'Discover the story behind Ghostlight Garden and our mission.',
