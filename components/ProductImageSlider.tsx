@@ -113,16 +113,6 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
                 height={64}
                 className="w-full h-full object-contain"
               />
-              {/* Brand Logo Overlay for Thumbnails */}
-              <div className="absolute bottom-1 left-1 pointer-events-none">
-                <Image
-                  src="/img/brand_logo.png"
-                  alt="Ghostlight Garden"
-                  width={32}
-                  height={32}
-                  className="opacity-20 w-1/3 h-1/3"
-                />
-              </div>
             </button>
           ))}
         </div>
