@@ -57,24 +57,24 @@ export default function AboutPage() {
         </div>
 
         {/* Main Content */}
-        <div className="max-w-5xl mx-auto px-6 mb-16 mt-12">
+        <div className="max-w-5xl mx-auto px-4 md:px-6 mb-16 mt-12">
         <div className="grid gap-12 md:grid-cols-2">
           {/* Artist Profile Picture */}
-          <div className="flex justify-center items-center order-2 md:order-1">
-            <div className="relative">
+          <div className="flex justify-center items-center order-2 md:order-1 px-2">
+            <div className="relative w-full max-w-sm">
               <div className="absolute -inset-4 bg-gradient-to-r from-purple-300 to-pink-300 rounded-3xl blur-lg opacity-30"></div>
               <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-2 shadow-xl">
                 <img
                   src="/img/artist_pofile_picture.jpg"
                   alt="Kailey - Artist behind Ghostlight Garden"
-                  className="max-w-sm rounded-xl shadow-lg object-contain bg-transparent"
+                  className="w-full rounded-xl shadow-lg object-contain bg-transparent"
                 />
               </div>
             </div>
           </div>
 
           {/* Our Mission */}
-          <div className="bg-white/80 rounded-2xl p-6 order-1 md:order-2">
+          <div className="bg-white/80 rounded-2xl p-4 md:p-6 order-1 md:order-2">
             <h2 className="text-5xl font-alex-brush text-gray-900 mb-6">from my heart to yours</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
