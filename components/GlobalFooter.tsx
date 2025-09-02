@@ -25,19 +25,19 @@ export default function GlobalFooter() {
           <div className="flex flex-wrap justify-center gap-6">
             <Link 
               href="/privacy" 
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-600 hover:text-purple-900 transition-colors"
             >
               Privacy Policy
             </Link>
             <Link 
               href="/terms" 
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-600 hover:text-purple-900 transition-colors"
             >
               Terms of Service
             </Link>
             <Link 
               href="/shipping-returns" 
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-600 hover:text-purple-900 transition-colors"
             >
               Shipping & Returns
             </Link>
@@ -70,19 +70,19 @@ export default function GlobalFooter() {
           <div className="absolute left-1/2 transform -translate-x-1/2 flex space-x-8">
             <Link 
               href="/privacy" 
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-600 hover:text-purple-900 transition-colors"
             >
               Privacy Policy
             </Link>
             <Link 
               href="/terms" 
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-600 hover:text-purple-900 transition-colors"
             >
               Terms of Service
             </Link>
             <Link 
               href="/shipping-returns" 
-              className="text-sm text-gray-600 hover:text-gray-900 transition-colors"
+              className="text-sm text-gray-600 hover:text-purple-900 transition-colors"
             >
               Shipping & Returns
             </Link>

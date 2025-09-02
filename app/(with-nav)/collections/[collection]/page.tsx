@@ -86,31 +86,35 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
     const Background = () => (
       <>
         {/* PC Background */}
-        <div className="hidden md:block fixed inset-0 z-0">
+        <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{ 
-              backgroundImage: 'url(/img/pc_home_background.png)',
+              backgroundImage: 'url(/img/pc_collections_background.png)',
               willChange: 'transform',
               transform: 'translateZ(0)'
             }}
             role="img"
-            aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
+            aria-label="PC background: Artistic collection scene"
           />
+          {/* Light pink overlay to brighten and add pink tint */}
+          <div className="absolute inset-0 bg-pink-100/30"></div>
         </div>
 
         {/* Mobile Background */}
-        <div className="md:hidden fixed inset-0 z-0">
+        <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{ 
-              backgroundImage: 'url(/img/mobile_home_background.png)',
+              backgroundImage: 'url(/img/mobile_collections_background.png)',
               willChange: 'transform',
               transform: 'translateZ(0)'
             }}
             role="img"
-            aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
+            aria-label="Mobile background: Artistic collection scene"
           />
+          {/* Light pink overlay to brighten and add pink tint */}
+          <div className="absolute inset-0 bg-pink-100/30"></div>
         </div>
       </>
     );

@@ -89,10 +89,36 @@ export default function CollectionsPage() {
   const Background = () => (
     <>
       {/* PC Background */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-[#9A77CC]"></div>
+      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/pc_collections_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="PC background: Artistic collection scene"
+        />
+        {/* Light pink overlay to brighten and add pink tint */}
+        <div className="absolute inset-0 bg-pink-100/30"></div>
+      </div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-[#9A77CC]"></div>
+      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/mobile_collections_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="Mobile background: Artistic collection scene"
+        />
+        {/* Light pink overlay to brighten and add pink tint */}
+        <div className="absolute inset-0 bg-pink-100/30"></div>
+      </div>
     </>
   );
 
@@ -152,7 +178,7 @@ export default function CollectionsPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
             Art Collections
           </h1>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
             Explore our curated collections, each showcasing unique characters and artistic styles. 
             From spooky wisps to whimsical faeries, discover the perfect pieces to add to your space.
           </p>

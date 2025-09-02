@@ -70,40 +70,21 @@ export default function CommissionsPage() {
         }}
       />
       {/* Background component to ensure consistency */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: 'url(/img/pc_home_background.png)',
-            willChange: 'transform',
-            transform: 'translateZ(0)'
-          }}
-          role="img"
-          aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
-        />
-      </div>
+      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-white"></div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: 'url(/img/mobile_home_background.png)',
-            willChange: 'transform',
-            transform: 'translateZ(0)'
-          }}
-          role="img"
-          aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
-        />
-      </div>
+      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-white"></div>
 
       <div className="relative z-10 min-h-full">
         {/* Hero Section */}
         <div className="py-10 px-6">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">Custom Art Commission</h1>
-            <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-              Bring your vision to life with a custom piece created just for you. Let's collaborate to create something truly unique.
+            <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
+              Bring your vision to life in my pastel-spooky garden—hand-painted, mixed-media pieces made just for you 🩷
+            </p>
+            <p className="text-md text-white mt-4">
+              Limited Monthly Spots · Transparent Pricing · Progress Updates
             </p>
             <div className="w-72 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto mt-6 rounded-full"></div>
           </div>
@@ -122,7 +103,7 @@ export default function CommissionsPage() {
               <div>
                 <h2 className="text-3xl font-semibold text-gray-900 mb-6">How It Works</h2>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  Commissioning custom art is a collaborative process. Here's what you can expect when working with us.
+                  Commissioning custom art is a collaborative process. Here's what you can expect when working with us:
                 </p>
               </div>
 
@@ -133,7 +114,7 @@ export default function CommissionsPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Initial Consultation</h3>
-                    <p className="text-gray-600">We'll review your request and discuss your vision in detail to ensure we understand exactly what you're looking for.</p>
+                    <p className="text-gray-600">We confirm your concept, size, budget, and timeline by email or short phone call.</p>
                   </div>
                 </div>
 
@@ -142,8 +123,8 @@ export default function CommissionsPage() {
                     <span className="text-green-600 font-bold text-lg">2</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Quote & Timeline</h3>
-                    <p className="text-gray-600">We'll provide a detailed quote and timeline based on your project requirements and complexity.</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Quote & Booking</h3>
+                    <p className="text-gray-600">Approve your quote and pay a 50% non-refundable deposit to reserve your spot.</p>
                   </div>
                 </div>
 
@@ -152,8 +133,8 @@ export default function CommissionsPage() {
                     <span className="text-blue-600 font-bold text-lg">3</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Creation Process</h3>
-                    <p className="text-gray-600">We'll create your custom piece, keeping you updated with progress and incorporating your feedback.</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Updates</h3>
+                    <p className="text-gray-600">We'll create your custom piece, keeping you updated with progress. 1-2 revisions allowed.</p>
                   </div>
                 </div>
 
@@ -162,31 +143,38 @@ export default function CommissionsPage() {
                     <span className="text-yellow-600 font-bold text-lg">4</span>
                   </div>
                   <div>
-                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Final Delivery</h3>
-                    <p className="text-gray-600">You'll receive your finished artwork in high-resolution format, ready for your intended use.</p>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Final Magic</h3>
+                    <p className="text-gray-600">When it's perfect, you'll receive final photos for approval and pay the remaining balance.</p>
+                  </div>
+                </div>
+
+                <div className="flex items-start space-x-4">
+                  <div className="w-12 h-12 bg-pink-200 rounded-full flex items-center justify-center flex-shrink-0">
+                    <span className="text-pink-600 font-bold text-lg">5</span>
+                  </div>
+                  <div>
+                    <h3 className="text-lg font-semibold text-gray-900 mb-1">Delivery</h3>
+                    <p className="text-gray-600">Packed with care; tracking will be provided.</p>
+                    <p className="text-sm text-gray-600 font-bold">Note: Rush availability is limited; fees may apply for deadlines under 2 weeks.</p>
                   </div>
                 </div>
               </div>
 
               {/* Pricing Guidelines */}
               <div className="mt-12">
-                <h3 className="text-xl font-semibold text-gray-900 mb-4">Pricing Guidelines</h3>
+                <h3 className="text-xl font-semibold text-gray-900 mb-4">Guidelines</h3>
                 <div className="space-y-4">
                   <div className="border-l-4 border-purple-200 pl-4">
-                    <h4 className="font-medium text-gray-900">Simple Illustrations</h4>
-                    <p className="text-sm text-gray-600">Starting at $100 - Basic digital art pieces with minimal complexity</p>
+                    <h4 className="font-medium text-gray-900">Starting Price Point</h4>
+                    <p className="text-sm text-gray-600">Pricing starts at $200+, but final pricing varies based on size, detail, backgrounds, and deadline.</p>
                   </div>
                   <div className="border-l-4 border-purple-200 pl-4">
-                    <h4 className="font-medium text-gray-900">Detailed Artwork</h4>
-                    <p className="text-sm text-gray-600">$250-$500 - Complex pieces with detailed backgrounds and multiple elements</p>
+                    <h4 className="font-medium text-gray-900">Timeline</h4>
+                    <p className="text-sm text-gray-600">Most pieces finish in 2–6 weeks depending on complexity and current queue.</p>
                   </div>
                   <div className="border-l-4 border-purple-200 pl-4">
-                    <h4 className="font-medium text-gray-900">Commercial Use</h4>
-                    <p className="text-sm text-gray-600">Additional licensing fees may apply for commercial or business use</p>
-                  </div>
-                  <div className="border-l-4 border-purple-200 pl-4">
-                    <h4 className="font-medium text-gray-900">Rush Jobs</h4>
-                    <p className="text-sm text-gray-600">50% surcharge for projects needed within 48 hours</p>
+                    <h4 className="font-medium text-gray-900">Shipping</h4>
+                    <p className="text-sm text-gray-600">Tracking number will be provided. Originals come signed, and framed.</p>
                   </div>
                 </div>
               </div>
@@ -203,7 +191,7 @@ export default function CommissionsPage() {
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 mb-1">Email Us</h4>
                     <p className="text-gray-600">info@ghostlightgarden.com</p>
-                    <p className="text-sm text-gray-500">We typically respond within 24 hours</p>
+                    <p className="text-sm text-gray-500">We typically respond within 72 hours</p>
                   </div>
                 </div>
               </div>

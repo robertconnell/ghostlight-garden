@@ -22,13 +22,15 @@ export default function AboutPage() {
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: 'url(/img/pc_home_background.png)',
+            backgroundImage: 'url(/img/pc_maintenance_background.png)',
             willChange: 'transform',
             transform: 'translateZ(0)'
           }}
           role="img"
-          aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
+          aria-label="PC background: Maintenance page artistic scene"
         />
+        {/* Light pink overlay to brighten and add pink tint */}
+        <div className="absolute inset-0 bg-pink-100/30"></div>
       </div>
 
       {/* Mobile Background */}
@@ -36,13 +38,15 @@ export default function AboutPage() {
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
-            backgroundImage: 'url(/img/mobile_home_background.png)',
+            backgroundImage: 'url(/img/mobile_maintenance_background.png)',
             willChange: 'transform',
             transform: 'translateZ(0)'
           }}
           role="img"
-          aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
+          aria-label="Mobile background: Maintenance page artistic scene"
         />
+        {/* Light pink overlay to brighten and add pink tint */}
+        <div className="absolute inset-0 bg-pink-100/30"></div>
       </div>
 
       {/* Hero Section */}

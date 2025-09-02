@@ -149,9 +149,17 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
       {/* Preorder Disclaimer */}
       {!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0) && (
         <div className="bg-purple-50 border-l-4 border-[#8A6D9B] p-4 mb-6 rounded-tr-lg rounded-br-lg">
-          <h3 className="text-lg font-semibold text-[#8A6D9B] mb-2">Preorder Available</h3>
+          <h3 className="text-lg font-semibold text-[#8A6D9B] mb-2">Secure your place in the Garden 🌸</h3>
           <p className="text-[#8A6D9B]">
-            This item is currently out of stock but available for preorder. Your order will be processed and shipped as soon as inventory becomes available. You will receive an email notification when your order ships.
+          Your piece will be printed and prepared with care, then shipped out on or before {(() => {
+            const today = new Date();
+            const twoWeeksFromNow = new Date(today.getTime() + (14 * 24 * 60 * 60 * 1000));
+            return twoWeeksFromNow.toLocaleDateString('en-US', { 
+              month: 'numeric', 
+              day: 'numeric' 
+            });
+          })()}!
+          Thank you for your patience and for bringing a little of the Garden into your home.
           </p>
         </div>
       )}

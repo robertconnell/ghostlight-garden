@@ -200,7 +200,7 @@ export default function HomePageContent() {
                     ease: "easeOut"
                   }}
                 >
-                  Discover our curated collection of unique pieces, each telling its own story
+                  Discover our favorite gloomies, each with their own unique personality.
                 </motion.p>
               </motion.div>
 

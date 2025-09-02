@@ -91,7 +91,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-64 md:w-80 mx-auto">
                   {/* Product Image */}
                   <div 
-                    className="relative aspect-square mb-4 overflow-hidden rounded-lg"
+                    className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-transparent"
                     {...(IMAGE_PROTECTION_ENABLED ? {
                       onContextMenu: (e) => e.preventDefault(),
                       onDragStart: (e) => e.preventDefault()
@@ -103,7 +103,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                         alt={product.featuredImage.altText || product.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className={`object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
+                        className={`object-contain group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
                         draggable={!IMAGE_PROTECTION_ENABLED}
                         priority={index === 0}
                         {...(IMAGE_PROTECTION_ENABLED ? {
@@ -112,7 +112,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                         } : {})}
                       />
                     ) : (
-                      <div className="w-full h-full bg-gray-200 flex items-center justify-center">
+                      <div className="w-full h-full bg-transparent flex items-center justify-center">
                         <span className="text-gray-400">No image</span>
                       </div>
                     )}
@@ -120,7 +120,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
 
                   {/* Product Info */}
                   <div className="text-center">
-                    <h3 className="font-semibold text-white mb-2 group-hover:text-purple-200 transition-colors">
+                    <h3 className="font-semibold text-purple-300 mb-2 group-hover:text-purple-700 transition-colors">
                       {product.title}
                     </h3>
                   </div>

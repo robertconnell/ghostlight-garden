@@ -73,19 +73,19 @@ export default function Navigation() {
 
           {/* Desktop Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            <Link href="/home" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/home" className="text-gray-600 hover:text-purple-900 transition-colors">
               Home
             </Link>
-            <Link href="/collections" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/collections" className="text-gray-600 hover:text-purple-900 transition-colors">
               Collections
             </Link>
-            <Link href="/commissions" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/commissions" className="text-gray-600 hover:text-purple-900 transition-colors">
               Commissions
             </Link>
-            <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/about" className="text-gray-600 hover:text-purple-900 transition-colors">
               About
             </Link>
-            <Link href="/contact" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/contact" className="text-gray-600 hover:text-purple-900 transition-colors">
               Contact
             </Link>
           </div>
@@ -249,35 +249,35 @@ export default function Navigation() {
                 <div className="py-4 space-y-1 px-6">
                   <Link 
                     href="/home" 
-                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Home
                   </Link>
                   <Link 
                     href="/collections" 
-                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Collections
                   </Link>
                   <Link 
                     href="/commissions" 
-                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Commissions
                   </Link>
                   <Link 
                     href="/about" 
-                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     About
                   </Link>
                   <Link 
                     href="/contact" 
-                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Contact
