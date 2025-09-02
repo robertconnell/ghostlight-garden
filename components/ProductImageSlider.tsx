@@ -56,7 +56,7 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
           priority={currentImageIndex === 0}
         />
         {/* Brand Logo Overlay */}
-        <div className="absolute bottom-0 left-22 pointer-events-none">
+        <div className="absolute bottom-0 left-12 pointer-events-none">
           <Image
             src="/img/brand_logo.png"
             alt="Ghostlight Garden"
