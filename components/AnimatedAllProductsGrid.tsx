@@ -56,15 +56,27 @@ export default function AnimatedAllProductsGrid({ products, searchTerm }: Animat
               )}
 
               {/* Product Image */}
-              <div className="aspect-square overflow-hidden">
+              <div className="aspect-square overflow-hidden relative">
                 {product.featuredImage ? (
-                  <Image
-                    src={product.featuredImage.url}
-                    alt={product.featuredImage.altText || product.title}
-                    width={product.featuredImage.width || 400}
-                    height={product.featuredImage.height || 400}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                  />
+                  <>
+                    <Image
+                      src={product.featuredImage.url}
+                      alt={product.featuredImage.altText || product.title}
+                      width={product.featuredImage.width || 400}
+                      height={product.featuredImage.height || 400}
+                      className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    />
+                    {/* Brand Logo Overlay */}
+                    <div className="absolute bottom-2 left-2 pointer-events-none">
+                      <Image
+                        src="/img/brand_logo.png"
+                        alt="Ghostlight Garden"
+                        width={200}
+                        height={200}
+                        className="opacity-50 w-1/3 h-1/3"
+                      />
+                    </div>
+                  </>
                 ) : (
                   <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
                     <span className="text-gray-400 text-lg">{product.title}</span>

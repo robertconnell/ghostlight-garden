@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function GlobalFooter() {
   return (
-    <footer className="w-full py-8 px-4 bg-gray-50 border-t border-gray-200 sticky-footer relative z-30">
+    <footer className="w-full py-8 px-4 pb-16 md:pb-8 bg-gray-50 border-t border-gray-200 sticky-footer relative z-30">
       <div className="w-full">
         {/* Mobile Layout - Stacked Vertically */}
         <div className="md:hidden text-center space-y-4">

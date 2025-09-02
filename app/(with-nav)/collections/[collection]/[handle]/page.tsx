@@ -187,12 +187,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 <div>
                   <VariantPicker product={product} collectionHandle={resolvedParams.collection} />
                 </div>
-
-
-
-
-
-
               </div>
             </div>
           </div>

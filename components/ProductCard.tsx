@@ -48,18 +48,30 @@ export default function ProductCard({
           } : {})}
         >
           {img ? (
-            <Image
-              src={img.url}
-              alt={img.altText || product.title}
-              width={img.width || 400}
-              height={img.height || 400}
-              className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none pointer-events-none' : ''}`}
-              draggable={!IMAGE_PROTECTION_ENABLED}
-              {...(IMAGE_PROTECTION_ENABLED ? {
-                onContextMenu: handleContextMenu,
-                onDragStart: handleDragStart
-              } : {})}
-            />
+            <>
+              <Image
+                src={img.url}
+                alt={img.altText || product.title}
+                width={img.width || 400}
+                height={img.height || 400}
+                className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none pointer-events-none' : ''}`}
+                draggable={!IMAGE_PROTECTION_ENABLED}
+                {...(IMAGE_PROTECTION_ENABLED ? {
+                  onContextMenu: handleContextMenu,
+                  onDragStart: handleDragStart
+                } : {})}
+              />
+              {/* Brand Logo Overlay */}
+              <div className="absolute bottom-2 left-2 pointer-events-none">
+                <Image
+                  src="/img/brand_logo.png"
+                  alt="Ghostlight Garden"
+                  width={200}
+                  height={200}
+                  className="opacity-50 w-1/3 h-1/3"
+                />
+              </div>
+            </>
           ) : (
             <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
               <span className="text-gray-400 text-lg">{product.title}</span>

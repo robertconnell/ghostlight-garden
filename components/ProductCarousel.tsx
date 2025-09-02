@@ -45,7 +45,9 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     gap: "1.5rem", // Gap between slides
     padding: "2rem", // Padding around the carousel
     start: 0, // Start from the first slide
-    focus: 1, // Focus on the second slide (center of 3)
+    focus: "center", // Use center focus for better initial positioning
+    height: "auto", // Let height adjust to content
+    fixedHeight: false, // Don't force a fixed height
     breakpoints: {
       1024: {
         perPage: 2,
@@ -79,7 +81,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   return (
     <div className="relative w-full max-w-6xl mx-auto">
       {/* Carousel Container */}
-      <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
+      <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[400px]">
         {/* Splide component with configuration options */}
         <Splide options={splideOptions}>
           {products.map((product, index) => (
@@ -98,19 +100,31 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                     } : {})}
                   >
                     {product.featuredImage ? (
-                      <Image
-                        src={product.featuredImage.url}
-                        alt={product.featuredImage.altText || product.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className={`object-contain group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
-                        draggable={!IMAGE_PROTECTION_ENABLED}
-                        priority={index === 0}
-                        {...(IMAGE_PROTECTION_ENABLED ? {
-                          onContextMenu: (e) => e.preventDefault(),
-                          onDragStart: (e) => e.preventDefault()
-                        } : {})}
-                      />
+                      <>
+                        <Image
+                          src={product.featuredImage.url}
+                          alt={product.featuredImage.altText || product.title}
+                          fill
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          className={`object-contain group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
+                          draggable={!IMAGE_PROTECTION_ENABLED}
+                          priority={index === 0}
+                          {...(IMAGE_PROTECTION_ENABLED ? {
+                            onContextMenu: (e) => e.preventDefault(),
+                            onDragStart: (e) => e.preventDefault()
+                          } : {})}
+                        />
+                        {/* Brand Logo Overlay */}
+                        <div className="absolute bottom-0 left-12 pointer-events-none">
+                          <Image
+                            src="/img/brand_logo.png"
+                            alt="Ghostlight Garden"
+                            width={200}
+                            height={200}
+                            className="opacity-45 w-1/3 h-1/3"
+                          />
+                        </div>
+                      </>
                     ) : (
                       <div className="w-full h-full bg-transparent flex items-center justify-center">
                         <span className="text-gray-400">No image</span>

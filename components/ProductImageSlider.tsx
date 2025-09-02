@@ -55,6 +55,16 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
           className="w-full h-full object-contain"
           priority={currentImageIndex === 0}
         />
+        {/* Brand Logo Overlay */}
+        <div className="absolute bottom-0 left-22 pointer-events-none">
+          <Image
+            src="/img/brand_logo.png"
+            alt="Ghostlight Garden"
+            width={200}
+            height={200}
+            className="opacity-45 w-1/2 h-1/2"
+          />
+        </div>
         
         {/* Navigation Arrows - Only show if more than 1 image */}
         {images.length > 1 && (
@@ -89,7 +99,7 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
             <button
               key={index}
               onClick={() => goToImage(index)}
-              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 ${
+              className={`flex-shrink-0 w-16 h-16 rounded-lg overflow-hidden border-2 transition-all duration-200 relative ${
                 index === currentImageIndex
                   ? "border-purple-900 scale-100"
                   : "border-gray-200 hover:border-purple-900 scale-95"
@@ -103,6 +113,16 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
                 height={64}
                 className="w-full h-full object-contain"
               />
+              {/* Brand Logo Overlay for Thumbnails */}
+              <div className="absolute bottom-1 left-1 pointer-events-none">
+                <Image
+                  src="/img/brand_logo.png"
+                  alt="Ghostlight Garden"
+                  width={32}
+                  height={32}
+                  className="opacity-20 w-1/3 h-1/3"
+                />
+              </div>
             </button>
           ))}
         </div>
