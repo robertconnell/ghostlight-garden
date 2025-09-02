@@ -35,18 +35,29 @@ export async function POST(request: NextRequest) {
 
     // Send email using Resend
     const { data, error } = await resend.emails.send({
-      from: 'noreply@ghostlightgarden.com', // Use your verified domain
+      from: 'noreply@ghostlightgarden.com',
       to: 'info@ghostlightgarden.com',
       subject: `Contact Form: ${subject}`,
       html: `
         <h2>New Contact Form Submission</h2>
-        <p><strong>Name:</strong> ${name}</p>
-        <p><strong>Email:</strong> ${email}</p>
-        <p><strong>Subject:</strong> ${subject}</p>
-        <p><strong>Message:</strong></p>
-        <p>${message.replace(/\n/g, '<br>')}</p>
-        <p><strong>Submitted:</strong> ${new Date().toLocaleString()}</p>
-        <p><strong>IP Address:</strong> ${request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'}</p>
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #6f42c1; margin-top: 0;">Contact Details</h3>
+          <p><strong>Name:</strong> ${name}</p>
+          <p><strong>Email:</strong> ${email}</p>
+          <p><strong>Subject:</strong> ${subject}</p>
+        </div>
+        
+        <div style="background-color: #f8f9fa; padding: 20px; border-radius: 8px; margin: 20px 0;">
+          <h3 style="color: #6f42c1; margin-top: 0;">Message</h3>
+          <p>${message.replace(/\n/g, '<br>')}</p>
+        </div>
+        
+        <div style="background-color: #e9ecef; padding: 15px; border-radius: 8px; margin: 20px 0;">
+          <p style="margin: 0; font-size: 14px; color: #6c757d;">
+            <strong>Submitted:</strong> ${new Date().toLocaleString()}<br>
+            <strong>IP Address:</strong> ${request.headers.get('x-forwarded-for') || request.headers.get('x-real-ip') || 'unknown'}
+          </p>
+        </div>
       `
     });
     
