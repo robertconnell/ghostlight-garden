@@ -1,4 +1,14 @@
 import Link from 'next/link';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'Under Maintenance | Ghostlight Garden',
+  description: 'Ghostlight Garden is temporarily under maintenance. We are working to improve your experience and will be back soon.',
+  robots: {
+    index: false,
+    follow: false,
+  },
+};
 
 export default function MaintenancePage() {
 
