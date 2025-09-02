@@ -67,7 +67,7 @@ export default function AboutPage() {
                 <img
                   src="/img/artist_pofile_picture.jpg"
                   alt="Kailey - Artist behind Ghostlight Garden"
-                  className="w-full max-w-sm rounded-xl shadow-lg object-cover aspect-square"
+                  className="max-w-sm rounded-xl shadow-lg object-contain bg-transparent"
                 />
               </div>
             </div>
