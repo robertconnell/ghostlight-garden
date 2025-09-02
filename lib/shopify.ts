@@ -1,6 +1,6 @@
 const domain = process.env.SHOPIFY_STORE_DOMAIN!;
 const token = process.env.SHOPIFY_STOREFRONT_TOKEN!;
-const apiVersion = process.env.SHOPIFY_STOREFRONT_API_VERSION || '2025-07';
+const apiVersion = process.env.SHOPIFY_STOREFRONT_API_VERSION || '2024-10';
 
 const endpoint = `https://${domain}/api/${apiVersion}/graphql.json`;
 
@@ -11,6 +11,11 @@ export async function shopifyFetch<T>(
   retries: number = 3,
   delay: number = 1000
 ): Promise<T> {
+  // Check if we have the required credentials
+  if (!domain || !token) {
+    console.warn('Shopify credentials not found, skipping API call');
+    throw new Error('Shopify credentials not configured');
+  }
   const controller = new AbortController();
   const timeoutId = setTimeout(() => controller.abort(), 30000); // 30 second timeout
 

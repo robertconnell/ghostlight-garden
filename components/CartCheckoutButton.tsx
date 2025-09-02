@@ -93,7 +93,7 @@ export default function CartCheckoutButton({
 
   return (
     <button
-      className={className || "w-full rounded-lg px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold"}
+      className={className || "w-full rounded-lg px-4 py-3 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font"}
       disabled={loading || items.length === 0}
       onClick={handleCheckout}
     >

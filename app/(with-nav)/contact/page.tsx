@@ -53,19 +53,47 @@ export default function ContactPage() {
   };
 
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white h-full">
+    <div className="min-h-full">
+      {/* Background component to ensure consistency */}
+      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/pc_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
+        />
+      </div>
+
+      {/* Mobile Background */}
+      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/mobile_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
+        />
+      </div>
+
       {/* Hero Section */}
-      <div className="py-20 px-6">
+      <div className="relative z-10 py-10 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">Get in Touch</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">Get in Touch</h1>
           <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
             Have a question, suggestion, or just want to say hello? We'd love to hear from you.
           </p>
+          <div className="w-72 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto mt-6 rounded-full"></div>
         </div>
-      </div>
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-6 mb-16">
+        {/* Main Content */}
+        <div className="max-w-6xl mx-auto px-6 mb-16 mt-12">
         <div className="grid gap-12 lg:grid-cols-2">
           {/* Contact Form */}
           <div className="bg-white rounded-2xl shadow-lg p-8">
@@ -95,7 +123,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
                   placeholder="Your name"
                 />
               </div>
@@ -111,7 +139,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -127,7 +155,7 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
                   placeholder="What's this about?"
                 />
               </div>
@@ -143,7 +171,7 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900"
                   placeholder="Tell us what's on your mind..."
                 />
               </div>
@@ -151,7 +179,7 @@ export default function ContactPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-purple-600 hover:bg-purple-700 disabled:bg-purple-400 text-white font-semibold py-3 px-6 rounded-lg transition-colors duration-200"
+                className="w-full rounded-lg px-4 py-3 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font"
               >
                 {isSubmitting ? "Sending..." : "Send Message"}
               </button>
@@ -188,9 +216,18 @@ export default function ContactPage() {
                   </svg>
                 </div>
                 <div>
-                  <h3 className="text-lg font-semibold text-gray-900 mb-1">Social Media</h3>
+                  <h3 className="text-lg font-semibold text-gray-900 mb-1">Follow Us</h3>
                   <p className="text-gray-600">Follow us for updates and inspiration</p>
-                  <p className="text-sm text-gray-500">Instagram • Twitter • LinkedIn</p>
+                  <a 
+                    href="https://tiktok.com/@ghostlightgarden" 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 text-purple-600 hover:text-purple-700 transition-colors"
+                  >
+                    <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                      <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64 2.93 2.93 0 0 1 .88.13V9.4a6.84 6.84 0 0 0-1-.05A6.33 6.33 0 0 0 5 20.1a6.34 6.34 0 0 0 10.86-4.43v-7a8.16 8.16 0 0 0 4.77 1.52v-3.4a4.85 4.85 0 0 1-1-.1z"/>
+                    </svg>
+                  </a>
                 </div>
               </div>
 
@@ -208,25 +245,9 @@ export default function ContactPage() {
               </div>
             </div>
 
-            {/* FAQ Section */}
-            <div className="mt-12">
-              <h3 className="text-xl font-semibold text-gray-900 mb-4">Frequently Asked Questions</h3>
-              <div className="space-y-4">
-                <div className="border-l-4 border-purple-200 pl-4">
-                  <h4 className="font-medium text-gray-900">How quickly do you respond?</h4>
-                  <p className="text-sm text-gray-600">We aim to respond to all inquiries within 24 hours during business days.</p>
-                </div>
-                <div className="border-l-4 border-purple-200 pl-4">
-                  <h4 className="font-medium text-gray-900">Do you offer custom solutions?</h4>
-                  <p className="text-sm text-gray-600">Yes! We love working on custom projects. Let's discuss your needs.</p>
-                </div>
-                <div className="border-l-4 border-purple-200 pl-4">
-                  <h4 className="font-medium text-gray-900">What are your business hours?</h4>
-                  <p className="text-sm text-gray-600">Monday to Friday, 9 AM - 6 PM EST</p>
-                </div>
-              </div>
-            </div>
+
           </div>
+        </div>
         </div>
       </div>
     </div>

@@ -102,7 +102,7 @@ export default function HomePageContent() {
               animate={{ opacity: 1, x: 0}}
               transition={{ 
                 duration: 1.2, 
-                delay: 1.2,
+                delay: 0.4,
                 ease: "easeOut"
               }}
             >
@@ -174,8 +174,7 @@ export default function HomePageContent() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
-                  duration: 1.2, 
-                  delay: 1,
+                  duration: 1.2,
                   ease: "easeOut"
                 }}
               >
@@ -185,7 +184,7 @@ export default function HomePageContent() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
                     duration: 1.0, 
-                    delay: 2.0,
+                    delay: 1.0,
                     ease: "easeOut"
                   }}
                 >
@@ -197,7 +196,7 @@ export default function HomePageContent() {
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
                     duration: 1.0, 
-                    delay: 2.2,
+                    delay: 1.2,
                     ease: "easeOut"
                   }}
                 >
@@ -211,7 +210,7 @@ export default function HomePageContent() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
                   duration: 1.2, 
-                  delay: 2.4,
+                  delay: 1.4,
                   ease: "easeOut"
                 }}
               >
@@ -228,29 +227,19 @@ export default function HomePageContent() {
             {/* Brand Logo Section */}
             <motion.div 
               className="max-w-4xl mx-auto pt-8 pb-8 text-center"
-              initial={{ opacity: 0, y: 30 }}
+              initial={{ opacity: 0, y: 35 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
                 duration: 1.2, 
-                delay: 2.8,
+                delay: 1.6,
                 ease: "easeOut"
               }}
             >
-              <motion.div
-                initial={{ opacity: 0, scale: 0.9 }}
-                animate={{ opacity: 1, scale: 1 }}
-                transition={{ 
-                  duration: 1.0, 
-                  delay: 3.0,
-                  ease: "easeOut"
-                }}
-              >
                 <img 
                   src="/img/brand_logo.png" 
                   alt="Ghostlight Garden - Where Soft Shadows Bloom" 
                   className="mx-auto max-w-xs md:max-w-sm lg:max-w-md xl:max-w-lg"
                 />
-              </motion.div>
             </motion.div>
           </div>
 

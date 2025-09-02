@@ -46,6 +46,12 @@ export const PRODUCT_BY_HANDLE = /* GraphQL */ `
       title
       handle
       descriptionHtml
+      priceRange {
+        minVariantPrice {
+          amount
+          currencyCode
+        }
+      }
       options {
         name
         values
@@ -68,6 +74,7 @@ export const PRODUCT_BY_HANDLE = /* GraphQL */ `
             availableForSale
             price { amount currencyCode }
             selectedOptions { name value }
+            quantityAvailable
           }
         }
       }

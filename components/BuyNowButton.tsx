@@ -8,11 +8,13 @@ export default function BuyNowButton({
   quantity = 1,
   className = "",
   disabled = false,
+  isPreorder = false,
 }: { 
   merchandiseId: string; 
   quantity?: number; 
   className?: string;
   disabled?: boolean;
+  isPreorder?: boolean;
 }) {
   const [loading, setLoading] = useState(false);
 
@@ -32,11 +34,11 @@ export default function BuyNowButton({
 
   return (
     <button
-      className={className || "w-full rounded-lg px-4 py-3 bg-green-600 hover:bg-green-700 text-white disabled:opacity-50 disabled:cursor-not-allowed"}
+      className={className || `w-full rounded-lg px-4 py-3 ${isPreorder ? 'bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white' : 'bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white'} text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font`}
       disabled={loading || !merchandiseId || disabled}
       onClick={handleBuyNow}
     >
-      {loading ? "Redirecting..." : "Buy Now"}
+      {loading ? "Redirecting..." : (isPreorder ? "Preorder Now" : "Buy Now")}
     </button>
   );
 }

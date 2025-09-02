@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function PrivacyPolicy() {
   return (
-    <div className="bg-white h-full">
+    <div className="bg-white">
       {/* Header */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-12">
@@ -24,8 +24,10 @@ export default function PrivacyPolicy() {
             <BackButton />
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
-          <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Privacy Policy</h1>
+            <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          </div>
         </div>
       </div>
 
@@ -133,7 +135,7 @@ export default function PrivacyPolicy() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. North Carolina Privacy Compliance</h2>
             <p className="text-gray-700 mb-4">
-              As a business operating in North Carolina, we comply with all applicable state privacy laws and regulations, including:
+              As a sole proprietorship operating in North Carolina under the name Kailey Swindal (dba Ghostlight Garden), we comply with all applicable state privacy laws and regulations, including:
             </p>
             <ul className="list-disc pl-6 text-gray-700 mb-4">
               <li>North Carolina Identity Theft Protection Act</li>
@@ -148,21 +150,15 @@ export default function PrivacyPolicy() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">11. Contact Us</h2>
-            <p className="text-gray-700 mb-4">
-              If you have any questions about this privacy policy or our data practices, 
-              please contact us:
-            </p>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700 mb-2">
-                <strong>Email:</strong> info@ghostlightgarden.com
+              <p className="text-gray-700 mb-4">
+                If you have any questions about this privacy policy or our data practices, please contact us at{' '}
+                <a 
+                  href="mailto:info@ghostlightgarden.com" 
+                  className="text-purple-600 hover:text-purple-700 underline"
+                >
+                  info@ghostlightgarden.com
+                </a>.
               </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Address:</strong> [Your Business Address]
-              </p>
-              <p className="text-gray-700">
-                <strong>Phone:</strong> [Your Business Phone]
-              </p>
-            </div>
           </section>
 
           

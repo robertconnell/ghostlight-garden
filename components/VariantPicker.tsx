@@ -11,12 +11,13 @@ interface VariantPickerProps {
     variants: { edges: { node: any }[] };
     title?: string;
     handle?: string; // Add handle to the interface
-    featuredImage?: { url: string; altText?: string };
+    images?: { edges: { node: { url: string; altText?: string } }[] };
     descriptionHtml?: string;
   };
+  collectionHandle?: string;
 }
 
-export default function VariantPicker({ product }: VariantPickerProps) {
+export default function VariantPicker({ product, collectionHandle }: VariantPickerProps) {
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [quantity, setQuantity] = useState(1);
 
@@ -26,26 +27,6 @@ export default function VariantPicker({ product }: VariantPickerProps) {
   // Check if we actually have meaningful variants to select from
   const hasMultipleVariants = product.variants.edges.length > 1;
   
-  // Find matching variant
-  const findMatchingVariant = () => {
-    // If no options are selected, return the first variant
-    if (Object.keys(selectedOptions).length === 0) {
-      return product.variants.edges[0]?.node;
-    }
-
-    // Find variant that matches selected options
-    return product.variants.edges.find(({ node }: { node: any }) => {
-      return node.selectedOptions.every((option: any) => {
-        // If this option isn't selected, skip it
-        if (!selectedOptions[option.name]) return true;
-        // If this option is selected, check if it matches
-        return selectedOptions[option.name] === option.value;
-      });
-    })?.node;
-  };
-
-  const selectedVariant = findMatchingVariant();
-
   // Get the base price (lowest price variant)
   const allVariants = product.variants.edges.map(({ node }: { node: any }) => node);
   const baseVariant = allVariants.reduce((lowest, current) => {
@@ -54,6 +35,46 @@ export default function VariantPicker({ product }: VariantPickerProps) {
     return currentPrice < lowestPrice ? current : lowest;
   });
   const basePrice = baseVariant?.price?.amount || '0';
+  
+  // Check if all options are selected
+  const allOptionsSelected = allOptions.every(option => selectedOptions[option.name]);
+  
+  // Find matching variant or closest partial match
+  const findMatchingVariant = () => {
+    // If all options are selected, find exact match
+    if (allOptionsSelected) {
+      return product.variants.edges.find(({ node }: { node: any }) => {
+        return node.selectedOptions.every((option: any) => {
+          return selectedOptions[option.name] === option.value;
+        });
+      })?.node;
+    }
+
+    // If some options are selected, find variants that match the selected options
+    const selectedOptionNames = Object.keys(selectedOptions);
+    if (selectedOptionNames.length > 0) {
+      const matchingVariants = product.variants.edges.filter(({ node }: { node: any }) => {
+        return node.selectedOptions.every((option: any) => {
+          // If this option is selected, it must match
+          if (selectedOptions[option.name]) {
+            return selectedOptions[option.name] === option.value;
+          }
+          // If this option is not selected, we don't care what it is
+          return true;
+        });
+      });
+
+      // If we found matching variants, return the first one (they should all have the same price for the selected options)
+      if (matchingVariants.length > 0) {
+        return matchingVariants[0].node;
+      }
+    }
+
+    // If no options selected or no matches, return null (show base price)
+    return null;
+  };
+
+  const selectedVariant = findMatchingVariant();
   const selectedPrice = selectedVariant?.price?.amount || basePrice;
   
   // Format prices for display
@@ -67,21 +88,15 @@ export default function VariantPicker({ product }: VariantPickerProps) {
 
   return (
     <div className="space-y-4">
-      {/* Dynamic Price Display */}
-      <div className="text-lg font-semibold text-gray-900">
-        <span className="text-gray-600">Price: </span>
+      {/* Dynamic Price Display - Always show price */}
+      <div className="text-2xl font-semibold text-gray-800">
         {formatPrice(selectedPrice)}
-        {selectedPrice !== basePrice && (
-          <span className="text-sm text-gray-500 ml-2">
-            (Base: {formatPrice(basePrice)})
-          </span>
-        )}
       </div>
 
       {/* Product Description */}
       {product.descriptionHtml && (
         <div
-          className="prose text-sm text-gray-600"
+          className="prose text-base text-gray-100"
           dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
         />
       )}
@@ -89,8 +104,8 @@ export default function VariantPicker({ product }: VariantPickerProps) {
       {/* Dynamic Option Selection - Show ALL options when there are multiple variants */}
       {hasMultipleVariants && allOptions.map((option) => (
         <div key={option.name}>
-          <label className="block text-sm font-medium text-gray-700 mb-2">
-            {option.name}
+          <label className="block text-lg font-medium text-gray-800 mb-2">
+            {option.name}:
           </label>
           <select
             value={selectedOptions[option.name] || ''}
@@ -98,7 +113,7 @@ export default function VariantPicker({ product }: VariantPickerProps) {
               ...prev,
               [option.name]: e.target.value
             }))}
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
           >
             <option value="">Select {option.name}</option>
             {option.values.map((value) => (
@@ -112,25 +127,34 @@ export default function VariantPicker({ product }: VariantPickerProps) {
 
       {/* Helpful message when options aren't selected */}
       {hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '') && (
-        <div className="text-sm text-amber-600 bg-amber-50 p-3 rounded-lg border border-amber-200">
+        <div className="text-sm text-purple-400 bg-amber-50 p-3 rounded-lg border border-amber-200">
           <p className="font-medium">Please select all options to add to cart</p>
-          <p className="text-xs mt-1">Choose your preferences above to enable the Add to Cart button</p>
         </div>
       )}
 
       {/* Quantity */}
-      <div>
-        <label className="block text-sm font-medium text-gray-700 mb-2">
-          Quantity
+      {/* <div>
+                  <label className="block text-lg font-medium text-gray-800 mb-2">
+          Quantity:
         </label>
         <input
           type="number"
           min="1"
           value={quantity}
           onChange={(e) => setQuantity(Math.max(1, parseInt(e.target.value) || 1))}
-          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
         />
-      </div>
+      </div> */}
+
+      {/* Preorder Disclaimer */}
+      {!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0) && (
+        <div className="bg-purple-50 border-l-4 border-[#8A6D9B] p-4 mb-6 rounded-tr-lg rounded-br-lg">
+          <h3 className="text-lg font-semibold text-[#8A6D9B] mb-2">Preorder Available</h3>
+          <p className="text-[#8A6D9B]">
+            This item is currently out of stock but available for preorder. Your order will be processed and shipped as soon as inventory becomes available. You will receive an email notification when your order ships.
+          </p>
+        </div>
+      )}
 
       {/* Action Buttons */}
       <div className="space-y-2">
@@ -141,8 +165,9 @@ export default function VariantPicker({ product }: VariantPickerProps) {
               quantity={quantity}
               title={product.title || 'Product'}
               price={selectedVariant.price?.amount || '0'}
-              image={product.featuredImage?.url}
+              image={product.images?.edges?.[0]?.node?.url || ""}
               handle={product.handle}
+              collectionHandle={collectionHandle}
               variantOptions={selectedOptions}
               variantTitle={selectedVariant.title}
               disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
@@ -151,6 +176,7 @@ export default function VariantPicker({ product }: VariantPickerProps) {
               merchandiseId={selectedVariant.id}
               quantity={quantity}
               disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
+              isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
             />
           </>
         ) : (
@@ -162,8 +188,9 @@ export default function VariantPicker({ product }: VariantPickerProps) {
                 quantity={quantity}
                 title={product.title || 'Product'}
                 price={product.variants.edges[0].node.price?.amount || '0'}
-                image={product.featuredImage?.url}
+                image={product.images?.edges?.[0]?.node?.url || ""}
                 handle={product.handle}
+                collectionHandle={collectionHandle}
                 variantOptions={{}}
                 variantTitle={product.variants.edges[0].node.title}
                 disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
@@ -172,6 +199,7 @@ export default function VariantPicker({ product }: VariantPickerProps) {
                 merchandiseId={product.variants.edges[0].node.id}
                 quantity={quantity}
                 disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
+                isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
               />
             </>
           )

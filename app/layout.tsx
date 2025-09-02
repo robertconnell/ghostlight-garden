@@ -6,8 +6,9 @@ import ConditionalSpacer from "@/components/ConditionalSpacer";
 import StructuredData from "@/components/StructuredData";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import ConversionTracking from "@/components/ConversionTracking";
+import ScrollToTop from "@/components/ScrollToTop";
 // import GlobalFooter from "@/components/GlobalFooter";
-// import ImageProtection from "@/components/ImageProtection";
+import ImageProtection from "@/components/ImageProtection";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -126,8 +127,9 @@ export default function RootLayout({
       >
         <StructuredData />
         <GoogleAnalytics />
-        {/* <ImageProtection /> */}
+        <ImageProtection />
         <CartProvider>
+          <ScrollToTop />
           <ConditionalSpacer />
           {children}
         </CartProvider>

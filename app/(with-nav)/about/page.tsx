@@ -16,85 +16,87 @@ export const metadata: Metadata = {
 
 export default function AboutPage() {
   return (
-    <div className="bg-gradient-to-b from-gray-50 to-white h-full">
-      {/* Hero Section */}
-      <div className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-5xl font-bold text-gray-900 mb-6">About Ghostlight Garden</h1>
-          <p className="text-xl text-gray-600 leading-relaxed max-w-3xl mx-auto">
-            Welcome to our enchanted corner of the digital world, where creativity blooms and imagination takes root.
-          </p>
-        </div>
+    <div className="min-h-full">
+      {/* Background component to ensure consistency */}
+      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/pc_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
+        />
       </div>
 
-      {/* Main Content */}
-      <div className="max-w-4xl mx-auto px-6 mb-16">
+      {/* Mobile Background */}
+      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/mobile_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
+        />
+      </div>
+
+      {/* Hero Section */}
+      <div className="relative z-10 py-10 px-6">
+        <div className="max-w-4xl mx-auto text-center">
+          <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">A peek inside the Garden</h1>
+          <div className="w-72 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto mt-6 rounded-full"></div>
+        </div>
+
+        {/* Main Content */}
+        <div className="max-w-5xl mx-auto px-6 mb-16 mt-12">
         <div className="grid gap-12 md:grid-cols-2">
-          {/* Our Story */}
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-900 mb-6">Our Story</h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed">
-              <p>
-                Ghostlight Garden began as a simple idea: to create a space where beauty and functionality coexist harmoniously. 
-                What started as a personal project has grown into something we're proud to share with the world.
-              </p>
-              <p>
-                We believe that every digital experience should feel as natural and inspiring as a walk through a well-tended garden. 
-                Each element is carefully crafted, every interaction thoughtfully designed.
-              </p>
+          {/* Artist Profile Picture */}
+          <div className="flex justify-center items-center order-2 md:order-1">
+            <div className="relative">
+              <div className="absolute -inset-4 bg-gradient-to-r from-purple-300 to-pink-300 rounded-3xl blur-lg opacity-30"></div>
+              <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-2 shadow-xl">
+                <img
+                  src="/img/artist_pofile_picture.jpg"
+                  alt="Kailey - Artist behind Ghostlight Garden"
+                  className="w-full max-w-sm rounded-xl shadow-lg object-cover aspect-square"
+                />
+              </div>
             </div>
           </div>
 
           {/* Our Mission */}
-          <div>
-            <h2 className="text-3xl font-semibold text-gray-900 mb-6">Our Mission</h2>
-            <div className="space-y-4 text-gray-600 leading-relaxed">
+          <div className="bg-white/80 rounded-2xl p-6 order-1 md:order-2">
+            <h2 className="text-5xl font-alex-brush text-gray-900 mb-6">from my heart to yours</h2>
+            <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
-                To cultivate digital experiences that not only serve their purpose but also bring joy and wonder to those who use them. 
-                We're committed to creating products that feel both familiar and extraordinary.
+                I’m the artist and heart behind Ghostlight Garden. 
               </p>
               <p>
-                Like a garden that changes with the seasons, we're constantly evolving, learning, and growing. 
-                Our journey is ongoing, and we invite you to be part of it.
+                I’ve always been enchanted by the space between soft and spooky, where pastel magic meets haunted whimsy. 
+              </p>
+              <p>
+                Ghostlight Garden grew out of my love for creating little worlds filled with eerie sweetness — glowing spirits, gloomy fae, skeletal unicorns, and creatures stitched from both shadow and starlight.
+              </p>
+              <p>
+                Every piece I make is like planting a seed in the Garden. Sometimes playful and cute, sometimes haunting and strange, always touched with a bit of glow. I work in mixed media, layering dreamy pastels with haunting textures to bring each Gloomie and ghostly scene to life.
+              </p>
+              <p>
+                Each little Gloomie I create deserves so much love. I pour my heart into every piece — from the tiniest glowing detail to the softest shadow — so it feels like it has its own soul. Everything in the Garden is made with care, stitched together with a little bit of eerie sweetness and a lot of heart, just for you. 
+              </p>
+              <p>
+                Ghostlight Garden is more than art to me. This is my cozy corner of spooky-dreamy magic, and I’m so happy you found your way here. Grab a lantern and wander with me — the Garden is always glowing. 
+              </p>
+              <p className="text-3xl text-right font-alex-brush">
+                xo, Kailey 🩷
               </p>
             </div>
           </div>
         </div>
-
-        {/* Values Section */}
-        <div className="mt-16">
-          <h2 className="text-3xl font-semibold text-gray-900 mb-8 text-center">What We Value</h2>
-          <div className="grid gap-8 md:grid-cols-3">
-            <div className="text-center">
-              <div className="w-16 h-16 bg-purple-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Creativity</h3>
-              <p className="text-gray-600">We believe in the power of creative thinking and innovative solutions.</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Care</h3>
-              <p className="text-gray-600">Every detail matters. We craft with attention and love for what we do.</p>
-            </div>
-
-            <div className="text-center">
-              <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4">
-                <svg className="w-8 h-8 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
-                </svg>
-              </div>
-              <h3 className="text-xl font-semibold text-gray-900 mb-2">Growth</h3>
-              <p className="text-gray-600">We're always learning, evolving, and striving to be better.</p>
-            </div>
-          </div>
         </div>
       </div>
     </div>

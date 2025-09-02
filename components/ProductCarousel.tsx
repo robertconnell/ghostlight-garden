@@ -3,6 +3,7 @@
 import React from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { motion } from "framer-motion";
 import { Splide, SplideSlide } from '@splidejs/react-splide';
 import { IMAGE_PROTECTION_ENABLED } from '@/lib/config';
 // Default theme
@@ -81,7 +82,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20">
         {/* Splide component with configuration options */}
         <Splide options={splideOptions}>
-          {products.map((product) => (
+          {products.map((product, index) => (
             <SplideSlide key={product.id}>
               <Link
                 href={`/collections/featured-artwork/${product.handle}`}
@@ -102,8 +103,9 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                         alt={product.featuredImage.altText || product.title}
                         fill
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                        className={`object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none pointer-events-none' : ''}`}
+                        className={`object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
                         draggable={!IMAGE_PROTECTION_ENABLED}
+                        priority={index === 0}
                         {...(IMAGE_PROTECTION_ENABLED ? {
                           onContextMenu: (e) => e.preventDefault(),
                           onDragStart: (e) => e.preventDefault()
@@ -129,17 +131,28 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
         </Splide>
       </div>
 
-      {/* View All Products Button */}
+      {/* Adopt a Gloomie Button */}
       <div className="text-center mt-8">
-        <Link
-                          href="/collections"
-          className="inline-flex items-center px-12 py-4 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl rounded-full border-2 border-white shadow-lg cursor-pointer transition-all duration-200 hover:scale-105"
+        <motion.div
+          whileHover={{
+            scale: 1.02,
+            boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
+          }}
+          whileTap={{ scale: 0.95 }}
+          transition={{
+            boxShadow: { duration: 0.4, ease: "easeInOut" }
+          }}
         >
-          Adopt a Gloomie
-          <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-          </svg>
-        </Link>
+          <Link
+            href="/collections"
+            className="inline-flex items-center px-12 py-4 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl rounded-full border-2 border-white shadow-lg cursor-pointer button-font"
+          >
+            Adopt a Gloomie
+            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </Link>
+        </motion.div>
       </div>
     </div>
   );

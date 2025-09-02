@@ -62,8 +62,13 @@ export default function Navigation() {
       <div className="w-full px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
-          <Link href="/" className="text-xl font-bold text-gray-900 hover:text-gray-700 transition-colors">
-            Ghostlight Garden
+          <Link href="/home" className="relative text-3xl font-alex-brush text-gray-900 hover:text-gray-700 transition-colors">
+            ghostlight garden
+            <img 
+              src="/img/logo_accent_transparent.png" 
+              alt="Ghostlight Garden Logo Accent" 
+              className="absolute -top-1 -right-4 w-6 h-6"
+            />
           </Link>
 
           {/* Desktop Navigation Links */}
@@ -71,8 +76,11 @@ export default function Navigation() {
             <Link href="/home" className="text-gray-600 hover:text-gray-900 transition-colors">
               Home
             </Link>
-                                          <Link href="/collections" className="text-gray-600 hover:text-gray-900 transition-colors">
+            <Link href="/collections" className="text-gray-600 hover:text-gray-900 transition-colors">
               Collections
+            </Link>
+            <Link href="/commissions" className="text-gray-600 hover:text-gray-900 transition-colors">
+              Commissions
             </Link>
             <Link href="/about" className="text-gray-600 hover:text-gray-900 transition-colors">
               About
@@ -121,7 +129,7 @@ export default function Navigation() {
             <div className="relative" ref={cartRef}>
               <button
                 onClick={handleCartToggle}
-                className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer group"
                 aria-label="Shopping cart"
               >
                 <svg 
@@ -141,7 +149,7 @@ export default function Navigation() {
                 {/* Cart Badge */}
                 {totalItems > 0 && (
                   <motion.span 
-                    className="absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium"
+                    className="absolute -top-1 -right-1 bg-purple-300 group-hover:bg-purple-900 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center font-medium transition-colors"
                     initial={{ scale: 0 }}
                     animate={{ scale: 1 }}
                     transition={{ type: "spring", stiffness: 500, damping: 30 }}
@@ -252,6 +260,13 @@ export default function Navigation() {
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Collections
+                  </Link>
+                  <Link 
+                    href="/commissions" 
+                    className="text-gray-600 hover:text-gray-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Commissions
                   </Link>
                   <Link 
                     href="/about" 

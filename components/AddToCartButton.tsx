@@ -12,6 +12,7 @@ export default function AddToCartButton({
   price = "",
   image = "",
   handle = "",
+  collectionHandle = "",
   variantOptions,
   variantTitle,
   disabled = false,
@@ -23,6 +24,7 @@ export default function AddToCartButton({
   price?: string;
   image?: string;
   handle?: string;
+  collectionHandle?: string;
   variantOptions?: Record<string, string>;
   variantTitle?: string;
   disabled?: boolean;
@@ -44,6 +46,7 @@ export default function AddToCartButton({
         price,
         image,
         handle,
+        collectionHandle,
         variantOptions,
         variantTitle
       });
@@ -78,7 +81,7 @@ export default function AddToCartButton({
 
   return (
     <button
-      className={`${className || "w-full rounded-lg px-4 py-3 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl"} ${
+      className={`${className || "w-full rounded-lg px-4 py-3 text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl button-font"} ${
         loading 
           ? "bg-gray-400 cursor-not-allowed shadow-md" 
           : success 

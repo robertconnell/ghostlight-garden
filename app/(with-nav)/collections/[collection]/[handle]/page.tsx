@@ -7,6 +7,8 @@ import { PRODUCT_BY_HANDLE, GET_COLLECTION_BY_HANDLE } from "@/lib/queries";
 import AddToCartButton from "@/components/AddToCartButton";
 import BuyNowButton from "@/components/BuyNowButton";
 import VariantPicker from "@/components/VariantPicker";
+import ProductImageSlider from "@/components/ProductImageSlider";
+import Breadcrumb from "@/components/Breadcrumb";
 
 
 interface ProductPageProps {
@@ -101,61 +103,70 @@ export default async function ProductPage({ params }: ProductPageProps) {
     
 
     
-    return (
+    // Background component to ensure consistency across all states
+    const Background = () => (
       <>
-        {/* Breadcrumb Navigation */}
-        <div className="bg-gray-50 border-b border-gray-200">
-          <div className="max-w-6xl mx-auto px-6 py-4">
-            <nav className="flex items-center space-x-2 text-sm text-gray-600">
-              <Link href="/collections" className="hover:text-gray-900 transition-colors">
-                Collections
-              </Link>
-              <span className="text-gray-400">&lt;</span>
-              <Link href={`/collections/${resolvedParams.collection}`} className="hover:text-gray-900 transition-colors">
-                {collection.title}
-              </Link>
-              <span className="text-gray-400">&lt;</span>
-              <span className="text-gray-900 font-medium">{product.title}</span>
-            </nav>
-          </div>
+        {/* PC Background */}
+        <div className="hidden md:block fixed inset-0 z-0">
+          <div
+            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            style={{ 
+              backgroundImage: 'url(/img/pc_home_background.png)',
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
+            role="img"
+            aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
+          />
         </div>
 
+        {/* Mobile Background */}
+        <div className="md:hidden fixed inset-0 z-0">
+          <div
+            className="w-full h-full bg-cover bg-center bg-no-repeat"
+            style={{ 
+              backgroundImage: 'url(/img/mobile_home_background.png)',
+              willChange: 'transform',
+              transform: 'translateZ(0)'
+            }}
+            role="img"
+            aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
+          />
+        </div>
+      </>
+    );
 
+    return (
+      <>
+        <Background />
+        
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: "Collections", href: "/collections" },
+            { label: collection.title, href: `/collections/${resolvedParams.collection}` },
+            { label: product.title, href: "" }
+          ]}
+        />
 
         {/* Product Details */}
-        <div className="bg-white min-h-screen">
+        <div className="relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-12">
             <div className="grid gap-12 lg:grid-cols-2">
               {/* Product Image */}
               <div className="space-y-4">
-                {product.images?.edges?.[0]?.node ? (
-                  <div className="aspect-square bg-gray-100 rounded-lg overflow-hidden">
-                    <Image
-                      src={product.images.edges[0].node.url}
-                      alt={product.images.edges[0].node.altText || product.title}
-                      width={product.images.edges[0].node.width || 800}
-                      height={product.images.edges[0].node.height || 800}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                ) : (
-                  <div className="aspect-square bg-gray-100 rounded-lg flex items-center justify-center">
-                    <div className="text-gray-400 text-center">
-                      <svg className="w-16 h-16 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
-                      </svg>
-                      <p>No image available</p>
-                    </div>
-                  </div>
-                )}
+                <ProductImageSlider 
+                  images={product.images?.edges?.map((edge: any) => edge.node) || []}
+                  productTitle={product.title}
+                />
               </div>
 
               {/* Product Info */}
               <div className="space-y-6">
                 <div>
-                  <h1 className="text-3xl font-bold text-gray-900 mb-2">{product.title}</h1>
-                  <p className="text-lg text-gray-600">
-                    From <Link href={`/collections/${resolvedParams.collection}`} className="text-purple-600 hover:text-purple-700">
+                  <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-2">{product.title}</h1>
+                  <p className="text-lg text-gray-200">
+                    From the <Link href={`/collections/${resolvedParams.collection}`} className="text-purple-300 hover:text-purple-900">
                       {collection.title}
                     </Link> collection
                   </p>
@@ -164,43 +175,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
                 {product.description && (
                   <div>
                     <h2 className="text-lg font-semibold text-gray-900 mb-2">Description</h2>
-                    <div className="prose text-gray-600" dangerouslySetInnerHTML={{ __html: product.description }} />
+                    <div className="prose text-gray-200" dangerouslySetInnerHTML={{ __html: product.description }} />
                   </div>
                 )}
 
-                {/* Price */}
-                {product.priceRange && (
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Price</h2>
-                    <p className="text-2xl font-bold text-purple-600">
-                      ${product.priceRange.minVariantPrice.amount}
-                    </p>
-                  </div>
-                )}
-
-                {/* Variants */}
-                {product.variants?.edges?.length > 1 && (
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Options</h2>
-                    <VariantPicker product={product} />
-                  </div>
-                )}
-
-                {/* Action Buttons */}
-                <div className="flex flex-col sm:flex-row gap-4 pt-6">
-                  <AddToCartButton 
-                    merchandiseId={product.variants?.edges?.[0]?.node?.id || product.id}
-                    title={product.title}
-                    price={product.priceRange?.minVariantPrice?.amount || "0"}
-                    image={product.images?.edges?.[0]?.node?.url || ""}
-                    handle={product.handle}
-                    disabled={!product.variants?.edges?.some((v: any) => v.node.availableForSale)}
-                  />
-                  <BuyNowButton 
-                    merchandiseId={product.variants?.edges?.[0]?.node?.id || product.id}
-                    disabled={!product.variants?.edges?.some((v: any) => v.node.availableForSale)}
-                  />
+                {/* Variants - Show for all products since they all have variants */}
+                <div>
+                  <VariantPicker product={product} collectionHandle={resolvedParams.collection} />
                 </div>
+
+
+
+
+
+
               </div>
             </div>
           </div>

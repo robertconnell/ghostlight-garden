@@ -10,6 +10,7 @@ export interface CartItem {
   price?: string;
   image?: string;
   handle?: string; // Product handle for linking to detail page
+  collectionHandle?: string; // Collection handle for proper routing
   addedAt: number; // Timestamp when item was added
   variantOptions?: Record<string, string>; // e.g., { "Frame": "Yes", "Gold Leaf": "No" }
   variantTitle?: string; // e.g., "Yes / No" or "None / Yes"

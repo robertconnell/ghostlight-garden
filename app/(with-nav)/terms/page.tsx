@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function TermsOfService() {
   return (
-    <div className="bg-white h-full">
+    <div className="bg-white">
       {/* Header */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-12">
@@ -24,8 +24,10 @@ export default function TermsOfService() {
             <BackButton />
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
-          <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Terms of Service</h1>
+            <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          </div>
         </div>
       </div>
 
@@ -35,14 +37,14 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-700 mb-4">
-              By accessing and using Ghostlight Garden's website and services, you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
+              By accessing and using Ghostlight Garden's website and services (operated by Kailey Swindal, sole proprietorship), you accept and agree to be bound by the terms and provision of this agreement. If you do not agree to abide by the above, please do not use this service.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">2. Use License</h2>
             <p className="text-gray-700 mb-4">
-              Permission is granted to temporarily download one copy of the materials (information or software) on Ghostlight Garden's website for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
+              Permission is granted to temporarily download one copy of the materials (information or software) on Ghostlight Garden's website (operated by Kailey Swindal) for personal, non-commercial transitory viewing only. This is the grant of a license, not a transfer of title, and under this license you may not:
             </p>
             <ul className="list-disc pl-6 text-gray-700 mb-4">
               <li>Modify or copy the materials</li>
@@ -72,7 +74,7 @@ export default function TermsOfService() {
               Payment is processed securely through Shopify's payment gateway. All transactions are encrypted and secure.
             </p>
             <p className="text-gray-700 mb-4">
-              <strong>Sales Tax:</strong> All applicable state and local sales taxes will be added to your order total. As we are located in North Carolina, orders shipped to North Carolina addresses will include the applicable state sales tax rate of 4.75% plus any applicable local taxes. Orders shipped to other states may be subject to different tax rates based on local regulations.
+              <strong>Sales Tax:</strong> All applicable state and local sales taxes will be collected and added to your order total where required by law. As we are located in North Carolina, orders shipped to North Carolina addresses will include the applicable state sales tax rate of 4.75% plus any applicable local taxes. Orders shipped to other states may be subject to different tax rates based on local regulations and nexus requirements. Tax collection is mandatory where required by applicable state and local laws.
             </p>
           </section>
 
@@ -93,7 +95,7 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">7. Intellectual Property</h2>
             <p className="text-gray-700 mb-4">
-              The content on this website, including but not limited to text, graphics, logos, images, and software, is the property of Ghostlight Garden or its content suppliers and is protected by copyright laws. Unauthorized use of any content may violate copyright, trademark, and other applicable laws.
+              The content on this website, including but not limited to text, graphics, logos, images, and software, is the property of Kailey Swindal (operating as Ghostlight Garden) or its content suppliers and is protected by copyright laws. Unauthorized use of any content may violate copyright, trademark, and other applicable laws.
             </p>
           </section>
 
@@ -114,14 +116,14 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">9. Limitation of Liability</h2>
             <p className="text-gray-700 mb-4">
-              In no event shall Ghostlight Garden, nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the website or services.
+              In no event shall Kailey Swindal (operating as Ghostlight Garden), nor its directors, employees, partners, agents, suppliers, or affiliates, be liable for any indirect, incidental, special, consequential, or punitive damages, including without limitation, loss of profits, data, use, goodwill, or other intangible losses, resulting from your use of the website or services.
             </p>
           </section>
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">10. Indemnification</h2>
             <p className="text-gray-700 mb-4">
-              You agree to defend, indemnify, and hold harmless Ghostlight Garden and its affiliates from and against any claims, damages, obligations, losses, liabilities, costs, or debt arising from your use of the website or violation of these terms.
+              You agree to defend, indemnify, and hold harmless Kailey Swindal (operating as Ghostlight Garden) and its affiliates from and against any claims, damages, obligations, losses, liabilities, costs, or debt arising from your use of the website or violation of these terms.
             </p>
           </section>
 
@@ -142,7 +144,7 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">13. North Carolina Legal Compliance</h2>
             <p className="text-gray-700 mb-4">
-              As a business operating in North Carolina, we comply with all applicable state and local laws, including:
+              As a sole proprietorship operating in North Carolina under the name Kailey Swindal (dba Ghostlight Garden), we comply with all applicable state and local laws, including:
             </p>
             <ul className="list-disc pl-6 text-gray-700 mb-4">
               <li>North Carolina Consumer Protection Act</li>
@@ -157,20 +159,16 @@ export default function TermsOfService() {
 
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">14. Contact Information</h2>
-            <p className="text-gray-700 mb-4">
-              If you have any questions about these Terms of Service, please contact us:
-            </p>
-            <div className="bg-gray-50 p-4 rounded-lg">
-              <p className="text-gray-700 mb-2">
-                <strong>Email:</strong> info@ghostlightgarden.com
+                          <p className="text-gray-700 mb-4">
+                If you have any questions about these Terms of Service, please contact us at{' '}
+                <a 
+                  href="mailto:info@ghostlightgarden.com" 
+                  className="text-purple-600 hover:text-purple-700 underline"
+                >
+                  info@ghostlightgarden.com
+                </a>.
               </p>
-              <p className="text-gray-700 mb-2">
-                <strong>Address:</strong> [Your Business Address]
-              </p>
-              <p className="text-gray-700">
-                <strong>Phone:</strong> [Your Business Phone]
-              </p>
-            </div>
+            
           </section>
 
           

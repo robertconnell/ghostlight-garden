@@ -15,7 +15,7 @@ export const metadata: Metadata = {
 
 export default function ShippingReturns() {
   return (
-    <div className="bg-white h-full">
+    <div className="bg-white">
       {/* Header */}
       <div className="bg-gray-50 border-b border-gray-200">
         <div className="max-w-4xl mx-auto px-6 py-12">
@@ -24,8 +24,10 @@ export default function ShippingReturns() {
             <BackButton />
           </div>
           
-          <h1 className="text-4xl font-bold text-gray-900 mb-4">Shipping & Returns</h1>
-          <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          <div className="text-center">
+            <h1 className="text-4xl font-bold text-gray-900 mb-4">Shipping & Returns</h1>
+            <p className="text-lg text-gray-600">Last updated: {new Date().toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}</p>
+          </div>
         </div>
       </div>
 
@@ -87,7 +89,7 @@ export default function ShippingReturns() {
             <div className="bg-purple-50 border-l-4 border-purple-400 p-6 mb-6">
               <h4 className="text-lg font-semibold text-purple-900 mb-2">North Carolina Sales Tax</h4>
               <p className="text-purple-800 mb-3">
-                As a North Carolina business, we are required to collect sales tax on all orders shipped to North Carolina addresses.
+                As a North Carolina business (Kailey Swindal, dba Ghostlight Garden), we are required to collect sales tax on all orders shipped to North Carolina addresses.
               </p>
               <ul className="text-purple-800 space-y-1">
                 <li>• State sales tax: 4.75%</li>
@@ -210,27 +212,15 @@ export default function ShippingReturns() {
             <h2 className="text-3xl font-semibold text-gray-900 mb-6">Need Help?</h2>
             <div className="bg-gray-50 p-6 rounded-lg">
               <p className="text-gray-700 mb-4">
-                Our customer service team is here to help with any questions about shipping, returns, 
-                or exchanges. Contact us:
+              Our customer service team is here to help with any questions about shipping, returns, 
+              or exchanges. <br />Contact us at{' '}
+                <a 
+                  href="mailto:info@ghostlightgarden.com" 
+                  className="text-purple-600 hover:text-purple-700 underline"
+                >
+                  info@ghostlightgarden.com
+                </a>.
               </p>
-              <div className="grid md:grid-cols-2 gap-4">
-                <div>
-                  <p className="text-gray-700 mb-2">
-                    <strong>Email:</strong> info@ghostlightgarden.com
-                  </p>
-                  <p className="text-gray-700 mb-2">
-                    <strong>Phone:</strong> [Your Business Phone]
-                  </p>
-                </div>
-                <div>
-                  <p className="text-gray-700 mb-2">
-                    <strong>Hours:</strong> Monday-Friday, 9AM-5PM EST
-                  </p>
-                  <p className="text-gray-700">
-                    <strong>Response Time:</strong> Within 24 hours
-                  </p>
-                </div>
-              </div>
             </div>
           </section>
 

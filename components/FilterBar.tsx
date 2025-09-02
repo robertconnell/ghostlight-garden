@@ -55,7 +55,7 @@ export default function FilterBar({ onFiltersChange, initialSearch = "" }: Filte
       <div className="mb-4">
         <input
           type="text"
-          placeholder="Search artwork..."
+          placeholder="Search Ghostlight Garden..."
           value={filters.search}
           onChange={(e) => handleFilterChange({ search: e.target.value })}
           className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"

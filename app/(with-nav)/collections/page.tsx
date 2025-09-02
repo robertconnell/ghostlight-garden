@@ -3,14 +3,20 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
 export default function CollectionsPage() {
   const [collections, setCollections] = useState<any[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+
+
   useEffect(() => {
     const fetchCollections = async () => {
+      const startTime = Date.now();
+      const minLoadingTime = 500; // Half second minimum loading time
+      
       try {
         const response = await fetch('/api/collections');
         
@@ -43,15 +49,36 @@ export default function CollectionsPage() {
             });
           
           setCollections(filteredAndSortedCollections);
-          setIsLoading(false);
+          
+          // Ensure minimum loading time
+          const elapsed = Date.now() - startTime;
+          const remainingTime = Math.max(0, minLoadingTime - elapsed);
+          
+          setTimeout(() => {
+            setIsLoading(false);
+          }, remainingTime);
         } else {
           setError(result.error || 'Failed to load collections');
-          setIsLoading(false);
+          
+          // Ensure minimum loading time even for errors
+          const elapsed = Date.now() - startTime;
+          const remainingTime = Math.max(0, minLoadingTime - elapsed);
+          
+          setTimeout(() => {
+            setIsLoading(false);
+          }, remainingTime);
         }
       } catch (err: any) {
         console.error('Error fetching collections:', err);
         setError(err.message || 'Failed to load collections');
-        setIsLoading(false);
+        
+        // Ensure minimum loading time even for errors
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, minLoadingTime - elapsed);
+        
+        setTimeout(() => {
+          setIsLoading(false);
+        }, remainingTime);
       }
     };
 
@@ -62,7 +89,7 @@ export default function CollectionsPage() {
   const Background = () => (
     <>
       {/* PC Background */}
-      <div className="hidden md:block fixed inset-0 z-0">
+      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
@@ -76,7 +103,7 @@ export default function CollectionsPage() {
       </div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0">
+      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
@@ -91,24 +118,22 @@ export default function CollectionsPage() {
     </>
   );
 
-  if (isLoading) {
-    return (
-      <div>
-        <Background />
-        <div className="mx-auto max-w-6xl p-6 relative z-10">
-          <div className="text-center py-20">
-            <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-purple-600 mx-auto mb-4"></div>
-            <p className="text-gray-600">Loading collections...</p>
+  return (
+    <div>
+      <Background />
+      
+      {/* Loading State */}
+      {isLoading && (
+        <div className="flex items-center justify-center relative z-10" style={{ minHeight: 'calc(100vh - 200px)' }}>
+          <div className="text-center">
+            <div className="animate-spin rounded-full h-20 w-20 border-b-3 border-purple-600 mx-auto mb-4"></div>
+            <p className="font-alex-brush text-white text-3xl">loading collections...</p>
           </div>
         </div>
-      </div>
-    );
-  }
+      )}
 
-  if (error) {
-    return (
-      <div>
-        <Background />
+      {/* Error State */}
+      {error && (
         <div className="mx-auto max-w-6xl p-6 relative z-10">
           <h1 className="text-3xl font-bold mb-6">Collections</h1>
           
@@ -134,48 +159,70 @@ export default function CollectionsPage() {
             </button>
           </div>
         </div>
-      </div>
-    );
-  }
+      )}
 
-  return (
-    <div>
-      <Background />
-      
-      {/* Main Content */}
-      <div className="mx-auto max-w-6xl p-6 relative z-10">
+      {/* Success State */}
+      {!isLoading && !error && (
+        <motion.div 
+          className="mx-auto max-w-6xl relative z-10 mb-16"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.8, ease: "easeOut" }}
+        >
         {/* SEO-Optimized Header Section */}
-        <div className="text-center mb-12">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+        <div className="text-center py-10 px-6">
+          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
             Art Collections
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Explore our curated collections, each showcasing unique themes and artistic styles. 
             From spooky cute art to serene landscapes, discover the perfect pieces for your space.
           </p>
-          <div className="w-24 h-1 bg-gradient-to-r from-purple-400 to-purple-600 mx-auto mt-6 rounded-full"></div>
+          <div className="w-72 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto mt-6 rounded-full"></div>
         </div>
         
         {/* All Products Button */}
-        <div className="text-center mb-12">
-          <Link 
-            href="/collections/all"
-            className="inline-flex items-center gap-3 px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1"
+        <div className="text-center mb-12 px-6">
+          <motion.div
+            className="inline-block rounded-full"
+            whileHover={{
+              scale: 1.02,
+              boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
+            }}
+            whileTap={{ scale: 0.95 }}
+            transition={{
+              boxShadow: { duration: 0.4, ease: "easeInOut" }
+            }}
           >
-            <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
-            </svg>
-            View All Products
-          </Link>
-          <p className="text-sm text-gray-500 mt-3">
-            Browse our complete catalog of artwork
-          </p>
+            <Link 
+              href="/collections/all"
+              className="inline-flex items-center gap-3 px-8 py-4 text-lg font-bold text-white bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 rounded-full border-2 border-white shadow-lg button-font"
+            >
+              <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+              </svg>
+              View All Artwork
+            </Link>
+          </motion.div>
         </div>
         
         {/* Collections Grid */}
-        <div className="flex flex-wrap gap-8 justify-center">
-          {collections.map((collection: any) => (
-            <div key={collection.id} className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm">
+        <div className="flex flex-wrap gap-8 justify-center px-6">
+          {collections && collections.length > 0 && collections.map((collection: any, index: number) => (
+            <motion.div 
+              key={collection.id} 
+              className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ 
+                duration: 0.8, 
+                delay: 0.3 + index * 0.1,
+                ease: "easeOut"
+              }}
+              whileHover={{
+                boxShadow: "0 0 20px rgba(138, 109, 155, 0.4), 0 0 40px rgba(138, 109, 155, 0.2)"
+              }}
+            >
               <Link 
                 href={`/collections/${collection.handle}`}
                 className="group block"
@@ -190,6 +237,7 @@ export default function CollectionsPage() {
                       width={collection.image.width || 400}
                       height={collection.image.height || 400}
                       className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                      priority={index === 0}
                     />
                   ) : (
                     <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
@@ -216,10 +264,16 @@ export default function CollectionsPage() {
                                  </div>
                </div>
              </Link>
-            </div>
+            </motion.div>
             ))}
-          </div>
-      </div>
+          {(!collections || collections.length === 0) && (
+            <div className="text-center py-12 col-span-full">
+              <p className="text-gray-600 text-lg">No collections found.</p>
+            </div>
+          )}
+        </div>
+        </motion.div>
+      )}
     </div>
   );
 }

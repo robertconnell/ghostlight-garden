@@ -5,7 +5,7 @@ import CartCheckoutButton from "./CartCheckoutButton";
 import Link from "next/link";
 
 export default function CartDisplay() {
-  const { items, removeItem, updateQuantity, totalItems, totalPrice } = useCart();
+  const { items, removeItem, updateQuantity, totalItems, totalPrice, clearCart } = useCart();
 
   if (items.length === 0) {
     return (
@@ -17,30 +17,49 @@ export default function CartDisplay() {
 
   return (
     <div className="p-4">
-      <h3 className="text-lg font-semibold mb-4 text-black">Shopping Cart ({totalItems} {totalItems === 1 ? 'item' : 'items'})</h3>
+      <div className="flex justify-between items-center mb-4">
+        <h3 className="text-lg font-semibold text-black">Shopping Cart ({totalItems} {totalItems === 1 ? 'item' : 'items'})</h3>
+        <button 
+          onClick={() => {
+            if (confirm('Clear all items from cart?')) {
+              clearCart();
+            }
+          }}
+          className="text-sm text-purple-400 hover:text-purple-900"
+        >
+          Clear Cart
+        </button>
+      </div>
       
       <div className="space-y-3 mb-4">
-        {items.map((item) => (
-          item.handle ? (
-            <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg transition-all duration-200 hover:border-blue-300 hover:shadow-md">
-                             {/* Clickable Image */}
-               {item.image && (
-                 <Link href={`/collections/all/${item.handle}`}>
-                   <img 
-                     src={item.image} 
-                     alt={item.title || 'Product'} 
-                     className="w-16 h-16 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
-                   />
-                 </Link>
-               )}
+        {items.map((item) => {
+          // Debug: log the item data
+          console.log('Cart item:', { 
+            handle: item.handle, 
+            collectionHandle: item.collectionHandle,
+            finalUrl: item.collectionHandle ? `/collections/${item.collectionHandle}/${item.handle}` : `/collections/all/${item.handle}`
+          });
+          
+          return item.handle ? (
+            <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg transition-all duration-200 hover:border-purple-300 hover:shadow-md">
+              {/* Clickable Image */}
+              {item.image && (
+                <Link href={item.collectionHandle ? `/collections/${item.collectionHandle}/${item.handle}` : `/collections/all/${item.handle}`}>
+                  <img 
+                    src={item.image} 
+                    alt={item.title || 'Product'} 
+                    className="w-16 h-16 object-cover rounded cursor-pointer hover:opacity-80 transition-opacity"
+                  />
+                </Link>
+              )}
               
               <div className="flex-1">
-                                 {/* Clickable Title */}
-                 <Link href={`/collections/all/${item.handle}`}>
-                   <h4 className="font-medium text-black hover:text-blue-600 transition-colors cursor-pointer">
-                     {item.title || 'Product Unavailable'}
-                   </h4>
-                 </Link>
+                {/* Clickable Title */}
+                <Link href={item.collectionHandle ? `/collections/${item.collectionHandle}/${item.handle}` : `/collections/all/${item.handle}`}>
+                  <h4 className="font-medium text-black hover:text-purple-300 transition-colors cursor-pointer">
+                    {item.title || 'Product Unavailable'}
+                  </h4>
+                </Link>
                 
                 {/* Individual Variant Options */}
                 {item.variantOptions && Object.keys(item.variantOptions).length > 0 && (
@@ -83,7 +102,7 @@ export default function CartDisplay() {
                     e.stopPropagation();
                     removeItem(item.id);
                   }}
-                  className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
+                  className="text-purple-400 hover:text-purple-900 text-sm cursor-pointer"
                 >
                   Remove
                 </button>
@@ -134,16 +153,11 @@ export default function CartDisplay() {
                   className="w-16 rounded border px-2 py-1 text-sm text-black"
                 />
                 
-                <button
-                  onClick={() => removeItem(item.id)}
-                  className="text-red-500 hover:text-red-700 text-sm cursor-pointer"
-                >
-                  Remove
-                </button>
+
               </div>
             </div>
-          )
-        ))}
+          );
+        })}
       </div>
       
       <div className="border-t pt-4">
@@ -153,7 +167,7 @@ export default function CartDisplay() {
         </div>
         
         {/* Checkout Button */}
-        <CartCheckoutButton className="w-full rounded-lg px-4 py-3 bg-blue-600 hover:bg-blue-700 text-white font-semibold" />
+        <CartCheckoutButton />
         
       </div>
     </div>

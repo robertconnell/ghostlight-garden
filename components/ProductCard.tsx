@@ -37,41 +37,57 @@ export default function ProductCard({
   };
 
   return (
-          <Link href={`/collections/${collectionHandle || 'all'}/${product.handle}`} className="group block">
-      <div 
-        className="relative rounded-xl overflow-hidden bg-gray-100 aspect-square"
-        {...(IMAGE_PROTECTION_ENABLED ? {
-          onContextMenu: handleContextMenu,
-          onDragStart: handleDragStart
-        } : {})}
-      >
-        {img && (
-          <Image
-            src={img.url}
-            alt={img.altText || product.title}
-            width={img.width || 800}
-            height={img.height || 800}
-            className={`h-full w-full object-cover transition-transform group-hover:scale-[1.03] ${IMAGE_PROTECTION_ENABLED ? 'select-none pointer-events-none' : ''}`}
-            draggable={!IMAGE_PROTECTION_ENABLED}
-            {...(IMAGE_PROTECTION_ENABLED ? {
-              onContextMenu: handleContextMenu,
-              onDragStart: handleDragStart
-            } : {})}
-          />
-        )}
+    <Link href={`/collections/${collectionHandle || 'all'}/${product.handle}`} className="group block">
+      <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+        {/* Product Image */}
+        <div 
+          className="aspect-square overflow-hidden relative"
+          {...(IMAGE_PROTECTION_ENABLED ? {
+            onContextMenu: handleContextMenu,
+            onDragStart: handleDragStart
+          } : {})}
+        >
+          {img ? (
+            <Image
+              src={img.url}
+              alt={img.altText || product.title}
+              width={img.width || 400}
+              height={img.height || 400}
+              className={`w-full h-full object-cover group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none pointer-events-none' : ''}`}
+              draggable={!IMAGE_PROTECTION_ENABLED}
+              {...(IMAGE_PROTECTION_ENABLED ? {
+                onContextMenu: handleContextMenu,
+                onDragStart: handleDragStart
+              } : {})}
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-purple-100 to-pink-100 flex items-center justify-center">
+              <span className="text-gray-400 text-lg">{product.title}</span>
+            </div>
+          )}
+          
+          {/* Availability Badge */}
+          {!isAvailable && (
+            <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
+              Sold Out
+            </div>
+          )}
+        </div>
         
-        {/* Availability Badge */}
-        {!isAvailable && (
-          <div className="absolute top-2 right-2 bg-red-500 text-white text-xs px-2 py-1 rounded-full font-medium">
-            Sold Out
+        {/* Product Info */}
+        <div className="p-6">
+          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+            {product.title}
+          </h3>
+          {!isAvailable && (
+            <p className="text-xs text-red-500 mb-3">Out of Stock</p>
+          )}
+          <div className="flex items-center justify-end">
+            <span className="text-purple-600 font-medium group-hover:text-purple-700 transition-colors">
+              View Details →
+            </span>
           </div>
-        )}
-      </div>
-      <div className="mt-3">
-        <h3 className="font-medium leading-tight group-hover:underline">{product.title}</h3>
-        {!isAvailable && (
-          <p className="text-xs text-red-500 mt-1">Out of Stock</p>
-        )}
+        </div>
       </div>
     </Link>
   );

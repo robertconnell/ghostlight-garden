@@ -38,7 +38,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     if (searchTerm.trim()) {
-              router.push(`/collections?search=${encodeURIComponent(searchTerm.trim())}`);
+      router.push(`/collections/all?search=${encodeURIComponent(searchTerm.trim())}`);
       onClose();
       setSearchTerm("");
     }
@@ -84,16 +84,16 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
         >
           {/* Search Form */}
           <form onSubmit={handleSearch} className="p-4">
-            <h3 className="text-lg font-semibold mb-4 text-black">Search Artwork</h3>
+            <h3 className="text-lg font-semibold mb-4 text-black">Search Ghostlight Garden</h3>
             
             <div className="relative">
               <input
                 ref={searchInputRef}
                 type="text"
-                placeholder="Search for artwork..."
+                placeholder="Search the garden..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="w-full px-4 py-3 pl-12 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent"
+                className="w-full px-4 py-3 pl-12 pr-10 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-300 focus:border-transparent text-gray-900"
               />
               <div className="absolute left-4 top-1/2 transform -translate-y-1/2 text-gray-400">
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -118,7 +118,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             <button
               type="submit"
               disabled={!searchTerm.trim()}
-              className="w-full mt-4 px-4 py-3 bg-purple-600 text-white font-medium rounded-lg hover:bg-purple-700 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors"
+              className="w-full mt-4 rounded-lg px-4 py-3 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font"
             >
               Search
             </button>
