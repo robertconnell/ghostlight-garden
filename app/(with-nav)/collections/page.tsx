@@ -89,10 +89,10 @@ export default function CollectionsPage() {
   const Background = () => (
     <>
       {/* PC Background */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-purple-300 to-purple-400"></div>
+      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-[#9A77CC]"></div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-purple-300 to-purple-400"></div>
+      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-[#9A77CC]"></div>
     </>
   );
 

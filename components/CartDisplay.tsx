@@ -32,14 +32,7 @@ export default function CartDisplay() {
       </div>
       
       <div className="space-y-3 mb-4">
-        {items.map((item) => {
-          // Debug: log the item data
-          console.log('Cart item:', { 
-            handle: item.handle, 
-            collectionHandle: item.collectionHandle,
-            finalUrl: item.collectionHandle ? `/collections/${item.collectionHandle}/${item.handle}` : `/collections/all/${item.handle}`
-          });
-          
+        {items.map((item) => {          
           return item.handle ? (
             <div key={item.id} className="flex items-center gap-3 p-3 border rounded-lg transition-all duration-200 hover:border-purple-300 hover:shadow-md">
               {/* Clickable Image */}

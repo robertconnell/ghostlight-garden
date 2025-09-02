@@ -39,7 +39,6 @@ export async function shopifyFetch<T>(
     if (res.status === 429) {
       // Rate limited - wait and retry
       if (retries > 0) {
-        console.log(`Shopify rate limited, retrying in ${delay}ms... (${retries} retries left)`);
         await new Promise(resolve => setTimeout(resolve, delay));
         return shopifyFetch<T>(query, variables, retries - 1, delay * 2);
       }
@@ -49,7 +48,6 @@ export async function shopifyFetch<T>(
     if (res.status === 500 || res.status === 502 || res.status === 503) {
       // Server error - retry with exponential backoff
       if (retries > 0) {
-        console.log(`Shopify server error ${res.status}, retrying in ${delay}ms... (${retries} retries left)`);
         await new Promise(resolve => setTimeout(resolve, delay));
         return shopifyFetch<T>(query, variables, retries - 1, delay * 2);
       }
@@ -71,7 +69,6 @@ export async function shopifyFetch<T>(
       
       if (errorMessages.includes('rate limit') || errorMessages.includes('too many requests')) {
         if (retries > 0) {
-          console.log(`Shopify rate limit in GraphQL, retrying in ${delay}ms... (${retries} retries left)`);
           await new Promise(resolve => setTimeout(resolve, delay));
           return shopifyFetch<T>(query, variables, retries - 1, delay * 2);
         }
@@ -88,7 +85,6 @@ export async function shopifyFetch<T>(
     // Handle timeout errors
     if (error.name === 'AbortError') {
       if (retries > 0) {
-        console.log(`Shopify request timeout, retrying... (${retries} retries left)`);
         return shopifyFetch<T>(query, variables, retries - 1, delay);
       }
       throw new Error('Shopify request timeout after retries');
@@ -97,7 +93,6 @@ export async function shopifyFetch<T>(
     // Handle network errors
     if (error.code === 'ECONNRESET' || error.code === 'ENOTFOUND' || error.message.includes('fetch')) {
       if (retries > 0) {
-        console.log(`Shopify network error, retrying in ${delay}ms... (${retries} retries left)`);
         await new Promise(resolve => setTimeout(resolve, delay));
         return shopifyFetch<T>(query, variables, retries - 1, delay * 2);
       }

@@ -39,14 +39,6 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Log the email attempt
-    console.log('Attempting to send commission request email:', {
-      from: 'noreply@ghostlightgarden.com',
-      to: 'info@ghostlightgarden.com',
-      subject: `Commission Request from ${name}`,
-      hasApiKey: !!process.env.RESEND_API_KEY
-    });
-
     // Send email using Resend
     const { data, error } = await resend.emails.send({
       from: 'noreply@ghostlightgarden.com',
@@ -92,9 +84,6 @@ export async function POST(request: NextRequest) {
         { status: 500 }
       );
     }
-
-    console.log('Commission email sent successfully:', data);
-    console.log('Full success details:', JSON.stringify(data, null, 2));
 
     return NextResponse.json({ 
       success: true, 

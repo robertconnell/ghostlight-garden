@@ -4,18 +4,13 @@ import { GET_COLLECTIONS } from '@/lib/queries';
 
 export async function GET(request: NextRequest) {
   try {
-    console.log('🔍 API: Fetching collections...');
-    
     const data = await shopifyFetch<{ collections: { edges: { node: any }[] } }>(
       GET_COLLECTIONS, 
       { first: 50 }
     );
     
-    console.log('✅ API: Collections data received:', data);
-    
     if (data && data.collections && data.collections.edges) {
       const collections = data.collections.edges.map(e => e.node);
-      console.log('📦 API: Processed collections:', collections);
       
       return NextResponse.json({ 
         success: true, 
