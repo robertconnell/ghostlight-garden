@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { Suspense } from 'react';
 import { shopifyFetch } from "@/lib/shopify";
 import { GET_COLLECTIONS_WITH_PRODUCTS } from "@/lib/queries";
 import SearchableAllProductsGrid from "@/components/SearchableAllProductsGrid";
@@ -219,7 +220,14 @@ export default async function AllProductsPage() {
 
             {/* Products Grid */}
             {sortedProducts.length > 0 ? (
-              <SearchableAllProductsGrid allProducts={sortedProducts} />
+              <Suspense fallback={
+                <div className="text-center py-12">
+                  <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600 mx-auto mb-4"></div>
+                  <p className="text-gray-600">Loading products...</p>
+                </div>
+              }>
+                <SearchableAllProductsGrid allProducts={sortedProducts} />
+              </Suspense>
             ) : (
               <div className="text-center py-12">
                 <p className="text-gray-600 text-lg mb-4">
