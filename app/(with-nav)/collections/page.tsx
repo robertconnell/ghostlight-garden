@@ -89,32 +89,10 @@ export default function CollectionsPage() {
   const Background = () => (
     <>
       {/* PC Background */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: 'url(/img/pc_home_background.png)',
-            willChange: 'transform',
-            transform: 'translateZ(0)'
-          }}
-          role="img"
-          aria-label="PC background: Artistic garden scene with soft shadows and blooming flowers"
-        />
-      </div>
+      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-purple-300 to-purple-400"></div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
-        <div
-          className="w-full h-full bg-cover bg-center bg-no-repeat"
-          style={{ 
-            backgroundImage: 'url(/img/mobile_home_background.png)',
-            willChange: 'transform',
-            transform: 'translateZ(0)'
-          }}
-          role="img"
-          aria-label="Mobile background: Artistic garden scene with soft shadows and blooming flowers"
-        />
-      </div>
+      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-purple-300 to-purple-400"></div>
     </>
   );
 
@@ -175,8 +153,8 @@ export default function CollectionsPage() {
             Art Collections
           </h1>
           <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Explore our curated collections, each showcasing unique themes and artistic styles. 
-            From spooky cute art to serene landscapes, discover the perfect pieces for your space.
+            Explore our curated collections, each showcasing unique characters and artistic styles. 
+            From spooky wisps to whimsical faeries, discover the perfect pieces to add to your space.
           </p>
           <div className="w-72 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto mt-6 rounded-full"></div>
         </div>
@@ -211,7 +189,7 @@ export default function CollectionsPage() {
           {collections && collections.length > 0 && collections.map((collection: any, index: number) => (
             <motion.div 
               key={collection.id} 
-              className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm"
+              className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm flex"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
@@ -225,9 +203,9 @@ export default function CollectionsPage() {
             >
               <Link 
                 href={`/collections/${collection.handle}`}
-                className="group block"
+                className="group block flex-1 flex flex-col"
               >
-              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300">
+              <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 flex-1 flex flex-col">
                 {/* Collection Image */}
                 <div className="aspect-square overflow-hidden">
                   {collection.image ? (
@@ -247,16 +225,16 @@ export default function CollectionsPage() {
                 </div>
                 
                 {/* Collection Info */}
-                <div className="p-6">
+                <div className="p-6 flex-1 flex flex-col">
                   <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
                     {collection.title}
                   </h3>
                   {collection.description && (
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2">
+                    <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-1">
                       {collection.description}
                     </p>
                   )}
-                  <div className="flex items-center justify-end">
+                  <div className="flex items-center justify-end mt-auto">
                     <span className="text-purple-600 font-medium group-hover:text-purple-700 transition-colors">
                       View Collection →
                     </span>
