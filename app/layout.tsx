@@ -59,8 +59,8 @@ export const metadata: Metadata = {
     default: "Ghostlight Garden | Spooky-Cute Creations",
     template: "%s | Ghostlight Garden"
   },
-  description: "Ghostlight Garden creates unique hand-painted, mixed-media, spooky-cute artwork and custom commissions. All artwork comes framed. Based in North Carolina, we specialize in original artwork.",
-  keywords: ["spooky art", "cute creations", "North Carolina", "artwork", "custom artwork", "framed artwork", "hand-painted art", "mixed-media art", "Ghostlight Garden"],
+  description: "Ghostlight Garden creates unique hand-painted, mixed-media, spooky-cute artwork and custom commissions. Framing options available. Based in North Carolina, we specialize in original artwork.",
+  keywords: ["spooky art", "cute creations", "North Carolina", "artwork", "custom artwork", "framed artwork", "unframed artwork", "hand-painted art", "mixed-media art", "Ghostlight Garden"],
   authors: [{ name: "Ghostlight Garden" }],
   creator: "Ghostlight Garden",
   publisher: "Ghostlight Garden",
@@ -79,7 +79,7 @@ export const metadata: Metadata = {
     url: 'https://ghostlightgarden.com',
     siteName: 'Ghostlight Garden',
     title: 'Ghostlight Garden | Spooky-Cute Creations',
-    description: 'Unique hand-painted, mixed-media, spooky-cute artwork and custom commissions from North Carolina. All artwork comes framed.',
+    description: 'Unique hand-painted, mixed-media, spooky-cute artwork and custom commissions from North Carolina. Framing options available.',
     images: [
       {
         url: '/img/brand_logo.png',
@@ -92,7 +92,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'Ghostlight Garden | Spooky-Cute Creations',
-    description: 'Unique hand-painted, mixed-media, spooky-cute artwork and custom commissions from North Carolina. All artwork comes framed.',
+    description: 'Unique hand-painted, mixed-media, spooky-cute artwork and custom commissions from North Carolina. Framing options available.',
     images: ['/img/brand_logo.png'],
   },
   robots: {

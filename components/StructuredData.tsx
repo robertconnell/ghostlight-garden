@@ -5,7 +5,7 @@ export default function StructuredData() {
     "name": "Ghostlight Garden",
     "url": "https://ghostlightgarden.com",
     "logo": "https://ghostlightgarden.com/img/brand_logo.png",
-    "description": "Ghostlight Garden creates unique hand-painted, mixed-media, spooky-cute artwork and custom commissions. All artwork comes framed. Based in North Carolina, we specialize in original artwork.",
+    "description": "Ghostlight Garden creates unique hand-painted, mixed-media, spooky-cute artwork and custom commissions. Framing options available. Based in North Carolina, we specialize in original artwork.",
     "address": {
       "@type": "PostalAddress",
       "addressCountry": "US",

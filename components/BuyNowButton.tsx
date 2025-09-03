@@ -38,7 +38,7 @@ export default function BuyNowButton({
       disabled={loading || !merchandiseId || disabled}
       onClick={handleBuyNow}
     >
-      {loading ? "Redirecting..." : (isPreorder ? "Preorder Now" : "Buy Now")}
+      {loading ? "Redirecting..." : "Buy Now"}
     </button>
   );
 }

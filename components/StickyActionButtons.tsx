@@ -1,0 +1,227 @@
+"use client";
+
+import { useState, useEffect, useRef } from 'react';
+import { createPortal } from 'react-dom';
+import AddToCartButton from './AddToCartButton';
+import BuyNowButton from './BuyNowButton';
+import Toast from './Toast';
+
+interface StickyActionButtonsProps {
+  selectedVariant: any;
+  product: any;
+  quantity: number;
+  collectionHandle?: string;
+  selectedOptions: any;
+  hasMultipleVariants: boolean;
+  allOptions: any[];
+}
+
+export default function StickyActionButtons({
+  selectedVariant,
+  product,
+  quantity,
+  collectionHandle,
+  selectedOptions,
+  hasMultipleVariants,
+  allOptions
+}: StickyActionButtonsProps) {
+  const [isVisible, setIsVisible] = useState(true);
+  const [shouldShowSticky, setShouldShowSticky] = useState(false);
+  const lastScrollY = useRef(0);
+  const [showToast, setShowToast] = useState(false);
+
+
+
+    useEffect(() => {
+    const handleScroll = () => {
+      // Use body scrollTop since that's the one that's actually changing
+      const currentScrollY = document.body.scrollTop;
+
+      // More sensitive scroll detection - smaller threshold
+      const scrollThreshold = 10; // Reduced from 100 to 10
+      
+
+      
+      // Normal scroll behavior - always apply
+      if (currentScrollY < lastScrollY.current) {
+        // Show buttons when scrolling up (any amount) or when at the very top
+        setIsVisible(true);
+      } else if (currentScrollY > lastScrollY.current && currentScrollY > 50) {
+        // Only hide when scrolling down AND we're more than 50px from top
+        setIsVisible(false);
+      }
+      // If we're near the top (within 50px), always show buttons
+
+      lastScrollY.current = currentScrollY;
+    };
+
+        // Add scroll listener
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    document.addEventListener('scroll', handleScroll, { passive: true });
+    document.body.addEventListener('scroll', handleScroll, { passive: true });
+
+    // Test scroll immediately
+    handleScroll();
+
+    // Cleanup
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('scroll', handleScroll);
+      document.body.removeEventListener('scroll', handleScroll);
+    };
+  }, [hasMultipleVariants, allOptions, selectedOptions]); // Add dependencies to track option changes
+
+  const isDisabled = hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '');
+  const allOptionsSelected = !hasMultipleVariants || allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '');
+
+  // Update shouldShowSticky when options change
+  useEffect(() => {
+    setShouldShowSticky(allOptionsSelected);
+    
+    // If all options are selected and buttons are currently hidden, show them
+    if (allOptionsSelected && !isVisible) {
+      setIsVisible(true);
+    }
+  }, [allOptionsSelected, isVisible]);
+
+  const handleButtonClick = (e: React.MouseEvent) => {
+    if (isDisabled) {
+      e.preventDefault();
+      e.stopPropagation();
+      setShowToast(true);
+    }
+  };
+
+  // Handle disabled button clicks specifically
+  const handleDisabledClick = (e: React.MouseEvent) => {
+    e.preventDefault();
+    e.stopPropagation();
+    setShowToast(true);
+  };
+
+
+
+
+
+  return (
+    <>
+      {/* Desktop: Side by side buttons */}
+      <div className="hidden md:flex gap-3">
+        <div className="flex-1">
+          <div 
+            className="w-full relative" 
+            onClick={isDisabled ? handleDisabledClick : undefined}
+            style={{ cursor: isDisabled ? 'pointer' : 'default' }}
+          >
+            <AddToCartButton
+              merchandiseId={selectedVariant.id}
+              quantity={quantity}
+              title={product.title || 'Product'}
+              price={selectedVariant.price?.amount || '0'}
+              image={product.images?.edges?.[0]?.node?.url || ""}
+              handle={product.handle}
+              collectionHandle={collectionHandle}
+              variantOptions={selectedOptions}
+              variantTitle={selectedVariant.title}
+              disabled={isDisabled}
+            />
+            {isDisabled && (
+              <div className="absolute inset-0 z-10 bg-transparent" />
+            )}
+          </div>
+        </div>
+        <div className="flex-1">
+          <div 
+            className="w-full relative" 
+            onClick={isDisabled ? handleDisabledClick : undefined}
+            style={{ cursor: isDisabled ? 'pointer' : 'default' }}
+          >
+            <BuyNowButton
+              merchandiseId={selectedVariant.id}
+              quantity={quantity}
+              disabled={isDisabled}
+              isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
+            />
+            {isDisabled && (
+              <div className="absolute inset-0 z-10 bg-transparent" />
+            )}
+          </div>
+        </div>
+      </div>
+
+      {/* Mobile: Sticky bottom buttons - rendered via portal */}
+      {typeof window !== 'undefined' && createPortal(
+        <div 
+          className={`md:hidden fixed bottom-0 left-0 right-0 transition-transform duration-300 sticky-action-buttons ${
+            isVisible ? 'translate-y-0' : 'translate-y-full'
+          }`}
+          style={{ zIndex: 99999 }}
+        >
+          <div className="p-4 bg-white border-t border-gray-200">
+            <div className="flex gap-3 max-w-md mx-auto min-h-[60px]">
+              <div className="flex-1">
+                <div 
+                  className="w-full relative" 
+                  onClick={isDisabled ? handleDisabledClick : undefined}
+                  style={{ cursor: isDisabled ? 'pointer' : 'default' }}
+                >
+                  <div className="h-12">
+                    <AddToCartButton
+                      merchandiseId={selectedVariant.id}
+                      quantity={quantity}
+                      title={product.title || 'Product'}
+                      price={selectedVariant.price?.amount || '0'}
+                      image={product.images?.edges?.[0]?.node?.url || ""}
+                      handle={product.handle}
+                      collectionHandle={collectionHandle}
+                      variantOptions={selectedOptions}
+                      variantTitle={selectedVariant.title}
+                      disabled={isDisabled}
+                    />
+                  </div>
+                  {isDisabled && (
+                    <div className="absolute inset-0 z-10 bg-transparent" />
+                  )}
+                </div>
+              </div>
+              <div className="flex-1">
+                <div 
+                  className="w-full relative" 
+                  onClick={isDisabled ? handleDisabledClick : undefined}
+                  style={{ cursor: isDisabled ? 'pointer' : 'default' }}
+                >
+                  <div className="h-12">
+                    <BuyNowButton
+                      merchandiseId={selectedVariant.id}
+                      quantity={quantity}
+                      disabled={isDisabled}
+                      isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
+                    />
+                  </div>
+                  {isDisabled && (
+                    <div className="absolute inset-0 z-10 bg-transparent" />
+                  )}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>,
+        document.body
+      )}
+
+      {/* Mobile: Spacer to prevent content from being hidden behind sticky buttons */}
+      <div className="md:hidden h-20"></div>
+
+
+
+
+
+      {/* Toast Message */}
+      <Toast
+        message="Please select all options to add to cart"
+        isVisible={showToast}
+        onClose={() => setShowToast(false)}
+      />
+    </>
+  );
+}

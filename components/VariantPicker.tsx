@@ -4,6 +4,7 @@
 import { useState } from "react";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
+import StickyActionButtons from "./StickyActionButtons";
 
 interface VariantPickerProps {
   product: {
@@ -125,12 +126,7 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
         </div>
       ))}
 
-      {/* Helpful message when options aren't selected */}
-      {hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '') && (
-        <div className="text-sm text-purple-400 bg-amber-50 p-3 rounded-lg border border-amber-200">
-          <p className="font-medium">Please select all options to add to cart</p>
-        </div>
-      )}
+
 
       {/* Quantity */}
       {/* <div>
@@ -147,7 +143,7 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
       </div> */}
 
       {/* Preorder Disclaimer */}
-      {!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0) && (
+      {/* {!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0) && (
         <div className="bg-purple-50 border-l-4 border-[#8A6D9B] p-4 mb-6 rounded-tr-lg rounded-br-lg">
           <h3 className="text-lg font-semibold text-[#8A6D9B] mb-2">Secure your place in the Garden 🌸</h3>
           <p className="text-[#8A6D9B]">
@@ -162,57 +158,33 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
           Thank you for your patience and for bringing a little of the Garden into your home.
           </p>
         </div>
-      )}
+      )} */}
 
       {/* Action Buttons */}
-      <div className="space-y-2">
-        {selectedVariant ? (
-          <>
-            <AddToCartButton
-              merchandiseId={selectedVariant.id}
-              quantity={quantity}
-              title={product.title || 'Product'}
-              price={selectedVariant.price?.amount || '0'}
-              image={product.images?.edges?.[0]?.node?.url || ""}
-              handle={product.handle}
-              collectionHandle={collectionHandle}
-              variantOptions={selectedOptions}
-              variantTitle={selectedVariant.title}
-              disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
-            />
-            <BuyNowButton
-              merchandiseId={selectedVariant.id}
-              quantity={quantity}
-              disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
-              isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
-            />
-          </>
-        ) : (
-          // Fallback: show buttons for first variant if no match
-          product.variants.edges[0]?.node && (
-            <>
-              <AddToCartButton
-                merchandiseId={product.variants.edges[0].node.id}
-                quantity={quantity}
-                title={product.title || 'Product'}
-                price={product.variants.edges[0].node.price?.amount || '0'}
-                image={product.images?.edges?.[0]?.node?.url || ""}
-                handle={product.handle}
-                collectionHandle={collectionHandle}
-                variantOptions={{}}
-                variantTitle={product.variants.edges[0].node.title}
-                disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
-              />
-              <BuyNowButton
-                merchandiseId={product.variants.edges[0].node.id}
-                quantity={quantity}
-                disabled={hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')}
-                isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
-              />
-            </>
-          )
-        )}
-      </div>
+      {selectedVariant ? (
+        <StickyActionButtons
+          selectedVariant={selectedVariant}
+          product={product}
+          quantity={quantity}
+          collectionHandle={collectionHandle}
+          selectedOptions={selectedOptions}
+          hasMultipleVariants={hasMultipleVariants}
+          allOptions={allOptions}
+        />
+      ) : (
+        // Fallback: show buttons for first variant if no match
+        product.variants.edges[0]?.node && (
+          <StickyActionButtons
+            selectedVariant={product.variants.edges[0].node}
+            product={product}
+            quantity={quantity}
+            collectionHandle={collectionHandle}
+            selectedOptions={{}}
+            hasMultipleVariants={hasMultipleVariants}
+            allOptions={allOptions}
+          />
+        )
+      )}
     </div>
   );
 }

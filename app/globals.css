@@ -71,6 +71,11 @@ body {
   margin-top: auto;
 }
 
+/* Sticky action buttons - highest z-index */
+.sticky-action-buttons {
+  z-index: 99999 !important;
+}
+
 /* Custom class for Welcome to text */
 .welcome-font {
   font-family: var(--font-pinyon-script), serif;
