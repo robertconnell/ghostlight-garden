@@ -29,6 +29,7 @@ export default function StickyActionButtons({
   const [shouldShowSticky, setShouldShowSticky] = useState(false);
   const lastScrollY = useRef(0);
   const [showToast, setShowToast] = useState(false);
+  const [clickPosition, setClickPosition] = useState<{ x: number; y: number } | undefined>();
 
 
 
@@ -88,6 +89,7 @@ export default function StickyActionButtons({
     if (isDisabled) {
       e.preventDefault();
       e.stopPropagation();
+      setClickPosition({ x: e.clientX, y: e.clientY });
       setShowToast(true);
     }
   };
@@ -96,6 +98,7 @@ export default function StickyActionButtons({
   const handleDisabledClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    setClickPosition({ x: e.clientX, y: e.clientY });
     setShowToast(true);
   };
 
@@ -136,12 +139,11 @@ export default function StickyActionButtons({
             onClick={isDisabled ? handleDisabledClick : undefined}
             style={{ cursor: isDisabled ? 'pointer' : 'default' }}
           >
-            <BuyNowButton
-              merchandiseId={selectedVariant.id}
-              quantity={quantity}
-              disabled={isDisabled}
-              isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
-            />
+                               <BuyNowButton
+                     merchandiseId={selectedVariant.id}
+                     quantity={quantity}
+                     disabled={isDisabled}
+                   />
             {isDisabled && (
               <div className="absolute inset-0 z-10 bg-transparent" />
             )}
@@ -191,12 +193,11 @@ export default function StickyActionButtons({
                   style={{ cursor: isDisabled ? 'pointer' : 'default' }}
                 >
                   <div className="h-12">
-                    <BuyNowButton
-                      merchandiseId={selectedVariant.id}
-                      quantity={quantity}
-                      disabled={isDisabled}
-                      isPreorder={!product.variants?.edges?.some((v: any) => v.node.availableForSale && (v.node.quantityAvailable || 0) > 0)}
-                    />
+                                       <BuyNowButton
+                     merchandiseId={selectedVariant.id}
+                     quantity={quantity}
+                     disabled={isDisabled}
+                   />
                   </div>
                   {isDisabled && (
                     <div className="absolute inset-0 z-10 bg-transparent" />
@@ -221,6 +222,7 @@ export default function StickyActionButtons({
         message="Please select all options to add to cart"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
+        clickPosition={clickPosition}
       />
     </>
   );

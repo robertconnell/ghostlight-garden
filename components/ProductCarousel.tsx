@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
@@ -31,10 +31,12 @@ interface ProductCarouselProps {
 }
 
 export default function ProductCarousel({ products }: ProductCarouselProps) {
+  const [isLoaded, setIsLoaded] = useState(false);
+
   // Splide carousel configuration options
   const splideOptions = {
     type: "loop", // Loop back to the beginning when reaching the end
-    perPage: 3, // Number of items visible per page
+    perPage: 3, // Number of items visible per page (back to 3 for desktop)
     perMove: 1, // Move one item at a time
     rewind: true, // Rewind to start when the end is reached
     pagination: false, // Disable pagination dots
@@ -43,32 +45,43 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     pauseOnHover: true, // Pause on hover
     arrows: true, // Show navigation arrows
     gap: "1.5rem", // Gap between slides
-    padding: "2rem", // Padding around the carousel
+    padding: "1rem", // Reduced padding to bring images closer to edges
     start: 0, // Start from the first slide
-    focus: "center", // Use center focus for better initial positioning
+    focus: "center", // Focus on center slide
     height: "auto", // Let height adjust to content
     fixedHeight: false, // Don't force a fixed height
+    waitForTransition: false, // Don't wait for transitions
+    updateOnMove: true, // Update on move
     breakpoints: {
       1024: {
-        perPage: 2,
+        perPage: 3,
         gap: "1.5rem",
-        padding: "1.5rem",
-        focus: "center", // Use center focus for 2 slides on iPad Pro
+        padding: "1rem",
+        focus: "center", // Focus on center slide
       },
       768: {
         perPage: 2,
         gap: "1rem",
-        padding: "1rem",
-        focus: "center", // Use center focus for 2 slides on iPad Air
+        padding: "0.75rem",
+        focus: 0, // Focus on first slide for tablet
       },
       640: {
         perPage: 1,
         gap: "0.75rem",
-        padding: "0.75rem",
-        focus: "center", // Use center focus for 1 slide
+        padding: "0.5rem",
+        focus: 0, // Focus on first slide for mobile
       },
     },
   };
+
+  // Handle loading state
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setIsLoaded(true);
+    }, 500); // Give images time to load
+
+    return () => clearTimeout(timer);
+  }, []);
 
   if (!products || products.length === 0) {
     return (
@@ -80,8 +93,26 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
 
   return (
     <div className="relative w-full max-w-6xl mx-auto">
+      {/* Loading State */}
+      {!isLoaded && (
+        <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[500px] flex items-center justify-center">
+          <div className="text-white/70 text-lg">Loading carousel...</div>
+        </div>
+      )}
+      
       {/* Carousel Container */}
-      <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[400px]">
+      <div className={`relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[500px] transition-opacity duration-300 ${isLoaded ? 'opacity-100' : 'opacity-0 absolute'}`}>
+        {/* Custom CSS for scaling non-center items */}
+        <style jsx>{`
+          .splide__slide:not(.is-active) {
+            transform: scale(0.95);
+            transition: transform 0.3s ease;
+          }
+          .splide__slide.is-active {
+            transform: scale(1);
+            transition: transform 0.3s ease;
+          }
+        `}</style>
         {/* Splide component with configuration options */}
         <Splide options={splideOptions}>
           {products.map((product, index) => (
@@ -90,7 +121,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 href={`/collections/featured-artwork/${product.handle}`}
                 className="group block"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-64 md:w-80 mx-auto">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-80 md:w-96 lg:w-[28rem] mx-auto">
                   {/* Product Image */}
                   <div 
                     className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-transparent"
@@ -108,14 +139,14 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
                           className={`object-contain group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
                           draggable={!IMAGE_PROTECTION_ENABLED}
-                          priority={index === 0}
+                          priority={index < 3} // Prioritize first 3 images
                           {...(IMAGE_PROTECTION_ENABLED ? {
                             onContextMenu: (e) => e.preventDefault(),
                             onDragStart: (e) => e.preventDefault()
                           } : {})}
                         />
                         {/* Brand Logo Overlay */}
-                        <div className="absolute bottom-0 left-9 md:bottom-0 md:left-11 pointer-events-none">
+                        <div className="absolute bottom-0 left-11 md:bottom-0 md:left-16 pointer-events-none">
                           <Image
                             src="/img/brand_logo.png"
                             alt="Ghostlight Garden"
@@ -146,7 +177,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       </div>
 
       {/* Adopt a Gloomie Button */}
-      <div className="text-center mt-8">
+      <div className="text-center mt-4">
         <motion.div
           whileHover={{
             scale: 1.02,

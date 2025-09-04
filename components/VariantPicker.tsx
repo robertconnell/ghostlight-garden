@@ -1,7 +1,7 @@
 // components/VariantPicker.tsx
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
 import StickyActionButtons from "./StickyActionButtons";
@@ -39,6 +39,70 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
   
   // Check if all options are selected
   const allOptionsSelected = allOptions.every(option => selectedOptions[option.name]);
+  
+  // Get all possible option values for an option type
+  const getAllOptionValues = (optionName: string) => {
+    const allVariants = product.variants.edges.map(({ node }: { node: any }) => node);
+    const allValues = new Set<string>();
+    
+    allVariants.forEach(variant => {
+      variant.selectedOptions.forEach((option: any) => {
+        if (option.name === optionName) {
+          allValues.add(option.value);
+        }
+      });
+    });
+    
+    return Array.from(allValues);
+  };
+
+  // Check if a specific option value is available with current selections
+  const isOptionValueAvailable = (optionName: string, optionValue: string) => {
+    const allVariants = product.variants.edges.map(({ node }: { node: any }) => node);
+    
+    // If no options are selected yet, all values are available
+    if (Object.keys(selectedOptions).length === 0) {
+      return true;
+    }
+    
+    // Check if there's a variant that matches current selections + this option value
+    const otherSelectedOptions = { ...selectedOptions };
+    delete otherSelectedOptions[optionName]; // Don't include the current option
+    
+    const matchingVariants = allVariants.filter(variant => {
+      return variant.selectedOptions.every((option: any) => {
+        // If this option is selected (and it's not the current option), it must match
+        if (otherSelectedOptions[option.name]) {
+          return otherSelectedOptions[option.name] === option.value;
+        }
+        // If this is the current option, check if it matches the value we're testing
+        if (option.name === optionName) {
+          return option.value === optionValue;
+        }
+        // If this option is not selected, we don't care what it is
+        return true;
+      });
+    });
+    
+    return matchingVariants.length > 0;
+  };
+
+  // Clear invalid selections when options become unavailable
+  useEffect(() => {
+    const updatedOptions = { ...selectedOptions };
+    let hasChanges = false;
+
+    Object.keys(selectedOptions).forEach(optionName => {
+      if (selectedOptions[optionName] && !isOptionValueAvailable(optionName, selectedOptions[optionName])) {
+        delete updatedOptions[optionName];
+        hasChanges = true;
+      }
+    });
+
+    if (hasChanges) {
+      setSelectedOptions(updatedOptions);
+    }
+  }, [product.variants]); // Re-run when variants change
   
   // Find matching variant or closest partial match
   const findMatchingVariant = () => {
@@ -103,28 +167,46 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
       )}
 
       {/* Dynamic Option Selection - Show ALL options when there are multiple variants */}
-      {hasMultipleVariants && allOptions.map((option) => (
-        <div key={option.name}>
-          <label className="block text-lg font-medium text-gray-800 mb-2">
-            {option.name}:
-          </label>
-          <select
-            value={selectedOptions[option.name] || ''}
-            onChange={(e) => setSelectedOptions(prev => ({
-              ...prev,
-              [option.name]: e.target.value
-            }))}
-            className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
-          >
-            <option value="">Select {option.name}</option>
-            {option.values.map((value) => (
-              <option key={value} value={value}>
-                {value}
-              </option>
-            ))}
-          </select>
+      {hasMultipleVariants && (
+        <div className="bg-gray-100/30 backdrop-blur-sm rounded-lg p-4 pb-6 space-y-4 shadow-lg">
+          {allOptions.map((option) => (
+            <div key={option.name}>
+              <label className="block text-lg font-medium text-gray-800 mb-2">
+                {option.name}:
+              </label>
+              <select
+                value={selectedOptions[option.name] || ''}
+                onChange={(e) => {
+                  const selectedValue = e.target.value;
+                  // Only allow selection of available options
+                  if (selectedValue === '' || isOptionValueAvailable(option.name, selectedValue)) {
+                    setSelectedOptions(prev => ({
+                      ...prev,
+                      [option.name]: selectedValue
+                    }));
+                  }
+                }}
+                className="w-full p-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-blue-500 bg-white text-gray-900"
+              >
+                <option value="">Select {option.name}</option>
+                {getAllOptionValues(option.name).map((value) => {
+                  const isAvailable = isOptionValueAvailable(option.name, value);
+                  return (
+                    <option 
+                      key={value} 
+                      value={value}
+                      disabled={!isAvailable}
+                      className={!isAvailable ? 'text-gray-400 bg-gray-100' : ''}
+                    >
+                      {value}{!isAvailable ? ' (Not available with current selection)' : ''}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+          ))}
         </div>
-      ))}
+      )}
 
 
 
