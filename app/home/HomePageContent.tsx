@@ -256,7 +256,7 @@ export default function HomePageContent() {
                   Featured Artwork
                 </motion.h2>
                 <motion.p 
-                  className="text-lg text-gray-600 max-w-2xl drop-shadow-lg mx-auto"
+                  className="text-md text-gray-600 max-w-2xl drop-shadow-lg mx-auto"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 

@@ -234,3 +234,15 @@ img {
   .splide__slide * {
     transition: all 0.15s ease-in-out;
   }
+
+  /* Modern mobile background zoom fix - using 100vh which is now properly supported */
+  .fixed.inset-0 {
+    height: 100vh; /* Modern browsers handle this correctly when address bar hides/shows */
+    width: 100%;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+
+
