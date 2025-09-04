@@ -88,14 +88,14 @@ export default function ProductCard({
         
         {/* Product Info */}
         <div className="p-6">
-          <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+          <h3 className="text-xl font-bold text-gray-700 drop-shadow-md group-hover:text-purple-900 transition-colors flex-1">
             {product.title}
           </h3>
           {!isAvailable && (
             <p className="text-xs text-red-500 mb-3">Out of Stock</p>
           )}
           <div className="flex items-center justify-end">
-            <span className="text-purple-600 font-medium group-hover:text-purple-700 transition-colors">
+            <span className="text-gray-500 font-medium group-hover:text-purple-900 drop-shadow-md transition-colors">
               View Details →
             </span>
           </div>

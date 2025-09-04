@@ -178,7 +178,7 @@ export default function CollectionsPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
             Art Collections
           </h1>
-          <p className="text-xl text-gray-200 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-md leading-relaxed">
             Explore our curated collections, each showcasing unique characters and artistic styles. 
             From spooky wisps to whimsical faeries, discover the perfect pieces to add to your space.
           </p>
@@ -252,16 +252,16 @@ export default function CollectionsPage() {
                 
                 {/* Collection Info */}
                 <div className="p-6 flex-1 flex flex-col">
-                  <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-purple-600 transition-colors">
+                  <h3 className="text-xl font-bold text-gray-700 drop-shadow-md group-hover:text-purple-900 transition-colors flex-1">
                     {collection.title}
                   </h3>
                   {collection.description && (
-                    <p className="text-gray-600 text-sm mb-3 line-clamp-2 flex-1">
+                    <p className="text-md text-gray-500 mb-3">
                       {collection.description}
                     </p>
                   )}
                   <div className="flex items-center justify-end mt-auto">
-                    <span className="text-purple-600 font-medium group-hover:text-purple-700 transition-colors">
+                    <span className="text-gray-500 font-medium group-hover:text-purple-900 drop-shadow-md transition-colors">
                       View Collection →
                     </span>
                   </div>

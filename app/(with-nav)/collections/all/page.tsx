@@ -215,8 +215,8 @@ export default async function AllProductsPage() {
               <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
                 All Artwork
               </h1>
-              <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed mb-6">
-                Browse our complete catalog of unique hand-painted, mixed-media artwork and custom commissions. 
+              <p className="text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-md leading-relaxed mb-6">
+                Browse our complete catalog of unique, hand-painted, mixed-media art. 
                 Framing options available. Discover spooky-cute pieces from all our collections in one place.
               </p>
               <div className="w-48 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto rounded-full"></div>
