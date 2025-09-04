@@ -130,7 +130,7 @@ export default function CollectionsPage() {
       {isLoading && (
         <div className="flex items-center justify-center relative z-10" style={{ minHeight: 'calc(100vh - 200px)' }}>
           <div className="text-center">
-            <div className="animate-spin rounded-full h-20 w-20 border-b-3 border-purple-600 mx-auto mb-4"></div>
+            <div className="animate-spin rounded-full h-20 w-20 border-b-3 border-purple-300 drop-shadow-lg mx-auto mb-4"></div>
             <p className="font-alex-brush text-white text-3xl">loading collections...</p>
           </div>
         </div>
@@ -178,7 +178,7 @@ export default function CollectionsPage() {
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
             Art Collections
           </h1>
-          <p className="text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-md leading-relaxed">
+          <p className="text-xl text-gray-100 max-w-4xl mx-auto drop-shadow-md leading-relaxed">
             Explore our curated collections, each showcasing unique characters and artistic styles. 
             From spooky wisps to whimsical faeries, discover the perfect pieces to add to your space.
           </p>

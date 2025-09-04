@@ -43,7 +43,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     pauseOnHover: true, // Pause on hover
     arrows: true, // Show navigation arrows
     gap: "1.5rem", // Gap between slides
-    padding: "2rem 2rem 2rem 1rem", // Padding around the carousel (less left padding)
+    padding: "0", // No padding
     start: 0, // Start from the first slide
     focus: "center", // Use center focus for better initial positioning
     height: "auto", // Let height adjust to content
@@ -52,19 +52,19 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       1024: {
         perPage: 2,
         gap: "1.5rem",
-        padding: "1.5rem 1.5rem 1.5rem 0.75rem",
+        padding: "0",
         focus: "center", // Use center focus for 2 slides on iPad Pro
       },
       768: {
         perPage: 2,
         gap: "1rem",
-        padding: "1rem 1rem 1rem 0.5rem",
+        padding: "0",
         focus: "center", // Use center focus for 2 slides on iPad Air
       },
       640: {
         perPage: 1,
         gap: "0.75rem",
-        padding: "0.75rem 0.75rem 0.75rem 0.375rem",
+        padding: "0",
         focus: "center", // Use center focus for 1 slide
       },
     },
@@ -90,7 +90,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 href={`/collections/featured-artwork/${product.handle}`}
                 className="group block"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl p-4 border border-white/10 hover:border-white/20 transition-all duration-300 w-72 md:w-80 lg:w-96 mx-auto">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 md:w-90 mx-auto md:mr-2">
                   {/* Product Image */}
                   <div 
                     className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-transparent"
@@ -106,7 +106,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                           alt={product.featuredImage.altText || product.title}
                           fill
                           sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
-                          className={`object-contain group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
+                          className={`object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
                           draggable={!IMAGE_PROTECTION_ENABLED}
                           priority={index === 0}
                           {...(IMAGE_PROTECTION_ENABLED ? {
@@ -115,7 +115,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                           } : {})}
                         />
                         {/* Brand Logo Overlay */}
-                        <div className="absolute bottom-0 left-9 md:bottom-0 md:left-11 pointer-events-none">
+                        <div className="absolute bottom-0 left-11 md:bottom-0 md:left-14 pointer-events-none">
                           <Image
                             src="/img/brand_logo.png"
                             alt="Ghostlight Garden"
@@ -134,7 +134,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
 
                   {/* Product Info */}
                   <div className="text-center">
-                    <h3 className="font-semibold text-purple-300 mb-2 group-hover:text-purple-700 transition-colors">
+                    <h3 className="text-xl font-semibold text-purple-300 mb-2 group-hover:text-purple-700 transition-colors drop-shadow-md">
                       {product.title}
                     </h3>
                   </div>
@@ -146,7 +146,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       </div>
 
       {/* Adopt a Gloomie Button */}
-      <div className="text-center md:mt-4">
+      <div className="text-center md:mt-8">
         <motion.div
           whileHover={{
             scale: 1.02,

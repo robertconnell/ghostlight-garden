@@ -68,7 +68,7 @@ export default function HomePageContent() {
 
     // Initial check - only start timer if at top
     const initialScrollY = window.scrollY;
-    if (initialScrollY <= 10) {
+    if (initialScrollY <= 15) {
       scrollTimeoutRef.current = setTimeout(() => {
         setShowScrollPrompt(true);
       }, 3000);
@@ -155,7 +155,7 @@ export default function HomePageContent() {
           <AnimatePresence>
             {showScrollPrompt && (
               <motion.div 
-                className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                className="absolute bottom-24 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
@@ -244,7 +244,7 @@ export default function HomePageContent() {
                 }}
               >
                 <motion.h2 
-                  className="text-3xl md:text-4xl font-bold text-gray-900 mb-4 ghostlight-font"
+                  className="text-3xl md:text-5xl font-bold text-gray-900 mb-4 ghostlight-font drop-shadow-lg"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
@@ -256,7 +256,7 @@ export default function HomePageContent() {
                   Featured Artwork
                 </motion.h2>
                 <motion.p 
-                  className="text-lg text-gray-600 max-w-2xl mx-auto"
+                  className="text-lg text-gray-600 max-w-2xl drop-shadow-lg mx-auto"
                   initial={{ opacity: 0, y: 15 }}
                   animate={{ opacity: 1, y: 0 }}
                   transition={{ 
@@ -265,7 +265,7 @@ export default function HomePageContent() {
                     ease: "easeOut"
                   }}
                 >
-                  Discover our favorite gloomies, each with their own unique personality.
+                  Discover our favorite gloomies, each with their own unique personality and story to tell.
                 </motion.p>
               </motion.div>
 
