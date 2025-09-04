@@ -155,14 +155,14 @@ export default function HomePageContent() {
           <AnimatePresence>
             {showScrollPrompt && (
               <motion.div 
-                className="absolute bottom-36 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                className="absolute bottom-32 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.5 }}
               >
                 <div className="text-center text-white">
-                  <p className="text-md font-medium mb-2 ghostlight-font">Scroll to see more</p>
+                  <p className="text-md font-medium mb-1 ghostlight-font">Scroll to see more</p>
                   <motion.div
                     animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
