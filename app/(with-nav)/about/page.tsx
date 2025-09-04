@@ -73,9 +73,9 @@ export default function AboutPage() {
             </div>
           </div>
 
-          {/* Our Mission */}
-          <div className="bg-white/80 rounded-2xl p-4 md:p-6 order-1 md:order-2">
-            <h2 className="text-4xl md:text-5xl font-alex-brush text-gray-900 mb-6">from my heart to yours</h2>
+          {/* Artist Bio */}
+          <div className="bg-white/80 rounded-2xl p-4 md:p-6 order-1 md:order-2 shadow-lg">
+            <h2 className="text-4xl md:text-5xl font-alex-brush text-gray-900 mb-6 drop-shadow-lg">from my heart to yours</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>
                 I’m the artist and heart behind Ghostlight Garden. 

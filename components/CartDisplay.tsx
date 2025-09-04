@@ -20,11 +20,7 @@ export default function CartDisplay() {
       <div className="flex justify-between items-center mb-4">
         <h3 className="text-lg font-semibold text-black">Shopping Cart ({totalItems} {totalItems === 1 ? 'item' : 'items'})</h3>
         <button 
-          onClick={() => {
-            if (confirm('Clear all items from cart?')) {
-              clearCart();
-            }
-          }}
+          onClick={() => clearCart()}
           className="text-sm text-purple-400 hover:text-purple-900"
         >
           Clear Cart

@@ -115,13 +115,13 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                           } : {})}
                         />
                         {/* Brand Logo Overlay */}
-                        <div className="absolute bottom-0 left-11 pointer-events-none">
+                        <div className="absolute bottom-0 left-9 md:bottom-0 md:left-11 pointer-events-none">
                           <Image
                             src="/img/brand_logo.png"
                             alt="Ghostlight Garden"
                             width={200}
                             height={200}
-                            className="opacity-45 w-1/3 h-1/3"
+                            className="opacity-45 w-1/3 h-1/3 md:w-1/3 md:h-1/3"
                           />
                         </div>
                       </>

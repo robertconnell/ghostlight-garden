@@ -46,7 +46,7 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
   return (
     <div className="space-y-4">
       {/* Main Image */}
-      <div className="relative aspect-square bg-transparent rounded-lg overflow-hidden group">
+      <div className="relative aspect-[5/6] bg-transparent rounded-lg drop-shadow-lg overflow-hidden group">
         <Image
           src={images[currentImageIndex].url}
           alt={images[currentImageIndex].altText || productTitle}
@@ -56,13 +56,13 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
           priority={currentImageIndex === 0}
         />
         {/* Brand Logo Overlay */}
-        <div className="absolute bottom-0 left-21 pointer-events-none">
+        <div className="absolute bottom-0 left-8 md:bottom-0 md:left-11 pointer-events-none">
           <Image
             src="/img/brand_logo.png"
             alt="Ghostlight Garden"
             width={200}
             height={200}
-            className="opacity-45 w-1/2 h-1/2"
+            className="opacity-45 w-1/3 h-1/3 md:w-1/2 md:h-1/2"
           />
         </div>
         
