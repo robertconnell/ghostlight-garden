@@ -155,7 +155,7 @@ export default function HomePageContent() {
           <AnimatePresence>
             {showScrollPrompt && (
               <motion.div 
-                className="absolute bottom-24 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                className="absolute bottom-36 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
