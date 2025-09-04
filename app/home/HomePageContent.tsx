@@ -135,10 +135,10 @@ export default function HomePageContent() {
                 md:top-1/5
                 lg:top-1/5
                 xl:top-1/5
-                left-4
+                left-10
                 md:left-8
                 lg:left-12
-                xl:left-16"
+                xl:left-64"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0}}
               transition={{ 
@@ -155,7 +155,7 @@ export default function HomePageContent() {
           <AnimatePresence>
             {showScrollPrompt && (
               <motion.div 
-                className="absolute bottom-32 md:bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
