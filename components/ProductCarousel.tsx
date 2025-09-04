@@ -43,7 +43,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     pauseOnHover: true, // Pause on hover
     arrows: true, // Show navigation arrows
     gap: "1.5rem", // Gap between slides
-    padding: "2rem", // Padding around the carousel
+    padding: "2rem 2rem 2rem 1rem", // Padding around the carousel (less left padding)
     start: 0, // Start from the first slide
     focus: "center", // Use center focus for better initial positioning
     height: "auto", // Let height adjust to content
@@ -52,19 +52,19 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       1024: {
         perPage: 2,
         gap: "1.5rem",
-        padding: "1.5rem",
+        padding: "1.5rem 1.5rem 1.5rem 0.75rem",
         focus: "center", // Use center focus for 2 slides on iPad Pro
       },
       768: {
         perPage: 2,
         gap: "1rem",
-        padding: "1rem",
+        padding: "1rem 1rem 1rem 0.5rem",
         focus: "center", // Use center focus for 2 slides on iPad Air
       },
       640: {
         perPage: 1,
         gap: "0.75rem",
-        padding: "0.75rem",
+        padding: "0.75rem 0.75rem 0.75rem 0.375rem",
         focus: "center", // Use center focus for 1 slide
       },
     },
@@ -146,7 +146,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       </div>
 
       {/* Adopt a Gloomie Button */}
-      <div className="text-center mt-8">
+      <div className="text-center md:mt-4">
         <motion.div
           whileHover={{
             scale: 1.02,
