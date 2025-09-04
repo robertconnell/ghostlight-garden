@@ -155,7 +155,7 @@ export default function HomePageContent() {
           <AnimatePresence>
             {showScrollPrompt && (
               <motion.div 
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                className="absolute bottom-18 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
@@ -166,7 +166,7 @@ export default function HomePageContent() {
                   <motion.div
                     animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-                    className="text-2xl"
+                    className="text-3xl"
                   >
                     ↓
                   </motion.div>
