@@ -35,14 +35,8 @@ export default function StickyActionButtons({
 
     useEffect(() => {
     const handleScroll = () => {
-      // Use body scrollTop since that's the one that's actually changing
-      const currentScrollY = document.body.scrollTop;
+      const currentScrollY = window.scrollY;
 
-      // More sensitive scroll detection - smaller threshold
-      const scrollThreshold = 10; // Reduced from 100 to 10
-      
-
-      
       // Normal scroll behavior - always apply
       if (currentScrollY < lastScrollY.current) {
         // Show buttons when scrolling up (any amount) or when at the very top
@@ -79,11 +73,11 @@ export default function StickyActionButtons({
   useEffect(() => {
     setShouldShowSticky(allOptionsSelected);
     
-    // If all options are selected and buttons are currently hidden, show them
-    if (allOptionsSelected && !isVisible) {
+    // If all options are selected, show them regardless of scroll position
+    if (allOptionsSelected) {
       setIsVisible(true);
     }
-  }, [allOptionsSelected, isVisible]);
+  }, [allOptionsSelected, selectedOptions]);
 
   const handleButtonClick = (e: React.MouseEvent) => {
     if (isDisabled) {
