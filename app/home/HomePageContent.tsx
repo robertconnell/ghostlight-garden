@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState, useRef } from 'react';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, AnimatePresence } from 'framer-motion';
 import ProductCarousel from "@/components/ProductCarousel";
 
 interface Product {
@@ -23,6 +23,8 @@ interface Product {
 export default function HomePageContent() {
   const [products, setProducts] = useState<Product[]>([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [showScrollPrompt, setShowScrollPrompt] = useState(false);
+  const scrollTimeoutRef = useRef<NodeJS.Timeout | null>(null);
 
   // Fetch products for the carousel
   useEffect(() => {
@@ -41,6 +43,45 @@ export default function HomePageContent() {
     };
 
     fetchProducts();
+  }, []);
+
+  // Scroll detection for scroll prompt
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+      
+      // Clear existing timeout
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+      
+      // Hide prompt immediately when scrolling
+      setShowScrollPrompt(false);
+      
+      // Only start timer if user is at the top of the page (within 10px tolerance)
+      if (currentScrollY <= 10) {
+        scrollTimeoutRef.current = setTimeout(() => {
+          setShowScrollPrompt(true);
+        }, 3000);
+      }
+    };
+
+    // Initial check - only start timer if at top
+    const initialScrollY = window.scrollY;
+    if (initialScrollY <= 10) {
+      scrollTimeoutRef.current = setTimeout(() => {
+        setShowScrollPrompt(true);
+      }, 3000);
+    }
+
+    window.addEventListener('scroll', handleScroll);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (scrollTimeoutRef.current) {
+        clearTimeout(scrollTimeoutRef.current);
+      }
+    };
   }, []);
 
   return (
@@ -109,6 +150,30 @@ export default function HomePageContent() {
               where soft shadows bloom
             </motion.h1>
           </div>
+
+          {/* Scroll Prompt */}
+          <AnimatePresence>
+            {showScrollPrompt && (
+              <motion.div 
+                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: 20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <div className="text-center text-white">
+                  <p className="text-md font-medium mb-2 ghostlight-font">Scroll to see more</p>
+                  <motion.div
+                    animate={{ y: [0, 8, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
+                    className="text-2xl"
+                  >
+                    ↓
+                  </motion.div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
 
           {/* Animated Misty Fog Transition - at bottom of adjusted viewport */}
           {/* Temporarily hidden until custom media is ready

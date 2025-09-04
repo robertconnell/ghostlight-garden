@@ -56,6 +56,25 @@ body {
   font-family: var(--font-cinzel), serif;
 }
 
+/* Splide carousel custom styles */
+.splide__slide.is-active {
+  opacity: 1;
+}
+
+.splide__slide.is-active .splide__slide-content {
+  border-color: rgba(255, 255, 255, 0.4);
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.splide__slide:not(.is-active) {
+  opacity: 0.4;
+}
+
+.splide__slide:not(.is-active) .splide__slide-content {
+  border-color: rgba(255, 255, 255, 0.1);
+  background-color: rgba(255, 255, 255, 0.05);
+}
+
 /* Coming soon page title - ensure proper font rendering */
 .coming-soon-title {
   line-height: 1.1;
