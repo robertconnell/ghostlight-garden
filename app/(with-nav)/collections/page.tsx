@@ -128,7 +128,7 @@ export default function CollectionsPage() {
       
       {/* Loading State */}
       {isLoading && (
-        <div className="flex items-center justify-center relative z-10" style={{ minHeight: 'calc(100vh - 200px)' }}>
+        <div className="flex items-center justify-center relative z-10" style={{ minHeight: 'calc(100dvh - 200px)' }}>
           <div className="text-center">
             <div className="animate-spin rounded-full h-20 w-20 border-b-3 border-purple-300 drop-shadow-lg mx-auto mb-4"></div>
             <p className="font-alex-brush text-white text-3xl">loading collections...</p>

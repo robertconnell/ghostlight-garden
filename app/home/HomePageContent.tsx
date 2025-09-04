@@ -117,7 +117,7 @@ export default function HomePageContent() {
       {/* Main Content */}
       <div className="relative z-10">
         {/* Hero Section - account for navigation bar height */}
-        <div className="flex flex-col text-white px-4 relative" style={{ height: 'calc(100vh - 4rem)' }}>
+        <div className="flex flex-col text-white px-4 relative" style={{ minHeight: 'calc(100dvh - 4rem)' }}>
           {/* Container with maxWidth constraint */}
           <div style={{
             maxWidth: 'clamp(60%, 70vw, 80%)',
