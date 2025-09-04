@@ -28,6 +28,16 @@ html {
   overflow-x: hidden; /* Disable horizontal scrolling */
 }
 
+/* Hide scrollbars but keep functionality */
+html::-webkit-scrollbar {
+  display: none;
+}
+
+html {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
 html, body {
   margin: 0;
   padding: 0;
