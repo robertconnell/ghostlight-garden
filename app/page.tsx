@@ -48,16 +48,16 @@ export default function LandingPage() {
 
       {/* PC Background Image - Hidden on mobile */}
       <div 
-        className="hidden md:block absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/pc_landing_background.png')]"
+        className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/pc_landing_background.png')]"
       ></div>
 
       {/* Mobile Background Image - Hidden on PC */}
       <div
-        className="md:hidden absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/mobile_landing_background.png')]"
+        className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/mobile_landing_background.png')]"
       ></div>
 
       {/* PC UI - Hidden on mobile */}
-      <div className="hidden md:flex relative z-10 flex-1 flex-col items-center justify-start pt-[25vh]">
+      <div className="hidden lg:flex relative z-10 flex-1 flex-col items-center justify-start pt-[25vh]">
         <motion.h1 
           className="text-6xl font-bold text-center mb-12 text-white drop-shadow-lg welcome-font"
           {...welcomeAnimation}
@@ -93,7 +93,7 @@ export default function LandingPage() {
       </div>
 
       {/* Mobile UI */}
-      <div className="md:hidden relative z-10 min-h-screen flex flex-col">
+      <div className="lg:hidden relative z-10 min-h-screen flex flex-col">
         {/* Welcome to Ghostlight Garden - Positioned in upper area */}
         <div className="flex-1 flex flex-col justify-center items-center px-4">
           <motion.h1
