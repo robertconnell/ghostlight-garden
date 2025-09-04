@@ -19,13 +19,24 @@
   }
 }
 
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow-y: auto; /* Enable vertical scrolling */
+  overflow-x: hidden; /* Disable horizontal scrolling */
+}
+
 html, body {
   margin: 0;
   padding: 0;
   height: 100%;
-  overflow-x: hidden;
   overscroll-behavior-x: none;
   overscroll-behavior-y: auto;
+  position: relative;
+  left: 0;
+  right: 0;
 }
 
 body {
@@ -35,7 +46,10 @@ body {
   overscroll-behavior-x: none;
   overscroll-behavior-y: auto;
   -webkit-overflow-scrolling: touch;
+  position: relative !important;
 }
+
+
 
 /* Custom class for Ghostlight Garden text */
 .ghostlight-font {
@@ -181,26 +195,10 @@ img {
     transition: all 0.2s ease-in-out;
   }
   
-  /* Highlight the focused slide */
-  .splide__slide.is-active {
+  /* All slides should be fully visible and properly sized */
+  .splide__slide {
     opacity: 1;
     transform: scale(1);
-  }
-  
-  .splide__slide.is-active .splide__slide-content {
-    border-color: rgba(255, 255, 255, 0.4);
-    background-color: rgba(255, 255, 255, 0.1);
-  }
-  
-  /* Dim the non-focused slides */
-  .splide__slide:not(.is-active) {
-    opacity: 0.4;
-    transform: scale(0.95);
-  }
-  
-  .splide__slide:not(.is-active) .splide__slide-content {
-    border-color: rgba(255, 255, 255, 0.1);
-    background-color: rgba(255, 255, 255, 0.05);
   }
   
   /* Smooth transitions for all slides */

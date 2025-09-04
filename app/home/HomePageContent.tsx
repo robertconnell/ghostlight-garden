@@ -94,10 +94,10 @@ export default function HomePageContent() {
                 md:top-1/5
                 lg:top-1/5
                 xl:top-1/5
-                left-1/9
-                md:left-1/8
-                lg:left-1/7
-                xl:left-1/5"
+                left-4
+                md:left-8
+                lg:left-12
+                xl:left-16"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0}}
               transition={{ 
@@ -166,9 +166,9 @@ export default function HomePageContent() {
         {/* White Content Section - starts immediately after fog */}
         <div className="relative bg-white flex-1 flex flex-col">
           {/* Content */}
-          <div className="relative pt-6 px-4 flex-1">
+          <div className="relative pt-6 w-full flex-1">
             {/* Featured Products Section */}
-            <div className="max-w-6xl mx-auto pt-8">
+            <div className="w-full pt-8">
               <motion.div 
                 className="text-center mb-12"
                 initial={{ opacity: 0, y: 20 }}

@@ -217,13 +217,13 @@ export default function StickyActionButtons({
 
 
 
-      {/* Toast Message */}
-      <Toast
+      {/* Toast Message - Temporarily disabled to test layout */}
+      {/* <Toast
         message="Please select all options to add to cart"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
         clickPosition={clickPosition}
-      />
+      /> */}
     </>
   );
 }
