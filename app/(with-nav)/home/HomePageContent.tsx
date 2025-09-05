@@ -110,35 +110,30 @@ export default function HomePageContent() {
         style={{ minHeight: 'calc(100svh - 4rem)' }}
       >
         {/* PC Background */}
-        <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{ 
-              backgroundImage: 'url(/img/pc_home_background.png)',
-              willChange: 'transform',
-              transform: 'translateZ(0)'
+        <div
+            className="hidden md:block fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
+            style={{
+            backgroundImage: 'url(/img/pc_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)',
+            paddingBottom: 'env(safe-area-inset-bottom)',
             }}
             role="img"
             aria-label="PC background: Artistic home scene with soft shadows"
-          />
-
-        </div>
+        />
 
         {/* Mobile Background */}
-        <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
-          <div
-            className="w-full h-full bg-cover bg-center bg-no-repeat"
-            style={{ 
-              backgroundImage: 'url(/img/mobile_home_background.png)',
-              willChange: 'transform',
-              transform: 'translateZ(0)'
+        <div
+            className="md:hidden fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
+            style={{
+            backgroundImage: 'url(/img/mobile_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)',
+            paddingBottom: 'env(safe-area-inset-bottom)',
             }}
             role="img"
             aria-label="Mobile background: Artistic home scene with soft shadows"
-          />
-          {/* Light pink overlay to brighten and add pink tint */}
-
-        </div>
+        />
 
         {/* Hero Content */}
         <div className="absolute top-1/4 left-1/10 lg:left-1/10 z-10 max-w-6xl mx-auto">
