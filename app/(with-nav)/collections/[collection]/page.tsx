@@ -6,6 +6,7 @@ import { GET_COLLECTION_BY_HANDLE } from "@/lib/queries";
 import AnimatedProductGrid from "@/components/AnimatedProductGrid";
 import Breadcrumb from "@/components/Breadcrumb";
 import AnimatedCollectionHeader from "@/components/AnimatedCollectionHeader";
+import BackToCollectionsButton from "@/components/BackToCollectionsButton";
 
 interface CollectionPageProps {
   params: Promise<{
@@ -80,7 +81,35 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
     }
 
     const collectionData = data.collection;
-    const products = collectionData.products?.edges?.map((e: any) => e.node) || [];
+    const rawProducts = collectionData.products?.edges?.map((e: any) => e.node) || [];
+    
+    // Check if this collection is limited
+    const isLimitedCollection = collectionData.title?.toLowerCase().includes('limited') || 
+                               collectionData.handle?.toLowerCase().includes('limited');
+    
+    // Add limited collection status to each product and sort
+    const productsWithLimitedStatus = rawProducts.map((product: any) => {
+      // Check if this product belongs to any limited collection
+      const isProductFromLimitedCollection = product.collections?.edges?.some(({ node: collection }: { node: any }) => 
+        collection.title?.toLowerCase().includes('limited') || 
+        collection.handle?.toLowerCase().includes('limited')
+      ) || false;
+      
+      return {
+        ...product,
+        isFromLimitedCollection: isProductFromLimitedCollection
+      };
+    });
+    
+    // Sort products: limited collection products first, then alphabetically by title
+    const sortedProducts = productsWithLimitedStatus.sort((a: any, b: any) => {
+      // First priority: limited collection products
+      if (a.isFromLimitedCollection && !b.isFromLimitedCollection) return -1;
+      if (!a.isFromLimitedCollection && b.isFromLimitedCollection) return 1;
+      
+      // If both are from limited collections or both are not, sort alphabetically by title
+      return (a.title || '').localeCompare(b.title || '');
+    });
 
     // Background component to ensure consistency across all states
     const Background = () => (
@@ -131,20 +160,29 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
           ]}
         />
 
-
-
         {/* Collection Header */}
         <AnimatedCollectionHeader 
           title={collectionData.title}
           description={collectionData.description}
         />
 
+        {/* Back to Collections Button */}
+        <div className="relative z-10">
+          <div className="max-w-6xl mx-auto px-6">
+            <BackToCollectionsButton />
+          </div>
+        </div>
+
         {/* Products Grid */}
         <div className="relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-12">
-            {products.length > 0 ? (
+            {sortedProducts.length > 0 ? (
               <>
-                <AnimatedProductGrid products={products} collectionHandle={resolvedParams.collection} />
+                <AnimatedProductGrid 
+                  products={sortedProducts} 
+                  collectionHandle={resolvedParams.collection}
+                  isLimitedCollection={isLimitedCollection}
+                />
               </>
             ) : (
               <div className="text-center py-16">
@@ -152,15 +190,6 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
                 <p className="text-gray-600 mb-6">
                   This collection doesn't have any products yet. Check back soon!
                 </p>
-                <Link 
-                  href="/collections" 
-                  className="inline-flex items-center gap-2 px-4 py-2 text-sm text-purple-600 hover:text-purple-700 bg-purple-50 hover:bg-purple-100 rounded-lg transition-colors border border-purple-200 hover:border-purple-300"
-                >
-                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-                  </svg>
-                  Back to Collections
-                </Link>
               </div>
             )}
           </div>

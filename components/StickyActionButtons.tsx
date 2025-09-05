@@ -30,6 +30,7 @@ export default function StickyActionButtons({
   const lastScrollY = useRef(0);
   const [showToast, setShowToast] = useState(false);
   const [clickPosition, setClickPosition] = useState<{ x: number; y: number } | undefined>();
+  const [toastKey, setToastKey] = useState(0);
 
 
 
@@ -92,7 +93,10 @@ export default function StickyActionButtons({
   const handleDisabledClick = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
+    
+    // Force restart animation by changing key to bypass exit animation
     setClickPosition({ x: e.clientX, y: e.clientY });
+    setToastKey(prev => prev + 1); // Change key to force new component
     setShowToast(true);
   };
 
@@ -211,13 +215,14 @@ export default function StickyActionButtons({
 
 
 
-      {/* Toast Message - Temporarily disabled to test layout */}
-      {/* <Toast
+      {/* Toast Message */}
+      <Toast
+        key={toastKey}
         message="Please select all options to add to cart"
         isVisible={showToast}
         onClose={() => setShowToast(false)}
         clickPosition={clickPosition}
-      /> */}
+      />
     </>
   );
 }

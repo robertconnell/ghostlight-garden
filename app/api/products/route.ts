@@ -20,6 +20,11 @@ export async function GET() {
       handle: node.handle,
       featuredImage: node.featuredImage,
       priceRange: node.priceRange,
+      collections: node.collections.edges.map(({ node: collection }: { node: any }) => ({
+        id: collection.id,
+        title: collection.title,
+        handle: collection.handle,
+      })),
     }));
 
     return NextResponse.json({ products });

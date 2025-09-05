@@ -2,6 +2,7 @@
 
 import { useEffect, useState, useRef } from 'react';
 import { motion, useInView, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
 import ProductCarousel from "@/components/ProductCarousel";
 
 interface Product {
@@ -18,6 +19,11 @@ interface Product {
       currencyCode: string;
     };
   };
+  collections: {
+    id: string;
+    title: string;
+    handle: string;
+  }[];
 }
 
 export default function HomePageContent() {
@@ -62,7 +68,7 @@ export default function HomePageContent() {
       if (currentScrollY <= 10) {
         scrollTimeoutRef.current = setTimeout(() => {
           setShowScrollPrompt(true);
-        }, 3000);
+        }, 2000);
       }
     };
 
@@ -127,18 +133,15 @@ export default function HomePageContent() {
               className="font-alex-brush
                 text-4xl
                 md:text-6xl
-                lg:text-7xl
-                xl:text-8xl
+                lg:text-8xl
                 text-left
                 absolute
                 top-1/4
                 md:top-1/5
                 lg:top-1/5
-                xl:top-1/5
                 left-10
                 md:left-8
-                lg:left-12
-                xl:left-64"
+                lg:left-[16rem]"
               initial={{ opacity: 0, x: 10 }}
               animate={{ opacity: 1, x: 0}}
               transition={{ 
@@ -155,14 +158,14 @@ export default function HomePageContent() {
           <AnimatePresence>
             {showScrollPrompt && (
               <motion.div 
-                className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
+                className="absolute bottom-10 left-1/2 transform -translate-x-1/2 z-20 pointer-events-none"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: 20 }}
                 transition={{ duration: 0.5 }}
               >
                 <div className="text-center text-white">
-                  <p className="text-md font-medium mb-1 ghostlight-font">Scroll to see more</p>
+                  <p className="lg:text-lg text-md font-medium mb-1 ghostlight-font">Scroll to see more</p>
                   <motion.div
                     animate={{ y: [0, 8, 0] }}
                     transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
@@ -271,6 +274,7 @@ export default function HomePageContent() {
 
               {/* Product Carousel */}
               <motion.div
+                className="w-full bg-gray-300/10 border-t border-gray-300/20 py-8 relative"
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ 
@@ -279,14 +283,40 @@ export default function HomePageContent() {
                   ease: "easeOut"
                 }}
               >
+                {/* Fade effect at bottom */}
+                <div className="absolute bottom-0 left-0 right-0 h-8 bg-gradient-to-t from-white to-transparent pointer-events-none"></div>
                 {isLoading ? (
-                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+                  <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center max-w-6xl mx-auto">
                     <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-purple-600"></div>
                   </div>
                 ) : (
                   <ProductCarousel products={products} />
                 )}
               </motion.div>
+
+              {/* Adopt a Gloomie Button */}
+              <div className="text-center mt-8">
+                <motion.div
+                  whileHover={{
+                    scale: 1.02,
+                    boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
+                  }}
+                  whileTap={{ scale: 0.95 }}
+                  transition={{
+                    boxShadow: { duration: 0.4, ease: "easeInOut" }
+                  }}
+                >
+                  <Link
+                    href="/collections"
+                    className="inline-flex items-center px-12 py-4 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl rounded-full border-2 border-white shadow-lg cursor-pointer button-font"
+                  >
+                    Adopt a Gloomie
+                    <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                    </svg>
+                  </Link>
+                </motion.div>
+              </div>
             </div>
 
             {/* Brand Logo Section */}

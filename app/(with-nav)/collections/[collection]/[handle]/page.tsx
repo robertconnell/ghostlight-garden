@@ -9,6 +9,7 @@ import BuyNowButton from "@/components/BuyNowButton";
 import VariantPicker from "@/components/VariantPicker";
 import ProductImageSlider from "@/components/ProductImageSlider";
 import Breadcrumb from "@/components/Breadcrumb";
+import BackToCollectionsButton from "@/components/BackToCollectionsButton";
 
 
 interface ProductPageProps {
@@ -152,6 +153,16 @@ export default async function ProductPage({ params }: ProductPageProps) {
             { label: product.title, href: "" }
           ]}
         />
+
+        {/* Back to Collection Button */}
+        <div className="relative z-10">
+          <div className="max-w-6xl mx-auto px-6 py-6 mt-8">
+            <BackToCollectionsButton 
+              href={`/collections/${resolvedParams.collection}`}
+              text={`Back to ${collection.title}`}
+            />
+          </div>
+        </div>
 
         {/* Product Details */}
         <div className="relative z-10">

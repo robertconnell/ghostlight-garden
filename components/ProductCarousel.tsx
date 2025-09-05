@@ -24,6 +24,11 @@ interface Product {
       currencyCode: string;
     };
   };
+  collections: {
+    id: string;
+    title: string;
+    handle: string;
+  }[];
 }
 
 interface ProductCarouselProps {
@@ -31,6 +36,14 @@ interface ProductCarouselProps {
 }
 
 export default function ProductCarousel({ products }: ProductCarouselProps) {
+  // Helper function to get the primary collection (excluding featured-artwork)
+  const getPrimaryCollection = (product: Product) => {
+    const primaryCollection = product.collections.find(
+      collection => collection.handle !== 'featured-artwork'
+    );
+    return primaryCollection || product.collections[0] || { handle: 'featured-artwork' };
+  };
+
   // Splide carousel configuration options
   const splideOptions = {
     type: "loop", // Loop back to the beginning when reaching the end
@@ -84,10 +97,12 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
       <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[400px]">
         {/* Splide component with configuration options */}
         <Splide options={splideOptions}>
-          {products.map((product, index) => (
+          {products.map((product, index) => {
+            const primaryCollection = getPrimaryCollection(product);
+            return (
             <SplideSlide key={product.id}>
               <Link
-                href={`/collections/featured-artwork/${product.handle}`}
+                href={`/collections/${primaryCollection.handle}/${product.handle}`}
                 className="group block"
               >
                 <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 md:w-90 mx-auto md:mr-2">
@@ -141,33 +156,11 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 </div>
               </Link>
             </SplideSlide>
-          ))}
+            );
+          })}
         </Splide>
       </div>
 
-      {/* Adopt a Gloomie Button */}
-      <div className="text-center md:mt-8">
-        <motion.div
-          whileHover={{
-            scale: 1.02,
-            boxShadow: "0 0 30px rgba(255, 255, 255, 0.8), 0 0 60px rgba(255, 255, 255, 0.6)"
-          }}
-          whileTap={{ scale: 0.95 }}
-          transition={{
-            boxShadow: { duration: 0.4, ease: "easeInOut" }
-          }}
-        >
-          <Link
-            href="/collections"
-            className="inline-flex items-center px-12 py-4 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 text-white font-bold text-xl rounded-full border-2 border-white shadow-lg cursor-pointer button-font"
-          >
-            Adopt a Gloomie
-            <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-            </svg>
-          </Link>
-        </motion.div>
-      </div>
     </div>
   );
 }

@@ -176,6 +176,15 @@ export const GET_COLLECTION_BY_HANDLE = /* GraphQL */ `
                 currencyCode
               }
             }
+            collections(first: 10) {
+              edges {
+                node {
+                  id
+                  title
+                  handle
+                }
+              }
+            }
           }
         }
       }

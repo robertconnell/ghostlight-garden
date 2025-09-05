@@ -4,6 +4,7 @@ import { shopifyFetch } from "@/lib/shopify";
 import { GET_COLLECTIONS_WITH_PRODUCTS } from "@/lib/queries";
 import SearchableAllProductsGrid from "@/components/SearchableAllProductsGrid";
 import Breadcrumb from "@/components/Breadcrumb";
+import ViewCollectionsButton from "@/components/ViewCollectionsButton";
 
 import Link from "next/link";
 
@@ -221,6 +222,9 @@ export default async function AllProductsPage() {
               </p>
               <div className="w-48 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto rounded-full"></div>
             </div>
+            
+            {/* View Collections Button */}
+            <ViewCollectionsButton />
 
             {/* Products Grid */}
             {sortedProducts.length > 0 ? (

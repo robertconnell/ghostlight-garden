@@ -96,9 +96,6 @@ export default function AnimatedAllProductsGrid({ products, searchTerm }: Animat
                     </span>
                   )}
                 </div>
-                <p className="text-md text-gray-500 mb-3">
-                  From the <span className="text-purple-300">{product.collectionTitle}</span> collection
-                </p>
                 <div className="flex items-center justify-end">
                   <span className="text-gray-500 font-medium group-hover:text-purple-900 drop-shadow-md transition-colors">
                     View Details →

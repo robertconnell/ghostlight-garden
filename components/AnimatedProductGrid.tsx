@@ -24,9 +24,10 @@ interface Product {
 interface AnimatedProductGridProps {
   products: Product[];
   collectionHandle: string;
+  isLimitedCollection?: boolean;
 }
 
-export default function AnimatedProductGrid({ products, collectionHandle }: AnimatedProductGridProps) {
+export default function AnimatedProductGrid({ products, collectionHandle, isLimitedCollection = false }: AnimatedProductGridProps) {
   return (
     <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
       {products.map((product: Product, index: number) => (
@@ -43,7 +44,11 @@ export default function AnimatedProductGrid({ products, collectionHandle }: Anim
             boxShadow: "0 0 20px rgba(138, 109, 155, 0.4), 0 0 40px rgba(138, 109, 155, 0.2)"
           }}
         >
-          <ProductCard product={product} collectionHandle={collectionHandle} />
+          <ProductCard 
+            product={product} 
+            collectionHandle={collectionHandle} 
+            isLimitedCollection={isLimitedCollection}
+          />
         </motion.div>
       ))}
     </div>

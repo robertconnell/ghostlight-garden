@@ -211,11 +211,11 @@ export default function CollectionsPage() {
         </div>
         
         {/* Collections Grid */}
-        <div className="flex flex-wrap gap-8 justify-center px-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
           {collections && collections.length > 0 && collections.map((collection: any, index: number) => (
             <motion.div 
               key={collection.id} 
-              className="w-full md:w-[calc(50%-1rem)] lg:w-[calc(33.333%-1.33rem)] max-w-sm flex"
+              className="flex"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ 
@@ -255,11 +255,6 @@ export default function CollectionsPage() {
                   <h3 className="text-xl font-bold text-gray-700 drop-shadow-md group-hover:text-purple-900 transition-colors flex-1">
                     {collection.title}
                   </h3>
-                  {collection.description && (
-                    <p className="text-md text-gray-500 mb-3">
-                      {collection.description}
-                    </p>
-                  )}
                   <div className="flex items-center justify-end mt-auto">
                     <span className="text-gray-500 font-medium group-hover:text-purple-900 drop-shadow-md transition-colors">
                       View Collection →
