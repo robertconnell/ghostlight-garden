@@ -67,7 +67,7 @@ export default function HomePageContent() {
       if (scrollY === 0) {
         timeoutId = setTimeout(() => {
           setShowScrollPrompt(true);
-        }, 2000);
+        }, 2500);
       } else {
         // If user scrolls away from top, hide prompt immediately
         setShowScrollPrompt(false);
@@ -144,9 +144,9 @@ export default function HomePageContent() {
         <div className="absolute top-1/4 left-1/10 lg:left-1/10 z-10 max-w-6xl mx-auto">
           <motion.h1 
             className="text-4xl lg:text-8xl text-white drop-shadow-lg embossed-text font-alex-brush"
-            initial={{ opacity: 0, x: 20 }}
+            initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ delay: 1, duration: 1.6, ease: "easeOut" }}
+            transition={{ delay: 1, duration: 1.2, ease: "easeOut" }}
           >
             where soft shadows bloom
           </motion.h1>
