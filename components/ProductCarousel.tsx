@@ -85,7 +85,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
 
   if (!products || products.length === 0) {
     return (
-      <div className="w-full h-64 bg-gray-100 rounded-lg flex items-center justify-center">
+      <div className="w-full h-64 rounded-lg flex items-center justify-center">
         <p className="text-gray-500">No products available</p>
       </div>
     );

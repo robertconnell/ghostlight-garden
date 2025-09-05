@@ -121,7 +121,6 @@ export default function HomePageContent() {
             role="img"
             aria-label="PC background: Artistic home scene with soft shadows"
           />
-          {/* Light pink overlay to brighten and add pink tint */}
 
         </div>
 
@@ -147,7 +146,7 @@ export default function HomePageContent() {
             className="text-4xl lg:text-8xl text-white drop-shadow-lg embossed-text font-alex-brush"
             initial={{ opacity: 0, x: 30 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2, ease: "easeOut" }}
+            transition={{ delay: 0.6, duration: 1.2, ease: "easeOut" }}
           >
             where soft shadows bloom
           </motion.h1>
