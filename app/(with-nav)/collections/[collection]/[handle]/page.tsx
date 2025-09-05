@@ -102,7 +102,17 @@ export default async function ProductPage({ params }: ProductPageProps) {
     const product = productData.product;
     const collection = collectionData.collection;
     
-
+    // Helper function to get the primary collection (excluding featured-artwork)
+    const getPrimaryCollection = (product: any) => {
+      if (!product.collections?.edges) return collection;
+      
+      const primaryCollection = product.collections.edges.find(
+        (edge: any) => edge.node.handle !== 'featured-artwork'
+      );
+      return primaryCollection?.node || collection;
+    };
+    
+    const primaryCollection = getPrimaryCollection(product);
     
     // Background component to ensure consistency across all states
     const Background = () => (
@@ -148,8 +158,9 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {/* Breadcrumb Navigation */}
         <Breadcrumb 
           items={[
+            { label: "Home", href: "/home" },
             { label: "Collections", href: "/collections" },
-            { label: collection.title, href: `/collections/${resolvedParams.collection}` },
+            { label: primaryCollection.title, href: `/collections/${primaryCollection.handle}` },
             { label: product.title, href: "" }
           ]}
         />
@@ -158,8 +169,8 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <div className="relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-6 mt-8">
             <BackToCollectionsButton 
-              href={`/collections/${resolvedParams.collection}`}
-              text={`Back to ${collection.title}`}
+              href={`/collections/${primaryCollection.handle}`}
+              text={`Back to ${primaryCollection.title}`}
             />
           </div>
         </div>

@@ -56,6 +56,15 @@ export const PRODUCT_BY_HANDLE = /* GraphQL */ `
         name
         values
       }
+      collections(first: 10) {
+        edges {
+          node {
+            id
+            title
+            handle
+          }
+        }
+      }
       images(first: 10) {
         edges {
           node {
@@ -134,6 +143,15 @@ export const GET_COLLECTIONS_WITH_PRODUCTS = /* GraphQL */ `
                   minVariantPrice {
                     amount
                     currencyCode
+                  }
+                }
+                collections(first: 10) {
+                  edges {
+                    node {
+                      id
+                      title
+                      handle
+                    }
                   }
                 }
               }

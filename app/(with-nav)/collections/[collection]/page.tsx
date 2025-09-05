@@ -153,12 +153,13 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         <Background />
         
         {/* Breadcrumb Navigation */}
-        <Breadcrumb 
-          items={[
-            { label: "Collections", href: "/collections" },
-            { label: collectionData.title, href: "" }
-          ]}
-        />
+                    <Breadcrumb 
+              items={[
+                { label: "Home", href: "/home" },
+                { label: "Collections", href: "/collections" },
+                { label: collectionData.title, href: "" }
+              ]}
+            />
 
         {/* Collection Header */}
         <AnimatedCollectionHeader 

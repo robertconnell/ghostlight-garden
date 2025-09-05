@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
+import Breadcrumb from "@/components/Breadcrumb";
 
 export default function CollectionsPage() {
   const [collections, setCollections] = useState<any[]>([]);
@@ -173,6 +174,14 @@ export default function CollectionsPage() {
           animate={{ opacity: 1 }}
           transition={{ duration: 0.8, ease: "easeOut" }}
         >
+        {/* Breadcrumb Navigation */}
+        <Breadcrumb 
+          items={[
+            { label: "Home", href: "/home" },
+            { label: "Collections", href: "" }
+          ]}
+        />
+        
         {/* SEO-Optimized Header Section */}
         <div className="text-center py-10 px-6">
           <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">

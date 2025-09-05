@@ -5,6 +5,7 @@ import { GET_COLLECTIONS_WITH_PRODUCTS } from "@/lib/queries";
 import SearchableAllProductsGrid from "@/components/SearchableAllProductsGrid";
 import Breadcrumb from "@/components/Breadcrumb";
 import ViewCollectionsButton from "@/components/ViewCollectionsButton";
+import AnimatedAllProductsHeader from "@/components/AnimatedAllProductsHeader";
 
 import Link from "next/link";
 
@@ -36,20 +37,43 @@ export default async function AllProductsPage() {
       );
     }
 
+    // Helper function to get the primary collection (excluding featured-artwork)
+    const getPrimaryCollection = (product: any, allCollections: any[]) => {
+      if (!product.collections?.edges) return null;
+      
+      const primaryCollection = product.collections.edges.find(
+        (edge: any) => edge.node.handle !== 'featured-artwork'
+      );
+      
+      if (primaryCollection) {
+        return primaryCollection.node;
+      }
+      
+      // If no primary collection found, return the first collection
+      return product.collections.edges[0]?.node || null;
+    };
+
     // Collect all products from all collections
     const allProducts: any[] = [];
     const collections = data.collections.edges.map(e => e.node);
     
     for (const collection of collections) {
       if (collection.products?.edges) {
-        const products = collection.products.edges.map((e: any) => ({
-          ...e.node,
-          collectionHandle: collection.handle,
-          collectionTitle: collection.title,
-          // Check if this collection is limited
-          isFromLimitedCollection: collection.title?.toLowerCase().includes('limited') || 
-                                  collection.handle?.toLowerCase().includes('limited')
-        }));
+        const products = collection.products.edges.map((e: any) => {
+          const product = e.node;
+          const primaryCollection = getPrimaryCollection(product, collections);
+          
+          return {
+            ...product,
+            collectionHandle: primaryCollection?.handle || collection.handle,
+            collectionTitle: primaryCollection?.title || collection.title,
+            // Check if this collection is limited
+            isFromLimitedCollection: primaryCollection?.title?.toLowerCase().includes('limited') || 
+                                    primaryCollection?.handle?.toLowerCase().includes('limited') ||
+                                    collection.title?.toLowerCase().includes('limited') || 
+                                    collection.handle?.toLowerCase().includes('limited')
+          };
+        });
         allProducts.push(...products);
       }
     }
@@ -166,7 +190,7 @@ export default async function AllProductsPage() {
           }}
         />
 
-        <div className="min-h-screen">
+        <div className="min-h-full">
           {/* PC Background */}
           <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
             <div
@@ -199,29 +223,24 @@ export default async function AllProductsPage() {
             <div className="absolute inset-0 bg-pink-100/30"></div>
           </div>
 
-          {/* Main Content */}
-          <div className="relative z-10 min-h-screen">
-            <div className="mx-auto max-w-6xl p-6">
-            {/* Breadcrumb Navigation */}
-            <Breadcrumb 
-              items={[
-                { label: "Collections", href: "/collections" },
-                { label: "All Artwork", href: "" }
-              ]}
-              className="mb-6"
-            />
+          {/* Breadcrumb Navigation */}
+          <Breadcrumb 
+            items={[
+              { label: "Home", href: "/home" },
+              { label: "Collections", href: "/collections" },
+              { label: "All Artwork", href: "" }
+            ]}
+          />
 
-            {/* Page Header */}
-            <div className="text-center mb-12">
-              <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
-                All Artwork
-              </h1>
-              <p className="text-xl text-gray-200 max-w-4xl mx-auto drop-shadow-md leading-relaxed mb-6">
-                Browse our complete catalog of unique, hand-painted, mixed-media art. 
-                Framing options available. Discover spooky-cute pieces from all our collections in one place.
-              </p>
-              <div className="w-48 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto rounded-full"></div>
-            </div>
+          {/* Page Header */}
+          <AnimatedAllProductsHeader 
+            title="All Artwork"
+            description="Browse our complete catalog of unique, hand-painted, mixed-media art. Framing options available. Discover spooky-cute pieces from all our collections in one place."
+          />
+
+          {/* Main Content */}
+          <div className="relative z-10">
+            <div className="max-w-6xl mx-auto px-6 py-12">
             
             {/* View Collections Button */}
             <ViewCollectionsButton />
