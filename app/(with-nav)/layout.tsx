@@ -7,7 +7,7 @@ export default function WithNavLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className="h-[95vh] flex flex-col w-full relative left-0 right-0">
+    <div className="h-[calc(100svh-4rem)] flex flex-col w-full relative left-0 right-0">
       <Navigation />
       <main className="flex-1 w-full">
         {children}

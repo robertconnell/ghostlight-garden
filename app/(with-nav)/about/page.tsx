@@ -74,7 +74,10 @@ export default function AboutPage() {
           </div>
 
           {/* Artist Bio */}
-          <div className="bg-white/80 rounded-2xl p-4 md:p-6 order-1 md:order-2 shadow-lg">
+          <div className="bg-white/80 rounded-2xl p-4 md:p-6 order-1 md:order-2 shadow-lg relative">
+            <div 
+              className="absolute inset-0 bg-[url('/img/brand_logo.png')] bg-cover bg-center rounded-2xl opacity-15"
+            ></div>
             <h2 className="text-4xl md:text-5xl font-alex-brush text-gray-900 mb-6 drop-shadow-lg">from my heart to yours</h2>
             <div className="space-y-4 text-gray-700 leading-relaxed">
               <p>

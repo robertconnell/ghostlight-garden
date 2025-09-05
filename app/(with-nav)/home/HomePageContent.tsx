@@ -107,7 +107,7 @@ export default function HomePageContent() {
       {/* Hero Section */}
       <div 
         className="relative w-full flex flex-col justify-center items-center text-center px-6 py-20"
-        style={{ minHeight: 'calc(100dvh - 4rem)' }}
+        style={{ minHeight: 'calc(100svh - 4rem)' }}
       >
         {/* PC Background */}
         <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
