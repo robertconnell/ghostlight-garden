@@ -46,6 +46,7 @@ export const PRODUCT_BY_HANDLE = /* GraphQL */ `
       title
       handle
       descriptionHtml
+      tags
       priceRange {
         minVariantPrice {
           amount

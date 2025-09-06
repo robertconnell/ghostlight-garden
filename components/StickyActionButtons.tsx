@@ -14,6 +14,7 @@ interface StickyActionButtonsProps {
   selectedOptions: any;
   hasMultipleVariants: boolean;
   allOptions: any[];
+  isSoldOut?: boolean;
 }
 
 export default function StickyActionButtons({
@@ -23,7 +24,8 @@ export default function StickyActionButtons({
   collectionHandle,
   selectedOptions,
   hasMultipleVariants,
-  allOptions
+  allOptions,
+  isSoldOut = false
 }: StickyActionButtonsProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [shouldShowSticky, setShouldShowSticky] = useState(false);
@@ -67,8 +69,19 @@ export default function StickyActionButtons({
     };
   }, [hasMultipleVariants, allOptions, selectedOptions]); // Add dependencies to track option changes
 
-  const isDisabled = hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '');
+  const isDisabled = isSoldOut || (hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== ''));
   const allOptionsSelected = !hasMultipleVariants || allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '');
+  
+  // Dynamic toast message based on priority
+  const getToastMessage = () => {
+    if (isSoldOut) {
+      return "This item is sold out";
+    }
+    if (hasMultipleVariants && !allOptions.every(option => selectedOptions[option.name] && selectedOptions[option.name] !== '')) {
+      return "Please select all options to add to cart";
+    }
+    return "Please select all options to add to cart";
+  };
 
   // Update shouldShowSticky when options change
   useEffect(() => {
@@ -218,7 +231,7 @@ export default function StickyActionButtons({
       {/* Toast Message */}
       <Toast
         key={toastKey}
-        message="Please select all options to add to cart"
+        message={getToastMessage()}
         isVisible={showToast}
         onClose={() => setShowToast(false)}
         clickPosition={clickPosition}

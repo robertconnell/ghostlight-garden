@@ -191,11 +191,21 @@ export default async function ProductPage({ params }: ProductPageProps) {
               <div className="space-y-6">
                 <div>
                   <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-2">{product.title}</h1>
+                  
                   <p className="text-xl text-gray-200 drop-shadow-md">
                     From the <Link href={`/collections/${resolvedParams.collection}`} className="text-purple-300 hover:text-purple-900">
                       {collection.title}
                     </Link> collection
                   </p>
+
+                  {product.variants?.edges?.every((edge: any) => !edge.node.availableForSale) && (
+                    <div className="my-3">
+                      <span className="inline-block bg-red-800 text-white px-3 py-1 rounded-full text-md font-semibold drop-shadow-md">
+                        Sold Out
+                      </span>
+                    </div>
+                  )}
+
                 </div>
 
                 {product.description && (

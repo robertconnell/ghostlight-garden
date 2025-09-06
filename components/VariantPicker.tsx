@@ -14,6 +14,7 @@ interface VariantPickerProps {
     handle?: string; // Add handle to the interface
     images?: { edges: { node: { url: string; altText?: string } }[] };
     descriptionHtml?: string;
+    tags?: string[];
   };
   collectionHandle?: string;
 }
@@ -21,6 +22,17 @@ interface VariantPickerProps {
 export default function VariantPicker({ product, collectionHandle }: VariantPickerProps) {
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [quantity, setQuantity] = useState(1);
+  
+  // Check if product is sold out by checking if all variants are unavailable
+  const isSoldOut = product.variants?.edges?.every((edge: any) => !edge.node.availableForSale) || false;
+  
+  // Debug logging to see variant availability
+  console.log('Product variants availability:', product.variants?.edges?.map((edge: any) => ({
+    title: edge.node.title,
+    availableForSale: edge.node.availableForSale,
+    quantityAvailable: edge.node.quantityAvailable
+  })));
+  console.log('Is sold out:', isSoldOut);
 
   // Get all options (Frame, Gold Leaf, etc.)
   const allOptions = product.options;
@@ -252,6 +264,7 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
           selectedOptions={selectedOptions}
           hasMultipleVariants={hasMultipleVariants}
           allOptions={allOptions}
+          isSoldOut={isSoldOut}
         />
       ) : (
         // Fallback: show buttons for first variant if no match
@@ -264,6 +277,7 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
             selectedOptions={{}}
             hasMultipleVariants={hasMultipleVariants}
             allOptions={allOptions}
+            isSoldOut={isSoldOut}
           />
         )
       )}
