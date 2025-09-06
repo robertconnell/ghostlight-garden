@@ -240,12 +240,13 @@ export default async function AllProductsPage() {
 
           {/* Main Content */}
           <div className="relative z-10">
-            <div className="max-w-6xl mx-auto px-6 py-12">
+            <div className="max-w-6xl mx-auto px-6">
             
             {/* View Collections Button */}
             <ViewCollectionsButton />
 
             {/* Products Grid */}
+            <div className="py-12">
             {sortedProducts.length > 0 ? (
               <Suspense fallback={
                 <div className="text-center py-12">
@@ -268,6 +269,7 @@ export default async function AllProductsPage() {
                 </Link>
               </div>
             )}
+            </div>
             </div>
           </div>
         </div>
