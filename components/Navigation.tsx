@@ -62,7 +62,7 @@ export default function Navigation() {
       <div className="w-full px-6">
         <div className="flex items-center justify-between h-16">
           {/* Logo/Brand */}
-          <Link href="/home" className="relative text-3xl font-alex-brush text-gray-900 hover:text-gray-700 transition-colors">
+          <Link href="/home" className="relative text-3xl font-alex-brush text-gray-900 hover:text-purple-900 transition-colors">
             ghostlight garden
             <img 
               src="/img/logo_accent_transparent.png" 
@@ -96,7 +96,7 @@ export default function Navigation() {
             <div className="relative">
               <button
                 onClick={handleSearchToggle}
-                className="p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer"
+                className="p-2 text-gray-600 hover:text-purple-900 transition-colors cursor-pointer"
                 aria-label="Search artwork"
               >
                 <svg 
@@ -129,7 +129,7 @@ export default function Navigation() {
             <div className="relative" ref={cartRef}>
               <button
                 onClick={handleCartToggle}
-                className="relative p-2 text-gray-600 hover:text-gray-900 transition-colors cursor-pointer group"
+                className="relative p-2 text-gray-600 hover:text-purple-900 transition-colors cursor-pointer group"
                 aria-label="Shopping cart"
               >
                 <svg 
@@ -201,7 +201,7 @@ export default function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={handleMobileMenuToggle}
-              className="md:hidden p-2 text-gray-600 hover:text-gray-900 transition-colors"
+              className="md:hidden p-2 text-gray-600 hover:text-purple-900 transition-colors"
               aria-label="Toggle mobile menu"
             >
               <svg 

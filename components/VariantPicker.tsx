@@ -25,14 +25,6 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
   
   // Check if product is sold out by checking if all variants are unavailable
   const isSoldOut = product.variants?.edges?.every((edge: any) => !edge.node.availableForSale) || false;
-  
-  // Debug logging to see variant availability
-  console.log('Product variants availability:', product.variants?.edges?.map((edge: any) => ({
-    title: edge.node.title,
-    availableForSale: edge.node.availableForSale,
-    quantityAvailable: edge.node.quantityAvailable
-  })));
-  console.log('Is sold out:', isSoldOut);
 
   // Get all options (Frame, Gold Leaf, etc.)
   const allOptions = product.options;
