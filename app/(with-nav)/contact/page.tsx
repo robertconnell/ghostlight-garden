@@ -14,6 +14,7 @@ export default function ContactPage() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -31,8 +32,13 @@ export default function ContactPage() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setSubmitStatus("success");
+        setShowSuccess(true);
         setFormData({ name: "", email: "", subject: "", message: "" });
+        
+        // Reset success state after 3 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+        }, 3000);
       } else {
         setSubmitStatus("error");
         console.error('Contact form error:', result.error);
@@ -77,11 +83,6 @@ export default function ContactPage() {
           <div className="bg-white rounded-2xl shadow-lg p-8">
             <h2 className="text-3xl font-semibold text-gray-900 mb-6">Send me a Message</h2>
             
-            {submitStatus === "success" && (
-              <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-                <p className="text-green-800">Thank you! Your message has been sent successfully.</p>
-              </div>
-            )}
             
             {submitStatus === "error" && (
               <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -101,7 +102,7 @@ export default function ContactPage() {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
                   placeholder="Your name"
                 />
               </div>
@@ -117,7 +118,7 @@ export default function ContactPage() {
                   value={formData.email}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
                   placeholder="your.email@example.com"
                 />
               </div>
@@ -133,7 +134,7 @@ export default function ContactPage() {
                   value={formData.subject}
                   onChange={handleChange}
                   required
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
                   placeholder="What's this about?"
                 />
               </div>
@@ -149,17 +150,21 @@ export default function ContactPage() {
                   onChange={handleChange}
                   required
                   rows={5}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900"
-                  placeholder="Your message matters. Drop me a note and I’ll float back to you within 24-48 hours."
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
+                  placeholder="Your message matters. Drop me a note and I'll float back to you within 24-48 hours."
                 />
               </div>
 
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-lg px-4 py-3 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font"
+                className={`w-full rounded-lg px-4 py-3 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font ${
+                  showSuccess 
+                    ? "bg-green-600 cursor-default shadow-lg" 
+                    : "bg-[#8A6D9B] hover:bg-[#8A6D9B]/90"
+                }`}
               >
-                {isSubmitting ? "Sending..." : "Send Message"}
+                {showSuccess ? "Message Sent!" : isSubmitting ? "Sending..." : "Send Message"}
               </button>
             </form>
           </div>
@@ -182,7 +187,12 @@ export default function ContactPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800 mb-1">Email</h3>
-                  <p className="text-gray-700">info@ghostlightgarden.com</p>
+                  <a 
+                    href="mailto:info@ghostlightgarden.com"
+                    className="text-gray-700 hover:text-purple-900 transition-colors"
+                  >
+                    info@ghostlightgarden.com
+                  </a>
                 </div>
               </div>
 
@@ -202,7 +212,7 @@ export default function ContactPage() {
                       className="text-gray-600 hover:text-purple-900 transition-colors"
                       aria-label="Follow us on TikTok"
                     >
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12.525.02c1.31-.02 2.61-.01 3.91-.02.08 1.53.63 3.09 1.75 4.17 1.12 1.11 2.7 1.62 4.24 1.79v4.03c-1.44-.05-2.89-.35-4.2-.97-.57-.26-1.1-.59-1.62-.93-.01 2.92.01 5.84-.02 8.75-.08 1.4-.54 2.79-1.35 3.94-1.31 1.92-3.58 3.17-5.91 3.21-1.43.05-2.83-.31-4.08-1.03-2.26-1.19-3.44-3.37-3.65-5.71-.02-.5-.03-1-.01-1.49.18-1.9 1.12-3.72 2.58-4.96 1.66-1.44 3.98-2.13 6.15-1.72.02 1.48-.04 2.96-.04 4.44-.99-.32-2.15-.23-3.02.37-.63.41-1.11 1.04-1.36 1.75-.21.51-.15 1.07-.14 1.61.24 1.64 1.82 3.02 3.5 2.87 1.12-.01 2.19-.66 2.77-1.61.19-.33.4-.67.41-1.06.1-1.79.06-3.57.07-5.36.01-4.03-.01-8.05.02-12.07z"/>
                       </svg>
                     </a>
@@ -213,7 +223,7 @@ export default function ContactPage() {
                       className="text-gray-600 hover:text-purple-900 transition-colors"
                       aria-label="Follow us on Instagram"
                     >
-                      <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                      <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
                         <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/>
                       </svg>
                     </a>

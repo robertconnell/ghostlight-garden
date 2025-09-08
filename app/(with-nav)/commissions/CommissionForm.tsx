@@ -13,6 +13,7 @@ export default function CommissionForm() {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<"idle" | "success" | "error">("idle");
+  const [showSuccess, setShowSuccess] = useState(false);
 
   // Check if all required fields are filled (excluding additionalNotes)
   const isFormValid = formData.name.trim() !== "" && 
@@ -37,15 +38,20 @@ export default function CommissionForm() {
       const result = await response.json();
 
       if (response.ok && result.success) {
-        setSubmitStatus("success");
-        setFormData({ 
-          name: "", 
-          email: "", 
-          phone: "", 
-          description: "", 
-          additionalNotes: "",
-          termsAccepted: false
-        });
+        setShowSuccess(true);
+        
+        // Reset success state and clear form after 3 seconds
+        setTimeout(() => {
+          setShowSuccess(false);
+          setFormData({ 
+            name: "", 
+            email: "", 
+            phone: "", 
+            description: "", 
+            additionalNotes: "",
+            termsAccepted: false
+          });
+        }, 3000);
         
         // Track commission request submission
         if (typeof window !== 'undefined' && window.gtag) {
@@ -81,11 +87,6 @@ export default function CommissionForm() {
         <p className="text-lg text-purple-400 mb-6 rounded-lg p-4">
           Tell me your dream piece. I'll reply with a quote and timeline within 1-2 business days.
         </p>
-      {submitStatus === "success" && (
-        <div className="mb-6 p-4 bg-green-50 border border-green-200 rounded-lg">
-          <p className="text-green-800">Thank you! Your commission request has been sent successfully.</p>
-        </div>
-      )}
       
       {submitStatus === "error" && (
         <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg">
@@ -105,7 +106,7 @@ export default function CommissionForm() {
             value={formData.name}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
             placeholder="Your name"
           />
         </div>
@@ -121,7 +122,7 @@ export default function CommissionForm() {
             value={formData.email}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
             placeholder="your.email@example.com"
           />
         </div>
@@ -137,7 +138,7 @@ export default function CommissionForm() {
             value={formData.phone}
             onChange={handleChange}
             required
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
             placeholder="(555) 123-4567"
           />
         </div>
@@ -153,7 +154,7 @@ export default function CommissionForm() {
             onChange={handleChange}
             required
             rows={5}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
             placeholder="Describe your vision, size preferences, project type (pet memorial, pet portrait, custom gloomie, etc.), mood, and any specific details..."
           />
         </div>
@@ -168,7 +169,7 @@ export default function CommissionForm() {
             value={formData.additionalNotes}
             onChange={handleChange}
             rows={3}
-            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900"
+            className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent resize-none text-gray-900 transition-all duration-200 hover:border-purple-300 hover:shadow-md"
             placeholder="Any other details, requirements, or questions you have..."
           />
         </div>
@@ -195,10 +196,14 @@ export default function CommissionForm() {
 
         <button
           type="submit"
-          disabled={isSubmitting || !isFormValid}
-          className="w-full rounded-lg px-4 py-3 bg-[#8A6D9B] hover:bg-[#8A6D9B]/90 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font"
+          disabled={isSubmitting || (!isFormValid && !showSuccess)}
+          className={`w-full rounded-lg px-4 py-3 border-1 border-white text-white font-medium transition-all duration-300 transform hover:scale-[1.02] active:scale-[0.98] shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed button-font ${
+            showSuccess 
+              ? "bg-green-600 cursor-default shadow-lg" 
+              : "bg-[#8A6D9B] hover:bg-[#8A6D9B]/90"
+          }`}
         >
-          {isSubmitting ? "Sending Request..." : "Submit Commission Request"}
+          {showSuccess ? "Request Submitted!" : isSubmitting ? "Sending Request..." : "Submit Commission Request"}
         </button>
       </form>
     </div>

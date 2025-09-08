@@ -190,8 +190,12 @@ export default function CommissionsPage() {
                   </div>
                   <div>
                     <h4 className="text-lg font-semibold text-gray-900 mb-1">Email Us</h4>
-                    <p className="text-gray-600">info@ghostlightgarden.com</p>
-                    <p className="text-sm text-gray-500">We typically respond within 72 hours</p>
+                    <a 
+                      href="mailto:info@ghostlightgarden.com"
+                      className="text-gray-600 hover:text-purple-900 transition-colors"
+                    >
+                      info@ghostlightgarden.com
+                    </a>
                   </div>
                 </div>
               </div>
