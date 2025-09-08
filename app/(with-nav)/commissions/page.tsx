@@ -134,7 +134,7 @@ export default function CommissionsPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Updates</h3>
-                    <p className="text-gray-600">We'll create your custom piece, keeping you updated with progress. 1-2 revisions allowed.</p>
+                    <p className="text-gray-600">We'll create your custom piece, keeping you updated on progress. 1-2 revisions allowed.</p>
                   </div>
                 </div>
 
