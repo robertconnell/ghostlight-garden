@@ -44,6 +44,18 @@ export default function AnimatedAllProductsGrid({ products, searchTerm }: Animat
           <Link 
             href={`/collections/${product.collectionHandle}/${product.handle}`}
             className="group block"
+            onClick={() => {
+              // Set session storage flag to indicate user came from /collections/all
+              sessionStorage.setItem('fromAll', 'true');
+              console.log('Debug - Set fromAll flag in session storage');
+              console.log('Debug - Session storage value:', sessionStorage.getItem('fromAll'));
+              
+              // Clear the flag after 30 seconds to prevent persistence
+              setTimeout(() => {
+                sessionStorage.removeItem('fromAll');
+                console.log('Debug - Cleared fromAll flag after timeout');
+              }, 30000);
+            }}
           >
             <div className="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 relative">
               {/* Limited Collection Gold Star */}

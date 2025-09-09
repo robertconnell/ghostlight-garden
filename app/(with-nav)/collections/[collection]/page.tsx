@@ -101,14 +101,14 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
       };
     });
     
-    // Sort products: limited collection products first, then alphabetically by title
+    // Sort products: limited collection products first, then maintain original order
     const sortedProducts = productsWithLimitedStatus.sort((a: any, b: any) => {
       // First priority: limited collection products
       if (a.isFromLimitedCollection && !b.isFromLimitedCollection) return -1;
       if (!a.isFromLimitedCollection && b.isFromLimitedCollection) return 1;
       
-      // If both are from limited collections or both are not, sort alphabetically by title
-      return (a.title || '').localeCompare(b.title || '');
+      // If both are from limited collections or both are not, maintain original order (no sorting)
+      return 0;
     });
 
     // Background component to ensure consistency across all states

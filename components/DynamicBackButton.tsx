@@ -1,0 +1,72 @@
+'use client';
+
+import { useEffect, useState } from 'react';
+import BackToCollectionsButton from './BackToCollectionsButton';
+
+interface DynamicBackButtonProps {
+  primaryCollection: {
+    handle: string;
+    title: string;
+  };
+}
+
+export default function DynamicBackButton({ primaryCollection }: DynamicBackButtonProps) {
+  const [backButtonProps, setBackButtonProps] = useState({
+    href: `/collections/${primaryCollection.handle}`,
+    text: `Back to ${primaryCollection.title}`
+  });
+
+  useEffect(() => {
+    // Check multiple sources for referrer information
+    const referrer = document.referrer;
+    const currentUrl = window.location.href;
+    
+    // Check URL parameters first
+    const urlParams = new URLSearchParams(window.location.search);
+    const fromAll = urlParams.get('from') === 'all';
+    
+    // Check session storage - this is the most reliable method
+    const fromAllStorage = sessionStorage.getItem('fromAll') === 'true';
+    
+    // Only check referrer if it's a direct navigation (not client-side routing)
+    const referrerFromAll = referrer && referrer.includes('/collections/all') && !referrer.includes(window.location.origin);
+    
+    console.log('=== DYNAMIC BACK BUTTON DEBUG ===');
+    console.log('Debug - Referrer:', referrer);
+    console.log('Debug - Current URL:', currentUrl);
+    console.log('Debug - URL param from=all:', fromAll);
+    console.log('Debug - Session storage fromAll:', fromAllStorage);
+    console.log('Debug - Referrer contains /collections/all:', referrerFromAll);
+    console.log('Debug - Primary Collection:', primaryCollection);
+    
+    // Only use session storage method for reliability
+    if (fromAllStorage) {
+      console.log('Debug - Setting back to All (session storage)');
+      setBackButtonProps({
+        href: '/collections/all',
+        text: 'Back to All'
+      });
+      // Clear the session storage flag after a short delay to ensure it's detected
+      setTimeout(() => {
+        sessionStorage.removeItem('fromAll');
+        console.log('Debug - Cleared fromAll flag after detection');
+      }, 100);
+    } else {
+      console.log('Debug - Using default collection button');
+      setBackButtonProps({
+        href: `/collections/${primaryCollection.handle}`,
+        text: `Back to ${primaryCollection.title}`
+      });
+    }
+    console.log('=== END DEBUG ===');
+  }, [primaryCollection]);
+
+  // Note: Session storage cleanup is handled in the main useEffect with setTimeout
+
+  return (
+    <BackToCollectionsButton 
+      href={backButtonProps.href}
+      text={backButtonProps.text}
+    />
+  );
+}

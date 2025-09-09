@@ -16,7 +16,7 @@ export default function Breadcrumb({ items, className = "" }: BreadcrumbProps) {
   return (
     <div className={`relative z-10 ${className}`}>
       <div className="max-w-6xl mx-auto px-6 mt-8">
-        <nav className="flex items-center space-x-2 text-md text-gray-100">
+        <nav className="flex items-center space-x-2 text-md text-gray-100 font-merriweather">
           {items.map((item, index) => (
             <div key={index} className="flex items-center">
               {index > 0 && (

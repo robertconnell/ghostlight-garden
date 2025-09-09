@@ -134,6 +134,25 @@ body {
   font-family: var(--font-alex-brush), cursive;
 }
 
+/* Global font for all paragraph tags */
+p, span {
+  font-family: var(--font-merriweather), serif;
+}
+
+/* Global font for links, forms, and variant picker */
+a, input, textarea, select, button, label, .variant-picker, .variant-picker * {
+  font-family: var(--font-merriweather), serif;
+}
+
+/* Global font for all heading tags */
+h1 {
+  font-family: var(--font-cinzel), serif;
+}
+
+h2, h3 {
+  font-family: var(--font-cinzel), serif;
+}
+
 /* 🎨 Custom glow effects */
 .mobile-button-glow {
   animation: glowFadeIn 3s ease-in-out infinite;

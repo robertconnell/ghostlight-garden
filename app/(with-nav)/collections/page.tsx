@@ -43,10 +43,9 @@ export default function CollectionsPage() {
               
               if (aIsLimited && !bIsLimited) return -1; // a first
               if (!aIsLimited && bIsLimited) return 1;  // b first
-              if (aIsLimited && bIsLimited) return 0;   // both limited, maintain order
               
-              // If neither is limited, sort alphabetically by title
-              return (a.title || '').localeCompare(b.title || '');
+              // If both are limited or both are not limited, maintain original order (no sorting)
+              return 0;
             });
           
           setCollections(filteredAndSortedCollections);

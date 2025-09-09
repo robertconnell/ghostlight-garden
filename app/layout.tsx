@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto, Alex_Brush } from "next/font/google";
+import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto, Alex_Brush, Merriweather } from "next/font/google";
 import { CartProvider } from "@/components/CartContext";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 import ConditionalSpacer from "@/components/ConditionalSpacer";
@@ -51,6 +51,13 @@ const alexBrush = Alex_Brush({
   variable: "--font-alex-brush",
   subsets: ["latin"],
   weight: ["400"],
+  display: "swap",
+});
+
+const merriweather = Merriweather({
+  variable: "--font-merriweather",
+  subsets: ["latin"],
+  weight: ["300", "400", "700", "900"],
   display: "swap",
 });
 
@@ -126,7 +133,7 @@ export default function RootLayout({
         <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
       </head>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} ${alexBrush.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${ebGaramond.variable} ${cinzel.variable} ${pinyonScript.variable} ${aboreto.variable} ${alexBrush.variable} ${merriweather.variable} antialiased`}
       >
         <StructuredData />
         <GoogleAnalytics />

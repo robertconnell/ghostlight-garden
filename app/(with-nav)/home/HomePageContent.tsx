@@ -102,6 +102,19 @@ export default function HomePageContent() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const scrollToFeaturedArtwork = () => {
+    const featuredSection = document.getElementById('featured-artwork');
+    if (featuredSection) {
+      const navHeight = 0; // Approximate navigation bar height
+      const elementPosition = featuredSection.offsetTop;
+      
+      window.scrollTo({
+        top: elementPosition,
+        behavior: 'smooth'
+      });
+    }
+  };
+
   return (
     <div className="min-h-screen w-full relative">
       {/* Hero Section */}
@@ -156,8 +169,9 @@ export default function HomePageContent() {
             y: showScrollPrompt ? 0 : 20 
           }}
           transition={{ duration: 0.8, ease: "easeOut" }}
+          onClick={scrollToFeaturedArtwork}
         >
-          <div className="flex flex-col items-center text-white drop-shadow-lg">
+          <div className="flex flex-col items-center text-white drop-shadow-lg hover:text-gray-200 transition-colors duration-200">
             <span className="text-lg mb-2">scroll to see more</span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
@@ -172,7 +186,7 @@ export default function HomePageContent() {
       </div>
 
       {/* White Content Section - starts immediately after fog */}
-      <div className="relative bg-white flex-1 flex flex-col">
+      <div id="featured-artwork" className="relative bg-white flex-1 flex flex-col">
         {/* Content */}
         <div className="relative pt-6 w-full flex-1">
           {/* Featured Products Section */}
@@ -186,7 +200,7 @@ export default function HomePageContent() {
               <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 drop-shadow-md ghostlight-font">
                 Featured Artwork
               </h2>
-              <p className="text-md text-gray-600 max-w-2xl mx-auto drop-shadow-sm">
+              <p className="text-md text-gray-600 max-w-2xl mx-auto">
                 Explore our curated selection of unique, hand-painted pieces that bring spooky-cute charm to any space.
               </p>
             </motion.div>

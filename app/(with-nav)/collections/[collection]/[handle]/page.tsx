@@ -10,6 +10,8 @@ import VariantPicker from "@/components/VariantPicker";
 import ProductImageSlider from "@/components/ProductImageSlider";
 import Breadcrumb from "@/components/Breadcrumb";
 import BackToCollectionsButton from "@/components/BackToCollectionsButton";
+import DynamicBackButton from "@/components/DynamicBackButton";
+import DynamicBreadcrumb from "@/components/DynamicBreadcrumb";
 
 
 interface ProductPageProps {
@@ -156,22 +158,15 @@ export default async function ProductPage({ params }: ProductPageProps) {
         <Background />
         
         {/* Breadcrumb Navigation */}
-        <Breadcrumb 
-          items={[
-            { label: "Home", href: "/home" },
-            { label: "Collections", href: "/collections" },
-            { label: primaryCollection.title, href: `/collections/${primaryCollection.handle}` },
-            { label: product.title, href: "" }
-          ]}
+        <DynamicBreadcrumb 
+          primaryCollection={primaryCollection}
+          productTitle={product.title}
         />
 
         {/* Back to Collection Button */}
         <div className="relative z-10">
           <div className="max-w-6xl mx-auto px-6 py-6 mt-8">
-            <BackToCollectionsButton 
-              href={`/collections/${primaryCollection.handle}`}
-              text={`Back to ${primaryCollection.title}`}
-            />
+            <DynamicBackButton primaryCollection={primaryCollection} />
           </div>
         </div>
 
