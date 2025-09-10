@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, EB_Garamond, Cinzel, Pinyon_Script, Aboreto, Alex_Brush, Merriweather } from "next/font/google";
 import { CartProvider } from "@/components/CartContext";
+import { PricingModalProvider } from "@/components/PricingModalContext";
 import ConditionalNavigation from "@/components/ConditionalNavigation";
 import ConditionalSpacer from "@/components/ConditionalSpacer";
 import StructuredData from "@/components/StructuredData";
@@ -139,9 +140,11 @@ export default function RootLayout({
         <GoogleAnalytics />
         <ImageProtection />
         <CartProvider>
-          <ScrollToTop />
-          <ConditionalSpacer />
-          {children}
+          <PricingModalProvider>
+            <ScrollToTop />
+            <ConditionalSpacer />
+            {children}
+          </PricingModalProvider>
         </CartProvider>
       </body>
     </html>

@@ -5,6 +5,8 @@ import { useState, useEffect } from "react";
 import AddToCartButton from "./AddToCartButton";
 import BuyNowButton from "./BuyNowButton";
 import StickyActionButtons from "./StickyActionButtons";
+import PricingModal from "./PricingModal";
+import { usePricingModal } from "./PricingModalContext";
 
 interface VariantPickerProps {
   product: {
@@ -20,6 +22,7 @@ interface VariantPickerProps {
 }
 
 export default function VariantPicker({ product, collectionHandle }: VariantPickerProps) {
+  const { isPricingModalOpen, openPricingModal, closePricingModal } = usePricingModal();
   const [selectedOptions, setSelectedOptions] = useState<Record<string, string>>({});
   const [quantity, setQuantity] = useState(1);
   
@@ -162,6 +165,16 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
         {formatPrice(selectedPrice)}
       </div>
 
+      {/* Pricing Guide Link */}
+      <div className="mt-2">
+        <button
+          onClick={openPricingModal}
+          className="text-purple-600 hover:text-purple-800 text-sm font-medium underline transition-colors"
+        >
+          View Pricing Guide
+        </button>
+      </div>
+
       {/* Product Description */}
       {product.descriptionHtml && (
         <div
@@ -257,6 +270,7 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
           hasMultipleVariants={hasMultipleVariants}
           allOptions={allOptions}
           isSoldOut={isSoldOut}
+          isPricingModalOpen={isPricingModalOpen}
         />
       ) : (
         // Fallback: show buttons for first variant if no match
@@ -270,9 +284,16 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
             hasMultipleVariants={hasMultipleVariants}
             allOptions={allOptions}
             isSoldOut={isSoldOut}
+            isPricingModalOpen={isPricingModalOpen}
           />
         )
       )}
+
+      {/* Pricing Modal */}
+      <PricingModal 
+        isOpen={isPricingModalOpen}
+        onClose={closePricingModal}
+      />
     </div>
   );
 }

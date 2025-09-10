@@ -2,23 +2,31 @@
 
 import Link from "next/link";
 import { useCart } from "./CartContext";
+import { usePricingModal } from "./PricingModalContext";
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import CartDisplay from "./CartDisplay";
 import SearchModal from "./SearchModal";
+import PricingModal from "./PricingModal";
 
 export default function Navigation() {
   const { totalItems } = useCart();
+  const { isPricingModalOpen, openPricingModal, closePricingModal } = usePricingModal();
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isCollectionsSubmenuOpen, setIsCollectionsSubmenuOpen] = useState(false);
   const cartRef = useRef<HTMLDivElement>(null);
+  const collectionsRef = useRef<HTMLDivElement>(null);
 
   // Close cart when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
       if (cartRef.current && !cartRef.current.contains(event.target as Node)) {
         setIsCartOpen(false);
+      }
+      if (collectionsRef.current && !collectionsRef.current.contains(event.target as Node)) {
+        setIsCollectionsSubmenuOpen(false);
       }
     }
 
@@ -33,6 +41,8 @@ export default function Navigation() {
     } else {
       setIsSearchOpen(false);
       setIsMobileMenuOpen(false);
+      setIsCollectionsSubmenuOpen(false);
+      closePricingModal();
       setIsCartOpen(true);
     }
   };
@@ -43,6 +53,8 @@ export default function Navigation() {
     } else {
       setIsCartOpen(false);
       setIsMobileMenuOpen(false);
+      setIsCollectionsSubmenuOpen(false);
+      closePricingModal();
       setIsSearchOpen(true);
     }
   };
@@ -53,8 +65,27 @@ export default function Navigation() {
     } else {
       setIsCartOpen(false);
       setIsSearchOpen(false);
+      setIsCollectionsSubmenuOpen(false);
+      closePricingModal();
       setIsMobileMenuOpen(true);
     }
+  };
+
+  const handleCollectionsSubmenuToggle = () => {
+    if (isCollectionsSubmenuOpen) {
+      setIsCollectionsSubmenuOpen(false);
+    } else {
+      setIsCartOpen(false);
+      setIsSearchOpen(false);
+      setIsMobileMenuOpen(false);
+      closePricingModal();
+      setIsCollectionsSubmenuOpen(true);
+    }
+  };
+
+  const handlePricingModalOpen = () => {
+    openPricingModal();
+    setIsCollectionsSubmenuOpen(false);
   };
 
   return (
@@ -76,9 +107,52 @@ export default function Navigation() {
             <Link href="/home" className="text-gray-600 hover:text-purple-900 transition-colors">
               Home
             </Link>
-            <Link href="/collections" className="text-gray-600 hover:text-purple-900 transition-colors">
-              Collections
-            </Link>
+            
+            {/* Collections Submenu */}
+            <div className="relative" ref={collectionsRef}>
+              <button
+                onClick={handleCollectionsSubmenuToggle}
+                className="text-gray-600 hover:text-purple-900 transition-colors flex items-center space-x-1"
+              >
+                <span>Collections</span>
+                <svg 
+                  className={`w-4 h-4 transition-transform ${isCollectionsSubmenuOpen ? 'rotate-180' : ''}`}
+                  fill="none" 
+                  stroke="currentColor" 
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+
+              {/* Collections Submenu Dropdown */}
+              <AnimatePresence>
+                {isCollectionsSubmenuOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.95, y: -10 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.95, y: -10 }}
+                    transition={{ duration: 0.2 }}
+                    className="absolute top-full left-0 mt-2 w-48 bg-white/95 backdrop-blur-sm border border-gray-200 rounded-lg shadow-lg z-[10000] overflow-hidden"
+                  >
+                    <Link 
+                      href="/collections" 
+                      className="block px-4 py-3 text-gray-600 hover:text-purple-900 hover:bg-gray-50 transition-colors"
+                      onClick={() => setIsCollectionsSubmenuOpen(false)}
+                    >
+                      Collections
+                    </Link>
+                    <button
+                      onClick={handlePricingModalOpen}
+                      className="block w-full text-left px-4 py-3 text-gray-600 hover:text-purple-900 hover:bg-gray-50 transition-colors"
+                    >
+                      Pricing
+                    </button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </div>
+
             <Link href="/commissions" className="text-gray-600 hover:text-purple-900 transition-colors">
               Commissions
             </Link>
@@ -254,13 +328,58 @@ export default function Navigation() {
                   >
                     Home
                   </Link>
-                  <Link 
-                    href="/collections" 
-                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
-                    onClick={() => setIsMobileMenuOpen(false)}
-                  >
-                    Collections
-                  </Link>
+                  
+                  {/* Mobile Collections Submenu */}
+                  <div className="space-y-1">
+                    <button
+                      onClick={() => setIsCollectionsSubmenuOpen(!isCollectionsSubmenuOpen)}
+                      className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50 w-full text-left flex items-center justify-between"
+                    >
+                      <span>Collections</span>
+                      <svg 
+                        className={`w-4 h-4 transition-transform ${isCollectionsSubmenuOpen ? 'rotate-180' : ''}`}
+                        fill="none" 
+                        stroke="currentColor" 
+                        viewBox="0 0 24 24"
+                      >
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                      </svg>
+                    </button>
+                    
+                    {/* Mobile Collections Submenu Items */}
+                    <AnimatePresence>
+                      {isCollectionsSubmenuOpen && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.2 }}
+                          className="overflow-hidden"
+                        >
+                          <Link 
+                            href="/collections" 
+                            className="text-gray-600 hover:text-purple-900 transition-colors px-8 py-2 block rounded-lg hover:bg-gray-50"
+                            onClick={() => {
+                              setIsMobileMenuOpen(false);
+                              setIsCollectionsSubmenuOpen(false);
+                            }}
+                          >
+                            Collections
+                          </Link>
+                          <button
+                            onClick={() => {
+                              handlePricingModalOpen();
+                              setIsMobileMenuOpen(false);
+                            }}
+                            className="text-gray-600 hover:text-purple-900 transition-colors px-8 py-2 block rounded-lg hover:bg-gray-50 w-full text-left"
+                          >
+                            Pricing
+                          </button>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                  
                   <Link 
                     href="/commissions" 
                     className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
@@ -288,6 +407,12 @@ export default function Navigation() {
           )}
         </AnimatePresence>
       </div>
+
+      {/* Pricing Modal */}
+      <PricingModal 
+        isOpen={isPricingModalOpen}
+        onClose={closePricingModal}
+      />
     </nav>
   );
 }

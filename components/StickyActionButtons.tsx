@@ -15,6 +15,7 @@ interface StickyActionButtonsProps {
   hasMultipleVariants: boolean;
   allOptions: any[];
   isSoldOut?: boolean;
+  isPricingModalOpen?: boolean;
 }
 
 export default function StickyActionButtons({
@@ -25,7 +26,8 @@ export default function StickyActionButtons({
   selectedOptions,
   hasMultipleVariants,
   allOptions,
-  isSoldOut = false
+  isSoldOut = false,
+  isPricingModalOpen = false
 }: StickyActionButtonsProps) {
   const [isVisible, setIsVisible] = useState(true);
   const [shouldShowSticky, setShouldShowSticky] = useState(false);
@@ -163,7 +165,7 @@ export default function StickyActionButtons({
       </div>
 
       {/* Mobile: Sticky bottom buttons - rendered via portal */}
-      {typeof window !== 'undefined' && createPortal(
+      {typeof window !== 'undefined' && !isPricingModalOpen && createPortal(
         <div 
           className={`md:hidden fixed bottom-0 left-0 right-0 transition-transform duration-300 sticky-action-buttons ${
             isVisible ? 'translate-y-0' : 'translate-y-full'
