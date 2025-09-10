@@ -172,7 +172,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
         {/* Product Details */}
         <div className="relative z-10">
-          <div className="max-w-6xl mx-auto px-6 py-12">
+          <div className="max-w-6xl mx-auto px-4 py-12">
             <div className="grid gap-12 lg:grid-cols-2">
               {/* Product Image */}
               <div className="space-y-4">
@@ -203,12 +203,6 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                 </div>
 
-                {product.description && (
-                  <div>
-                    <h2 className="text-lg font-semibold text-gray-900 mb-2">Description</h2>
-                    <div className="prose text-gray-200" dangerouslySetInnerHTML={{ __html: product.description }} />
-                  </div>
-                )}
 
                 {/* Variants - Show for all products since they all have variants */}
                 <div>

@@ -178,7 +178,7 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
       {/* Product Description */}
       {product.descriptionHtml && (
         <div
-          className="prose text-base text-gray-100"
+          className="prose text-base text-gray-100 drop-shadow-md"
           dangerouslySetInnerHTML={{ __html: product.descriptionHtml }}
         />
       )}
