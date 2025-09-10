@@ -103,7 +103,7 @@ export default function CommissionsPage() {
               <div>
                 <h2 className="text-3xl font-semibold text-gray-900 mb-6">How It Works</h2>
                 <p className="text-gray-600 leading-relaxed mb-8">
-                  Commissioning custom art is a collaborative process. Here's what you can expect when working with us:
+                  Commissioning custom art is a collaborative process. Here's what you can expect when working with me:
                 </p>
               </div>
 
@@ -114,7 +114,7 @@ export default function CommissionsPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Initial Consultation</h3>
-                    <p className="text-gray-600">We confirm your concept, size, budget, and timeline by email or short phone call.</p>
+                    <p className="text-gray-600">I confirm your concept, size, budget, and timeline by email or short phone call.</p>
                   </div>
                 </div>
 
@@ -134,7 +134,7 @@ export default function CommissionsPage() {
                   </div>
                   <div>
                     <h3 className="text-lg font-semibold text-gray-900 mb-1">Updates</h3>
-                    <p className="text-gray-600">We'll create your custom piece, keeping you updated on progress. 1-2 revisions allowed.</p>
+                    <p className="text-gray-600">I'll create your custom piece, keeping you updated on progress. 1-2 revisions allowed.</p>
                   </div>
                 </div>
 
@@ -189,7 +189,7 @@ export default function CommissionsPage() {
                     </svg>
                   </div>
                   <div>
-                    <h4 className="text-lg font-semibold text-gray-900 mb-1">Email Us</h4>
+                    <h4 className="text-lg font-semibold text-gray-900 mb-1">Email Me</h4>
                     <a 
                       href="mailto:info@ghostlightgarden.com"
                       className="text-gray-600 hover:text-purple-900 transition-colors"
