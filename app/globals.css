@@ -135,7 +135,7 @@ body {
 }
 
 /* Global font for all paragraph tags */
-p, span {
+p, span, li {
   font-family: var(--font-merriweather), serif;
 }
 
