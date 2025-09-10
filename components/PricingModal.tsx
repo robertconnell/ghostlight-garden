@@ -77,7 +77,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
-          <div className="sticky top-0 bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
+          <div className="bg-white border-b border-gray-200 px-6 py-4 flex items-center justify-between">
             <h2 className="text-4xl font-alex-brush text-gray-900">pricing information</h2>
             <button
               onClick={onClose}
@@ -157,7 +157,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
           </div>
 
           {/* Footer */}
-          <div className="sticky bottom-0 bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end">
+          <div className="bg-gray-50 border-t border-gray-200 px-6 py-4 flex justify-end">
             <button
               onClick={onClose}
               className="px-6 py-2 bg-purple-300 hover:bg-purple-400 text-white rounded-lg transition-colors font-medium"
