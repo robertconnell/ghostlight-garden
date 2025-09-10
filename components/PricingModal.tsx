@@ -24,13 +24,13 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
     { item: "Print",            size: "8x12 inches",  price: "$30" },
     { item: "Print",            size: "11x17 inches", price: "$50" },
     { item: "Print",            size: "14x22 inches", price: "$80" },
-    { item: "Original", size: "8x11 inches",  price: "$300" },
+    { item: "Original",         size: "8x11 inches",  price: "$300" },
     { item: "Limited Edition",  size: "20x30 inches", price: "$700" },
   ];
 
   const addOnPricing: AddOnPricing[] = [
     { option: "Frame",               additionalCost: "+$20" },
-    { option: "Glittered Frame",  additionalCost: "+$25 (includes +$5 glitter)" },
+    { option: "Glittered Frame",  additionalCost: "+$25" },
     { option: "Resin Glitter",       additionalCost: "+$5" },
   ];
 
