@@ -88,6 +88,38 @@ export const PRODUCT_BY_HANDLE = /* GraphQL */ `
           }
         }
       }
+      metafield(namespace: "custom", key: "metaphor") {
+        value
+      }
+    }
+  }
+`;
+
+export const PRODUCT_LORE_BY_HANDLE = /* GraphQL */ `
+  query ProductLoreByHandle($handle: String!) {
+    product(handle: $handle) {
+      id
+      title
+      handle
+      descriptionHtml
+      featuredImage {
+        url
+        altText
+        width
+        height
+      }
+      metafield(namespace: "custom", key: "lore") {
+        value
+      }
+      collections(first: 10) {
+        edges {
+          node {
+            id
+            title
+            handle
+          }
+        }
+      }
     }
   }
 `;
@@ -146,6 +178,9 @@ export const GET_COLLECTIONS_WITH_PRODUCTS = /* GraphQL */ `
                     currencyCode
                   }
                 }
+                metafield(namespace: "custom", key: "lore") {
+                  value
+                }
                 collections(first: 10) {
                   edges {
                     node {
@@ -194,6 +229,9 @@ export const GET_COLLECTION_BY_HANDLE = /* GraphQL */ `
                 amount
                 currencyCode
               }
+            }
+            metafield(namespace: "custom", key: "lore") {
+              value
             }
             collections(first: 10) {
               edges {

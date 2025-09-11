@@ -19,6 +19,7 @@ export default function Navigation() {
   const cartRef = useRef<HTMLDivElement>(null);
   const collectionsRef = useRef<HTMLDivElement>(null);
 
+
   // Close cart when clicking outside
   useEffect(() => {
     function handleClickOutside(event: MouseEvent) {
@@ -26,7 +27,12 @@ export default function Navigation() {
         setIsCartOpen(false);
       }
       if (collectionsRef.current && !collectionsRef.current.contains(event.target as Node)) {
-        setIsCollectionsSubmenuOpen(false);
+        // Check if the click is on the Collections button itself
+        const target = event.target as Element;
+        const isCollectionsButton = target.closest('button[data-collections-button]');
+        if (!isCollectionsButton) {
+          setIsCollectionsSubmenuOpen(false);
+        }
       }
     }
 
@@ -152,7 +158,9 @@ export default function Navigation() {
                 )}
               </AnimatePresence>
             </div>
-
+            <Link href="/lore" className="text-gray-600 hover:text-purple-900 transition-colors">
+              Lore
+            </Link>
             <Link href="/commissions" className="text-gray-600 hover:text-purple-900 transition-colors">
               Commissions
             </Link>
@@ -305,7 +313,10 @@ export default function Navigation() {
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
                 className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-[9998] md:hidden"
-                onClick={() => setIsMobileMenuOpen(false)}
+                onClick={() => {
+                  setIsMobileMenuOpen(false);
+                  setIsCollectionsSubmenuOpen(false);
+                }}
               />
               
               {/* Mobile Menu Overlay - Height Animation */}
@@ -332,7 +343,15 @@ export default function Navigation() {
                   {/* Mobile Collections Submenu */}
                   <div className="space-y-1">
                     <button
-                      onClick={() => setIsCollectionsSubmenuOpen(!isCollectionsSubmenuOpen)}
+                      data-collections-button
+                      onClick={() => {
+                        // Toggle the submenu, but keep the mobile menu open
+                        if (isCollectionsSubmenuOpen) {
+                          setIsCollectionsSubmenuOpen(false);
+                        } else {
+                          setIsCollectionsSubmenuOpen(true);
+                        }
+                      }}
                       className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50 w-full text-left flex items-center justify-between"
                     >
                       <span>Collections</span>
@@ -381,12 +400,19 @@ export default function Navigation() {
                   </div>
                   
                   <Link 
+                    href="/lore" 
+                    className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
+                    onClick={() => setIsMobileMenuOpen(false)}
+                  >
+                    Lore
+                  </Link>
+                  <Link 
                     href="/commissions" 
                     className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Commissions
-                  </Link>
+                  </Link>                  
                   <Link 
                     href="/about" 
                     className="text-gray-600 hover:text-purple-900 transition-colors px-4 py-3 block rounded-lg hover:bg-gray-50"

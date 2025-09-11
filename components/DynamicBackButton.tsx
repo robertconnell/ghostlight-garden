@@ -31,17 +31,9 @@ export default function DynamicBackButton({ primaryCollection }: DynamicBackButt
     // Only check referrer if it's a direct navigation (not client-side routing)
     const referrerFromAll = referrer && referrer.includes('/collections/all') && !referrer.includes(window.location.origin);
     
-    console.log('=== DYNAMIC BACK BUTTON DEBUG ===');
-    console.log('Debug - Referrer:', referrer);
-    console.log('Debug - Current URL:', currentUrl);
-    console.log('Debug - URL param from=all:', fromAll);
-    console.log('Debug - Session storage fromAll:', fromAllStorage);
-    console.log('Debug - Referrer contains /collections/all:', referrerFromAll);
-    console.log('Debug - Primary Collection:', primaryCollection);
     
     // Only use session storage method for reliability
     if (fromAllStorage) {
-      console.log('Debug - Setting back to All (session storage)');
       setBackButtonProps({
         href: '/collections/all',
         text: 'Back to All'
@@ -49,16 +41,13 @@ export default function DynamicBackButton({ primaryCollection }: DynamicBackButt
       // Clear the session storage flag after a short delay to ensure it's detected
       setTimeout(() => {
         sessionStorage.removeItem('fromAll');
-        console.log('Debug - Cleared fromAll flag after detection');
       }, 100);
     } else {
-      console.log('Debug - Using default collection button');
       setBackButtonProps({
         href: `/collections/${primaryCollection.handle}`,
         text: `Back to ${primaryCollection.title}`
       });
     }
-    console.log('=== END DEBUG ===');
   }, [primaryCollection]);
 
   // Note: Session storage cleanup is handled in the main useEffect with setTimeout

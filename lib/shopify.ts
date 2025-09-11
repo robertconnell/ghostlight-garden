@@ -143,3 +143,13 @@ export async function checkOrderStatus(cartId: string): Promise<string | null> {
     return null;
   }
 }
+
+// Metafield types
+export interface Metafield {
+  value: string;
+}
+
+export interface ProductMetafields {
+  metaphor?: Metafield;
+  lore?: Metafield;
+}

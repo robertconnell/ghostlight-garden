@@ -188,7 +188,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
                   <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-2">{product.title}</h1>
                   
                   <p className="text-xl text-gray-200 drop-shadow-md">
-                    From the <Link href={`/collections/${resolvedParams.collection}`} className="text-purple-300 hover:text-purple-900">
+                    From the <Link href={`/collections/${resolvedParams.collection}`} className="text-purple-900 hover:text-purple-300 transition-colors">
                       {collection.title}
                     </Link> collection
                   </p>
@@ -203,6 +203,48 @@ export default async function ProductPage({ params }: ProductPageProps) {
 
                 </div>
 
+                {/* Product Metaphor/Lore */}
+                {(product.metafield?.value || product.descriptionHtml) && (
+                  <div className="space-y-4">
+                    {/* Show metaphor if available, otherwise fallback to description */}
+                    {product.metafield?.value ? (
+                      <div className="prose text-gray-200 drop-shadow-md">
+                        <div className="whitespace-pre-line">{product.metafield.value}</div>
+                      </div>
+                    ) : (
+                      product.descriptionHtml && (
+                        <div 
+                          className="prose text-gray-200 drop-shadow-md" 
+                          dangerouslySetInnerHTML={{ __html: product.descriptionHtml }} 
+                        />
+                      )
+                    )}
+                    
+                    {/* Lore link */}
+                    <div>
+                      <Link 
+                        href={`/lore/${resolvedParams.collection}/${product.handle}`}
+                        className="text-purple-900 hover:text-purple-300 transition-colors font-medium"
+                      >
+                        Read the full lore →
+                      </Link>
+                    </div>
+                  </div>
+                )}
+
+                {/* Always show lore link even if no metaphor/description */}
+                {!(product.metafield?.value || product.descriptionHtml) && (
+                  <div className="space-y-4">
+                    <div>
+                      <Link 
+                        href={`/lore/${resolvedParams.collection}/${product.handle}`}
+                        className="text-purple-900 hover:text-purple-300 transition-colors font-medium"
+                      >
+                        Read the full lore →
+                      </Link>
+                    </div>
+                  </div>
+                )}
 
                 {/* Variants - Show for all products since they all have variants */}
                 <div>

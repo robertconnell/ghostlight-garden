@@ -160,16 +160,14 @@ export default function VariantPicker({ product, collectionHandle }: VariantPick
 
   return (
     <div className="space-y-4">
-      {/* Dynamic Price Display - Always show price */}
-      <div className="text-2xl font-semibold text-gray-800">
-        {formatPrice(selectedPrice)}
-      </div>
-
-      {/* Pricing Guide Link */}
-      <div className="mt-2">
+      {/* Dynamic Price Display with Pricing Guide */}
+      <div className="flex items-center justify-between">
+        <div className="text-2xl font-semibold text-gray-800">
+          {formatPrice(selectedPrice)}
+        </div>
         <button
           onClick={openPricingModal}
-          className="text-purple-600 hover:text-purple-800 text-sm font-medium underline transition-colors"
+          className="text-purple-900 hover:text-purple-300 transition-colors font-medium text-sm"
         >
           View Pricing Guide
         </button>
