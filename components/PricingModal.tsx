@@ -73,7 +73,7 @@ export default function PricingModal({ isOpen, onClose }: PricingModalProps) {
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: 20 }}
           transition={{ duration: 0.2 }}
-          className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90vh] overflow-y-auto"
+          className="bg-white rounded-lg shadow-xl max-w-4xl w-full max-h-[90svh] overflow-y-auto"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Header */}
