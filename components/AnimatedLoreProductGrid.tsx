@@ -83,7 +83,7 @@ export default function AnimatedLoreProductGrid({ products, collectionHandle }: 
                 
                 {/* Read Lore Link */}
                 <div className="flex items-center justify-end">
-                  <span className="text-purple-600 group-hover:text-purple-800 font-medium transition-colors">
+                  <span className="text-purple-900 group-hover:text-purple-300 font-medium transition-colors">
                     Read Full Lore →
                   </span>
                 </div>

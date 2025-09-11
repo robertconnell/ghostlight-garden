@@ -83,8 +83,9 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
               role="img"
               aria-label="PC background: Lore and stories scene"
             />
-            {/* Light pink overlay to brighten and add pink tint */}
-            <div className="absolute inset-0 bg-pink-100/30"></div>
+            {/* Dark overlay for better text contrast */}
+            <div className="absolute inset-0 bg-black/20"></div>
+            
           </div>
 
           {/* Mobile Background */}
@@ -99,8 +100,9 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
               role="img"
               aria-label="Mobile background: Lore and stories scene"
             />
-            {/* Light pink overlay to brighten and add pink tint */}
-            <div className="absolute inset-0 bg-pink-100/30"></div>
+            {/* Dark overlay for better text contrast */}
+            <div className="absolute inset-0 bg-black/20"></div>
+
           </div>
 
           {/* Hero Section */}
@@ -131,7 +133,7 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
                 <div className="order-1 md:order-1">
                   {hasLore ? (
                     <div className="bg-gray-100/30 backdrop-blur-sm rounded-lg p-6 space-y-4 shadow-lg">
-                      <div className="prose text-gray-800 text-left">
+                      <div className="prose text-gray-100 text-left drop-shadow-md">
                         {/* Check if lore contains HTML tags */}
                         {lore.includes('<') ? (
                           <div dangerouslySetInnerHTML={{ __html: lore }} />
