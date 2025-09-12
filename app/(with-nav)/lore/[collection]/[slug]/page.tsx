@@ -175,11 +175,21 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
                     <div className="absolute -inset-4 bg-gradient-to-r from-purple-300 to-pink-300 rounded-3xl blur-lg opacity-30"></div>
                     <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-2 shadow-xl">
                       {product.featuredImage ? (
-                        <img
-                          src={product.featuredImage.url}
-                          alt={product.featuredImage.altText || product.title}
-                          className="w-full rounded-xl shadow-lg object-contain bg-transparent"
-                        />
+                        <>
+                          <img
+                            src={product.featuredImage.url}
+                            alt={product.featuredImage.altText || product.title}
+                            className="w-full rounded-xl shadow-lg object-contain bg-transparent"
+                          />
+                          {/* Brand Logo Overlay */}
+                          <div className="absolute bottom-2 left-2 pointer-events-none">
+                            <img
+                              src="/img/brand_logo.png"
+                              alt="Ghostlight Garden"
+                              className="opacity-50 w-1/3 h-1/3"
+                            />
+                          </div>
+                        </>
                       ) : (
                         <div className="w-full h-64 bg-gradient-to-br from-purple-100 to-pink-100 rounded-xl flex items-center justify-center">
                           <span className="text-gray-400 text-lg">{product.title}</span>
