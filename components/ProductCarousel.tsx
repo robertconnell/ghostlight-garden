@@ -105,7 +105,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 href={`/collections/${primaryCollection.handle}/${product.handle}`}
                 className="group block"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 md:w-90 mx-auto">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 tablet:w-90 mx-auto">
                   {/* Product Image */}
                   <div 
                     className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-transparent"
@@ -136,7 +136,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                             alt="Ghostlight Garden"
                             width={200}
                             height={200}
-                            className="opacity-45 w-1/3 h-1/3 md:w-1/3 md:h-1/3"
+                            className="opacity-45 w-1/3 h-1/3 tablet:w-1/3 tablet:h-1/3"
                           />
                         </div>
                       </>

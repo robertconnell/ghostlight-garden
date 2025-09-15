@@ -70,16 +70,16 @@ export default function CommissionsPage() {
         }}
       />
       {/* Background component to ensure consistency */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-white"></div>
+      <div className="hidden tablet:block fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-white"></div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-white"></div>
+      <div className="tablet:hidden fixed inset-0 z-0 bg-gradient-to-b from-[#DDC1CB] to-white"></div>
 
       <div className="relative z-10 min-h-full">
         {/* Hero Section */}
         <div className="py-10 px-6">
           <div className="max-w-4xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">Custom Art Commission</h1>
+            <h1 className="text-4xl tablet:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">Custom Art Commission</h1>
             <p className="text-xl text-gray-700 leading-relaxed max-w-4xl mx-auto">
               Bring your vision to life in my pastel-spooky garden—hand-painted, mixed-media pieces made just for you 🩷
             </p>

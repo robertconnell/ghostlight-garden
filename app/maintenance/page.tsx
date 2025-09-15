@@ -42,11 +42,11 @@ export default function MaintenancePage() {
 
 
 
-      <div className="relative z-10 pt-8 md:pt-16 pb-8 px-2 sm:px-4 lg:px-0">
+      <div className="relative z-10 pt-8 tablet:pt-16 pb-8 px-2 sm:px-4 lg:px-0">
         <div className="max-w-6xl mx-auto text-center px-4 sm:px-6 lg:px-8">
         {/* Logo/Brand */}
         <div className="mb-12 px-2 sm:px-4">
-          <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#FFF9F5] to-[#9A77CC] bg-clip-text text-transparent mb-10 leading-tight ghostlight-font coming-soon-title drop-shadow-lg">
+          <h1 className="text-5xl sm:text-6xl tablet:text-7xl lg:text-8xl font-bold bg-gradient-to-r from-[#FFF9F5] to-[#9A77CC] bg-clip-text text-transparent mb-10 leading-tight ghostlight-font coming-soon-title drop-shadow-lg">
             Ghostlight Garden
           </h1>
           <div className="w-24 h-1 bg-gradient-to-r from-[#FFF9F5] to-[#9A77CC] mx-auto rounded-full"></div>
@@ -54,7 +54,7 @@ export default function MaintenancePage() {
 
         {/* Main Message */}
         <div className="mb-12">
-          <h2 className="text-2xl md:text-4xl font-semibold text-white mb-6 drop-shadow-lg">
+          <h2 className="text-2xl tablet:text-4xl font-semibold text-white mb-6 drop-shadow-lg">
             We're Growing Something New
           </h2>
           <p className="text-xl text-white/90 leading-relaxed max-w-2xl mx-auto drop-shadow-lg">
@@ -66,7 +66,7 @@ export default function MaintenancePage() {
         {/* Status */}
         <div className="bg-white/40 backdrop-blur-sm rounded-2xl p-8 mb-12 shadow-lg border border-white/30 max-w-3xl mx-auto">
           <h3 className="text-2xl font-semibold text-gray-600 mb-4">Status</h3>
-          <div className="text-4xl md:text-5xl text-white mb-2 font-alex-brush">
+          <div className="text-4xl tablet:text-5xl text-white mb-2 font-alex-brush">
             Under Maintenance
           </div>
           <p className="text-gray-600">blooming soon</p>
@@ -77,7 +77,7 @@ export default function MaintenancePage() {
           <img 
             src="/img/brand_logo.png" 
             alt="Ghostlight Garden Logo" 
-            className="w-48 h-48 md:w-64 md:h-64 object-contain bg-transparent"
+            className="w-48 h-48 tablet:w-64 tablet:h-64 object-contain bg-transparent"
             style={{ 
               background: 'transparent', 
               backgroundColor: 'transparent',
@@ -116,7 +116,7 @@ export default function MaintenancePage() {
         </div>
 
         {/* Footer */}
-        <div className="pt-8 pb-4 md:pb-0 border-t border-white/30 mt-32">
+        <div className="pt-8 pb-4 tablet:pb-0 border-t border-white/30 mt-32">
           <p className="text-sm text-white/80">
             © 2025 Ghostlight Garden. All rights reserved.
           </p>

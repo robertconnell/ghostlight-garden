@@ -88,8 +88,8 @@ export default function CollectionsPage() {
   // Background component to ensure consistency across all states
   const Background = () => (
     <>
-      {/* PC Background */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+      {/* Desktop Background */}
+      <div className="hidden lg:block fixed inset-0 z-0 bg-gray-50">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
@@ -98,14 +98,30 @@ export default function CollectionsPage() {
             transform: 'translateZ(0)'
           }}
           role="img"
-          aria-label="PC background: Artistic collection scene"
+          aria-label="Desktop background: Artistic collection scene"
+        />
+        {/* Light pink overlay to brighten and add pink tint */}
+        <div className="absolute inset-0 bg-pink-100/30"></div>
+      </div>
+
+      {/* Tablet Background */}
+      <div className="hidden tablet:block lg:hidden fixed inset-0 z-0 bg-gray-50">
+        <div
+          className="w-full h-full bg-cover bg-center bg-no-repeat"
+          style={{ 
+            backgroundImage: 'url(/img/pc_collections_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)'
+          }}
+          role="img"
+          aria-label="Tablet background: Artistic collection scene"
         />
         {/* Light pink overlay to brighten and add pink tint */}
         <div className="absolute inset-0 bg-pink-100/30"></div>
       </div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+      <div className="tablet:hidden fixed inset-0 z-0 bg-gray-50">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
@@ -183,7 +199,7 @@ export default function CollectionsPage() {
         
         {/* SEO-Optimized Header Section */}
         <div className="text-center py-10 px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
+          <h1 className="text-4xl tablet:text-5xl lg:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
             Art Collections
           </h1>
           <p className="text-xl text-gray-100 max-w-4xl mx-auto drop-shadow-md leading-relaxed">
@@ -219,7 +235,7 @@ export default function CollectionsPage() {
         </div>
         
         {/* Collections Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+        <div className="grid grid-cols-1 tablet:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
           {collections && collections.length > 0 && collections.map((collection: any, index: number) => (
             <motion.div 
               key={collection.id} 

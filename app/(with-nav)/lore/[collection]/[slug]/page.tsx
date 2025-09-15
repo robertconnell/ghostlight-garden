@@ -72,7 +72,7 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
         {/* Background */}
         <div className="min-h-full">
           {/* PC Background */}
-          <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+          <div className="hidden tablet:block fixed inset-0 z-0 bg-gray-50">
             <div
               className="w-full h-full bg-cover bg-center bg-no-repeat"
               style={{ 
@@ -89,7 +89,7 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
           </div>
 
           {/* Mobile Background */}
-          <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+          <div className="tablet:hidden fixed inset-0 z-0 bg-gray-50">
             <div
               className="w-full h-full bg-cover bg-center bg-no-repeat"
               style={{ 
@@ -108,17 +108,17 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
           {/* Hero Section */}
           <div className="relative z-10 py-10 px-6">
             <div className="max-w-4xl mx-auto text-center">
-              <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">
+              <h1 className="text-4xl tablet:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">
                 {product.title}
               </h1>
-              <p className="text-lg md:text-xl text-gray-200 drop-shadow-md mb-6">
+              <p className="text-lg tablet:text-xl text-gray-200 drop-shadow-md mb-6">
                 The Lore & Story
               </p>
               <div className="w-72 h-1 bg-gradient-to-r from-[#FFF9F566] to-[#9A77CC] mx-auto mt-6 rounded-full"></div>
             </div>
 
             {/* Dynamic Back Button */}
-            <div className="max-w-4xl mx-auto px-4 md:px-6 mt-8">
+            <div className="max-w-4xl mx-auto px-4 tablet:px-6 mt-8">
               <DynamicLoreBackButton 
                 collectionHandle={resolvedParams.collection}
                 collectionTitle={resolvedParams.collection.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase())}
@@ -127,10 +127,10 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
             </div>
 
             {/* Main Content - Reverse About Page Layout */}
-            <div className="max-w-5xl mx-auto px-4 md:px-6 mb-16 mt-12">
-              <div className="grid gap-12 md:grid-cols-2">
+            <div className="max-w-5xl mx-auto px-4 tablet:px-6 mb-16 mt-12">
+              <div className="grid gap-12 tablet:grid-cols-2">
                 {/* Lore Content - Left Side */}
-                <div className="order-1 md:order-1">
+                <div className="order-1 tablet:order-1">
                   {hasLore ? (
                     <div className="bg-gray-100/30 backdrop-blur-sm rounded-lg p-6 space-y-4 shadow-lg">
                       <div className="prose text-gray-100 text-left drop-shadow-md">
@@ -170,7 +170,7 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
                 </div>
 
                 {/* Product Image - Right Side */}
-                <div className="flex justify-center items-center order-2 md:order-2 px-2">
+                <div className="flex justify-center items-center order-2 tablet:order-2 px-2">
                   <div className="relative w-full max-w-sm">
                     <div className="absolute -inset-4 bg-gradient-to-r from-purple-300 to-pink-300 rounded-3xl blur-lg opacity-30"></div>
                     <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-2 shadow-xl">

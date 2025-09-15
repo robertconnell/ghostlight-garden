@@ -5,7 +5,7 @@ export default function GlobalFooter() {
     <footer className="w-full py-8 px-4 bg-gray-50 border-t border-gray-200 sticky-footer relative z-30">
       <div className="w-full">
         {/* Mobile Layout - Stacked Vertically */}
-        <div className="md:hidden text-center space-y-4">
+        <div className="tablet:hidden text-center space-y-4">
           {/* Social Media Section */}
           <div className="flex justify-center space-x-4">
             <a 
@@ -61,7 +61,7 @@ export default function GlobalFooter() {
         </div>
 
         {/* Desktop Layout - Three-Column with Left/Center/Right Alignment */}
-        <div className="hidden md:flex relative items-center">
+        <div className="hidden tablet:flex relative items-center">
           {/* Left: Social Media Icons */}
           <div className="flex space-x-3">
             <a 

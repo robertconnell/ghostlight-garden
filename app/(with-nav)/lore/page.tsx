@@ -87,7 +87,7 @@ export default function LorePage() {
   const Background = () => (
     <>
       {/* PC Background */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+      <div className="hidden tablet:block fixed inset-0 z-0 bg-gray-50">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
@@ -103,7 +103,7 @@ export default function LorePage() {
       </div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+      <div className="tablet:hidden fixed inset-0 z-0 bg-gray-50">
         <div
           className="w-full h-full bg-cover bg-center bg-no-repeat"
           style={{ 
@@ -181,7 +181,7 @@ export default function LorePage() {
         
         {/* SEO-Optimized Header Section */}
         <div className="text-center py-10 px-6">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
+          <h1 className="text-4xl tablet:text-5xl font-bold mb-4 text-white drop-shadow-lg embossed-text ghostlight-font">
             Lore & Stories
           </h1>
           <p className="text-xl text-gray-100 max-w-4xl mx-auto drop-shadow-md leading-relaxed">
@@ -217,7 +217,7 @@ export default function LorePage() {
         </div>
         
         {/* Collections Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
+        <div className="grid grid-cols-1 tablet:grid-cols-2 lg:grid-cols-3 gap-8 px-6">
           {collections && collections.length > 0 && collections.map((collection: any, index: number) => (
             <motion.div 
               key={collection.id} 

@@ -115,7 +115,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
     const Background = () => (
       <>
         {/* PC Background */}
-        <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+        <div className="hidden tablet:block fixed inset-0 z-0 bg-gray-50">
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{ 
@@ -131,7 +131,7 @@ export default async function CollectionPage({ params }: CollectionPageProps) {
         </div>
 
         {/* Mobile Background */}
-        <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+        <div className="tablet:hidden fixed inset-0 z-0 bg-gray-50">
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{ 

@@ -122,9 +122,9 @@ export default function HomePageContent() {
         className="relative w-full flex flex-col justify-center items-center text-center px-6 py-20"
         style={{ minHeight: 'calc(100svh - 4rem)' }}
       >
-        {/* PC Background */}
+        {/* Desktop Background */}
         <div
-            className="hidden md:block fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
+            className="hidden lg:block fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
             style={{
             backgroundImage: 'url(/img/pc_home_background.png)',
             willChange: 'transform',
@@ -132,12 +132,25 @@ export default function HomePageContent() {
             paddingBottom: 'env(safe-area-inset-bottom)',
             }}
             role="img"
-            aria-label="PC background: Artistic home scene with soft shadows"
+            aria-label="Desktop background: Artistic home scene with soft shadows"
+        />
+
+        {/* Tablet Background */}
+        <div
+            className="hidden tablet:block lg:hidden fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
+            style={{
+            backgroundImage: 'url(/img/pc_home_background.png)',
+            willChange: 'transform',
+            transform: 'translateZ(0)',
+            paddingBottom: 'env(safe-area-inset-bottom)',
+            }}
+            role="img"
+            aria-label="Tablet background: Artistic home scene with soft shadows"
         />
 
         {/* Mobile Background */}
         <div
-            className="md:hidden fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
+            className="tablet:hidden fixed inset-0 z-0 bg-gray-50 bg-cover bg-center bg-no-repeat pointer-events-none h-[100svh]"
             style={{
             backgroundImage: 'url(/img/mobile_home_background.png)',
             willChange: 'transform',
@@ -149,9 +162,9 @@ export default function HomePageContent() {
         />
 
         {/* Hero Content */}
-        <div className="absolute top-1/4 left-1/10 lg:left-1/10 z-10 max-w-6xl mx-auto">
+        <div className="absolute top-1/4 left-1/10 tablet:left-1/10 lg:left-1/10 z-10 max-w-6xl mx-auto">
           <motion.h1 
-            className="text-4xl lg:text-8xl text-white drop-shadow-lg embossed-text font-alex-brush"
+            className="text-4xl tablet:text-6xl lg:text-8xl text-white drop-shadow-lg embossed-text font-alex-brush"
             initial={{ opacity: 0, x: 15 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 1, duration: 1.2, ease: "easeOut" }}
@@ -197,7 +210,7 @@ export default function HomePageContent() {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 1.2, delay: 0.6, ease: "easeOut" }}
             >
-              <h2 className="text-3xl md:text-4xl font-bold mb-4 text-gray-800 drop-shadow-md ghostlight-font">
+              <h2 className="text-3xl tablet:text-4xl lg:text-4xl font-bold mb-4 text-gray-800 drop-shadow-md ghostlight-font">
                 Featured Artwork
               </h2>
               <p className="text-md text-gray-600 max-w-2xl mx-auto">
@@ -271,7 +284,7 @@ export default function HomePageContent() {
               <img 
                 src="/img/brand_logo.png" 
                 alt="Ghostlight Garden" 
-                className="mx-auto w-[16rem] h-[16rem] lg:w-[24rem] lg:h-[24rem] drop-shadow-lg"
+                className="mx-auto w-[16rem] h-[16rem] tablet:w-[20rem] tablet:h-[20rem] lg:w-[24rem] lg:h-[24rem] drop-shadow-lg"
               />
           </motion.div>
         </div>

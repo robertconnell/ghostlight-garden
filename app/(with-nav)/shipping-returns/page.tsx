@@ -55,7 +55,7 @@ export default function ShippingReturns() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="grid tablet:grid-cols-2 gap-6 mb-6">
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Standard Shipping</h3>
                 <ul className="text-gray-700 space-y-2">
@@ -144,7 +144,7 @@ export default function ShippingReturns() {
               </p>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="grid tablet:grid-cols-2 gap-6 mb-6">
               <div className="bg-gray-50 p-6 rounded-lg">
                 <h3 className="text-lg font-semibold text-gray-900 mb-3">Return Requirements</h3>
                 <ul className="text-gray-700 space-y-2">

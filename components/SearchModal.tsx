@@ -80,7 +80,7 @@ export default function SearchModal({ isOpen, onClose }: SearchModalProps) {
             damping: 30,
             duration: 0.2
           }}
-          className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-50 overflow-hidden"
+          className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 tablet:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-50 overflow-hidden"
         >
           {/* Search Form */}
           <form onSubmit={handleSearch} className="p-4">

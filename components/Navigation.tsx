@@ -109,7 +109,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden tablet:flex items-center space-x-8">
             <Link href="/home" className="text-gray-600 hover:text-purple-900 transition-colors">
               Home
             </Link>
@@ -272,7 +272,7 @@ export default function Navigation() {
                       damping: 30,
                       duration: 0.2
                     }}
-                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 md:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-[9999] overflow-hidden"
+                    className="fixed sm:absolute left-4 sm:left-auto right-4 sm:right-0 top-20 sm:top-full mt-0 sm:mt-2 w-auto sm:w-80 tablet:w-96 lg:w-[28rem] max-w-[calc(100vw-2rem)] sm:max-w-none bg-white/95 backdrop-blur-sm border border-gray-200/80 rounded-lg shadow-lg z-[9999] overflow-hidden"
                   >
                     <CartDisplay />
                   </motion.div>
@@ -283,7 +283,7 @@ export default function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={handleMobileMenuToggle}
-              className="md:hidden p-2 text-gray-600 hover:text-purple-900 transition-colors"
+              className="tablet:hidden p-2 text-gray-600 hover:text-purple-900 transition-colors"
               aria-label="Toggle mobile menu"
             >
               <svg 
@@ -312,7 +312,7 @@ export default function Navigation() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-[9998] md:hidden"
+                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-[9998] tablet:hidden"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsCollectionsSubmenuOpen(false);
@@ -329,7 +329,7 @@ export default function Navigation() {
                   ease: "easeInOut",
                   height: { duration: 0.3, ease: "easeInOut" }
                 }}
-                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-[9999] md:hidden overflow-hidden"
+                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-[9999] tablet:hidden overflow-hidden"
               >
                 <div className="py-4 space-y-1 px-6">
                   <Link 

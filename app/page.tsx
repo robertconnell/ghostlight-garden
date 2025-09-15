@@ -46,17 +46,22 @@ export default function LandingPage() {
       {/* Background overlay for better text readability */}
       <div className="absolute inset-0 bg-black/20 dark:bg-black/40 pointer-events-none"></div>
 
-      {/* PC Background Image - Hidden on mobile */}
+      {/* Desktop Background Image - Hidden on mobile and tablet */}
       <div 
         className="hidden lg:block absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/pc_landing_background.png')]"
       ></div>
 
-      {/* Mobile Background Image - Hidden on PC */}
+      {/* Tablet Background Image - Hidden on mobile and desktop */}
       <div
-        className="lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/mobile_landing_background.png')]"
+        className="hidden tablet:block lg:hidden absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/pc_landing_background.png')]"
       ></div>
 
-      {/* PC UI - Hidden on mobile */}
+      {/* Mobile Background Image - Hidden on tablet and desktop */}
+      <div
+        className="tablet:hidden absolute inset-0 bg-cover bg-center bg-no-repeat bg-[url('/img/mobile_landing_background.png')]"
+      ></div>
+
+      {/* Desktop UI - Hidden on mobile and tablet */}
       <div className="hidden lg:flex relative z-10 flex-1 flex-col items-center justify-start pt-[25vh]">
         <motion.h1 
           className="text-6xl font-bold text-center mb-12 text-white drop-shadow-lg welcome-font"

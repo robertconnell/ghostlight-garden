@@ -62,7 +62,7 @@ export default function ProductImageSlider({ images, productTitle }: ProductImag
             alt="Ghostlight Garden"
             width={200}
             height={200}
-            className="opacity-45 w-1/3 h-1/3 md:w-1/2 md:h-1/2"
+            className="opacity-45 w-1/3 h-1/3 tablet:w-1/2 tablet:h-1/2"
           />
         </div>
         

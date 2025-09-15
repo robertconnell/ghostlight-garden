@@ -122,7 +122,7 @@ export default function StickyActionButtons({
   return (
     <>
       {/* Desktop: Side by side buttons */}
-      <div className="hidden md:flex gap-3">
+      <div className="hidden tablet:flex gap-3">
         <div className="flex-1">
           <div 
             className="w-full relative" 
@@ -167,7 +167,7 @@ export default function StickyActionButtons({
       {/* Mobile: Sticky bottom buttons - rendered via portal */}
       {typeof window !== 'undefined' && !isPricingModalOpen && createPortal(
         <div 
-          className={`md:hidden fixed bottom-0 left-0 right-0 transition-transform duration-300 sticky-action-buttons ${
+          className={`tablet:hidden fixed bottom-0 left-0 right-0 transition-transform duration-300 sticky-action-buttons ${
             isVisible ? 'translate-y-0' : 'translate-y-full'
           }`}
           style={{ zIndex: 99999 }}
@@ -224,7 +224,7 @@ export default function StickyActionButtons({
       )}
 
       {/* Mobile: Spacer to prevent content from being hidden behind sticky buttons */}
-      <div className="md:hidden h-20"></div>
+      <div className="tablet:hidden h-20"></div>
 
 
 

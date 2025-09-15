@@ -120,7 +120,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
     const Background = () => (
       <>
         {/* PC Background */}
-        <div className="hidden md:block fixed inset-0 z-0 bg-gray-50">
+        <div className="hidden tablet:block fixed inset-0 z-0 bg-gray-50">
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{ 
@@ -136,7 +136,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         </div>
 
         {/* Mobile Background */}
-        <div className="md:hidden fixed inset-0 z-0 bg-gray-50">
+        <div className="tablet:hidden fixed inset-0 z-0 bg-gray-50">
           <div
             className="w-full h-full bg-cover bg-center bg-no-repeat"
             style={{ 
@@ -185,7 +185,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
               {/* Product Info */}
               <div className="space-y-6">
                 <div>
-                  <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-2">{product.title}</h1>
+                  <h1 className="text-4xl tablet:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-2">{product.title}</h1>
                   
                   <p className="text-xl text-gray-200 drop-shadow-md">
                     From the <Link href={`/collections/${resolvedParams.collection}`} className="text-purple-900 hover:text-purple-300 transition-colors">

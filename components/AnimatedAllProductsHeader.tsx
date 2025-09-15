@@ -17,7 +17,7 @@ export default function AnimatedAllProductsHeader({ title, description }: Animat
     >
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-4">{title}</h1>
+          <h1 className="text-4xl tablet:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-4">{title}</h1>
           <p className="text-xl text-gray-200 max-w-4xl mx-auto leading-relaxed drop-shadow-md mb-6">
             {description}
           </p>

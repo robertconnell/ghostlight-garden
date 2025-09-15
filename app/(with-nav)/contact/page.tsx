@@ -61,15 +61,15 @@ export default function ContactPage() {
   return (
     <div className="min-h-full">
       {/* Background component to ensure consistency */}
-      <div className="hidden md:block fixed inset-0 z-0 bg-gradient-to-b from-purple-200 to-white"></div>
+      <div className="hidden tablet:block fixed inset-0 z-0 bg-gradient-to-b from-purple-200 to-white"></div>
 
       {/* Mobile Background */}
-      <div className="md:hidden fixed inset-0 z-0 bg-gradient-to-b from-purple-200 to-white"></div>
+      <div className="tablet:hidden fixed inset-0 z-0 bg-gradient-to-b from-purple-200 to-white"></div>
 
       {/* Hero Section */}
       <div className="relative z-10 py-10 px-6">
         <div className="max-w-4xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">Get in Touch</h1>
+          <h1 className="text-4xl tablet:text-5xl font-bold text-white drop-shadow-lg embossed-text ghostlight-font mb-6">Get in Touch</h1>
           <p className="text-xl text-gray-700 leading-relaxed max-w-3xl mx-auto">
           Have a question, commission idea, or collab? I’d love to hear from you.
           </p>

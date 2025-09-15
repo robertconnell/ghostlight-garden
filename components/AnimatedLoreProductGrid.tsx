@@ -23,7 +23,7 @@ interface AnimatedLoreProductGridProps {
 
 export default function AnimatedLoreProductGrid({ products, collectionHandle }: AnimatedLoreProductGridProps) {
   return (
-    <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+    <div className="grid gap-8 tablet:grid-cols-2 lg:grid-cols-3">
       {products.map((product: Product, index: number) => (
         <motion.div
           key={product.id}

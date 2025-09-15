@@ -126,7 +126,7 @@ export default function ShopContent({ products, searchTerm = "" }: ShopContentPr
 
       {/* Products Grid with Staggered Animation */}
       <motion.div 
-        className="grid gap-6 grid-cols-2 md:grid-cols-3 lg:grid-cols-3"
+        className="grid gap-6 grid-cols-2 tablet:grid-cols-3 lg:grid-cols-3"
         variants={containerVariants}
         initial="hidden"
         animate="visible"
