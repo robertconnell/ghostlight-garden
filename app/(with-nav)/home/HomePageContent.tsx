@@ -185,7 +185,7 @@ export default function HomePageContent() {
           onClick={scrollToFeaturedArtwork}
         >
           <div className="flex flex-col items-center text-white drop-shadow-lg hover:text-gray-200 transition-colors duration-200">
-            <span className="text-lg mb-2">scroll to see more</span>
+            <span className="text-lg lg:text-xl mb-2">scroll to see more</span>
             <motion.div
               animate={{ y: [0, 5, 0] }}
               transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}

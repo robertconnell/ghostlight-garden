@@ -10,6 +10,14 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-eb-garamond);
   --font-mono: var(--font-geist-mono);
+  
+  /* Custom breakpoints for better tablet support */
+  --breakpoint-tablet: 768px;
+  --breakpoint-sm: 640px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
 }
 
 @media (prefers-color-scheme: dark) {

@@ -109,7 +109,7 @@ export default function Navigation() {
           </Link>
 
           {/* Desktop Navigation Links */}
-          <div className="hidden tablet:flex items-center space-x-8">
+          <div className="hidden lg:flex items-center space-x-8">
             <Link href="/home" className="text-gray-600 hover:text-purple-900 transition-colors">
               Home
             </Link>
@@ -283,7 +283,7 @@ export default function Navigation() {
             {/* Mobile Menu Button */}
             <button
               onClick={handleMobileMenuToggle}
-              className="tablet:hidden p-2 text-gray-600 hover:text-purple-900 transition-colors"
+              className="lg:hidden p-2 text-gray-600 hover:text-purple-900 transition-colors"
               aria-label="Toggle mobile menu"
             >
               <svg 
@@ -312,7 +312,7 @@ export default function Navigation() {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
                 transition={{ duration: 0.2 }}
-                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-[9998] tablet:hidden"
+                className="fixed top-16 inset-x-0 bottom-0 bg-black/50 z-[9998] lg:hidden"
                 onClick={() => {
                   setIsMobileMenuOpen(false);
                   setIsCollectionsSubmenuOpen(false);
@@ -329,7 +329,7 @@ export default function Navigation() {
                   ease: "easeInOut",
                   height: { duration: 0.3, ease: "easeInOut" }
                 }}
-                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-[9999] tablet:hidden overflow-hidden"
+                className="fixed top-16 left-0 right-0 bg-white border-b border-gray-200 shadow-lg z-[9999] lg:hidden overflow-hidden"
               >
                 <div className="py-4 space-y-1 px-6">
                   <Link 

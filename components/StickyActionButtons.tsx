@@ -122,7 +122,7 @@ export default function StickyActionButtons({
   return (
     <>
       {/* Desktop: Side by side buttons */}
-      <div className="hidden tablet:flex gap-3">
+      <div className="hidden lg:flex gap-3">
         <div className="flex-1">
           <div 
             className="w-full relative" 
