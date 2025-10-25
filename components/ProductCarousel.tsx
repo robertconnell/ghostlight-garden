@@ -47,36 +47,36 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   // Splide carousel configuration options
   const splideOptions = {
     type: "loop", // Loop back to the beginning when reaching the end
-    perPage: 3, // Number of items visible per page
+    perPage: 5, // Number of items visible per page
     perMove: 1, // Move one item at a time
     rewind: true, // Rewind to start when the end is reached
     pagination: false, // Disable pagination dots
     autoplay: true, // Enable autoplay
-    interval: 4000, // 4 seconds between slides
+    interval: 3000, // 4 seconds between slides
     pauseOnHover: true, // Pause on hover
     arrows: true, // Show navigation arrows
-    gap: "1.5rem", // Gap between slides
+    gap: "1rem", // Reduced gap between slides
     padding: "0", // No padding
     start: 0, // Start from the first slide
-    focus: "center", // Use center focus for better initial positioning
+    focus: "center", // Center the active slide
     height: "auto", // Let height adjust to content
     fixedHeight: false, // Don't force a fixed height
     breakpoints: {
       1024: {
-        perPage: 2,
-        gap: "1.5rem",
+        perPage: 3,
+        gap: "0.5rem",
         padding: "0",
-        focus: "center", // Use center focus for 2 slides on iPad Pro
+        focus: "center", // Use center focus for 3 slides on iPad Pro
       },
       768: {
         perPage: 2,
-        gap: "1rem",
+        gap: "0.75rem",
         padding: "0",
         focus: "center", // Use center focus for 2 slides on iPad Air
       },
       640: {
         perPage: 1,
-        gap: "0.75rem",
+        gap: "0.5rem",
         padding: "0",
         focus: "center", // Use center focus for 1 slide
       },
@@ -92,9 +92,15 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   }
 
   return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    <div className="relative w-full">
       {/* Carousel Container */}
       <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[400px]">
+        {/* Left fade overlay */}
+        <div className="absolute left-0 top-0 bottom-0 w-[15%] bg-gradient-to-r from-white via-white/50 to-transparent z-20 pointer-events-none"></div>
+        
+        {/* Right fade overlay */}
+        <div className="absolute right-0 top-0 bottom-0 w-[15%] bg-gradient-to-l from-white via-white/50 to-transparent z-20 pointer-events-none"></div>
+        
         {/* Splide component with configuration options */}
         <Splide options={splideOptions}>
           {products.map((product, index) => {
@@ -105,7 +111,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 href={`/collections/${primaryCollection.handle}/${product.handle}`}
                 className="group block"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 tablet:w-90 mx-auto">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 mx-auto splide__slide-content">
                   {/* Product Image */}
                   <div 
                     className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-transparent"
