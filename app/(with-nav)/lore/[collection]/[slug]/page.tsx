@@ -151,7 +151,7 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
                         We're working on bringing you the full story behind this piece. 
                         Check back soon for the complete lore and tale that inspired this creation.
                       </p>
-                      <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                      {/* <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link 
                           href={`/collections/${resolvedParams.collection}/${product.handle}`}
                           className="inline-flex items-center justify-center px-6 py-3 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors font-medium"
@@ -164,7 +164,7 @@ export default async function LoreDetailPage({ params }: LoreDetailPageProps) {
                         >
                           Explore Collection Lore
                         </Link>
-                      </div>
+                      </div> */}
                     </div>
                   )}
                 </div>
