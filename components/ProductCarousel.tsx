@@ -48,7 +48,6 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   const splideOptions = {
     type: "loop", // Loop back to the beginning when reaching the end
     perPage: 5, // Number of items visible per page
-    perPage: 5, // Number of items visible per page
     perMove: 1, // Move one item at a time
     rewind: true, // Rewind to start when the end is reached
     pagination: false, // Disable pagination dots
