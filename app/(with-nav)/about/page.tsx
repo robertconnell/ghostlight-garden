@@ -82,7 +82,7 @@ export default function AboutPage() {
               <div className="relative bg-white/90 backdrop-blur-sm rounded-2xl p-2 shadow-xl">
                 <img
                   src="/img/artist_pofile_picture.jpg"
-                  alt="Kailey - Artist behind Ghostlight Garden"
+                  alt="Artist behind Ghostlight Garden"
                   className="w-full rounded-xl shadow-lg object-contain bg-transparent"
                 />
               </div>

@@ -231,7 +231,7 @@ export default function PrivacyPolicy() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">15. North Carolina–Specific Information</h2>
             <p className="text-gray-700 mb-4">
-              Ghostlight Garden operates in North Carolina as a sole proprietorship under the name Kailey Swindal (dba Ghostlight Garden). Where North Carolina law applies, we comply with state privacy and consumer protection requirements, including:
+              Ghostlight Garden operates in North Carolina. Where North Carolina law applies, we comply with state privacy and consumer protection requirements, including:
             </p>
             <ul className="list-disc pl-6 text-gray-700 mb-4">
               <li>

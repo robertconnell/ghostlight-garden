@@ -47,9 +47,8 @@ export default function TermsOfService() {
           <section className="mb-8">
             <h2 className="text-2xl font-semibold text-gray-900 mb-4">1. Acceptance of Terms</h2>
             <p className="text-gray-700 mb-4">
-              These Terms of Service (“Terms”) govern your access to and use of the website, products, and services offered by
-              Ghostlight Garden, a sole proprietorship operated by Kailey Swindal in North Carolina (“Ghostlight Garden,” “we,”
-              “us,” or “our”). By using our site or placing an order, you agree to these Terms. If you do not agree, do not use
+              These Terms of Service ("Terms") govern your access to and use of the website, products, and services offered by
+              Ghostlight Garden ("Ghostlight Garden," "we," "us," or "our"). By using our site or placing an order, you agree to these Terms. If you do not agree, do not use
               the site.
             </p>
           </section>

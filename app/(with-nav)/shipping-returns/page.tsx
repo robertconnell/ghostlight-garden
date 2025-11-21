@@ -120,7 +120,7 @@ export default function ShippingReturns() {
             <div className="bg-purple-50 border-l-4 border-purple-400 p-6 mb-6">
               <h4 className="text-lg font-semibold text-purple-900 mb-2">North Carolina Sales Tax</h4>
               <p className="text-purple-800 mb-3">
-                As a North Carolina business (Kailey Swindal, dba Ghostlight Garden), we collect
+                As a North Carolina business, Ghostlight Garden collects
                 sales tax on orders shipped to North Carolina addresses.
               </p>
               <ul className="text-purple-800 space-y-1">

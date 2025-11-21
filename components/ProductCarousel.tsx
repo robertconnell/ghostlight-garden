@@ -47,7 +47,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   // Splide carousel configuration options
   const splideOptions = {
     type: "loop", // Loop back to the beginning when reaching the end
-    perPage: 3, // Number of items visible per page
+    perPage: 5, // Number of items visible per page
     perMove: 1, // Move one item at a time
     rewind: true, // Rewind to start when the end is reached
     pagination: false, // Disable pagination dots
@@ -55,7 +55,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     interval: 4000, // 4 seconds between slides
     pauseOnHover: true, // Pause on hover
     arrows: true, // Show navigation arrows
-    gap: "1.5rem", // Gap between slides
+    gap: "0rem", // Gap between slides
     padding: "0", // No padding
     start: 0, // Start from the first slide
     focus: "center", // Use center focus for better initial positioning
@@ -91,8 +91,8 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     );
   }
 
-  return (
-    <div className="relative w-full max-w-6xl mx-auto">
+    return (
+    <div className="relative w-full max-w-7xl mx-auto">
       {/* Carousel Container */}
       <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[400px]">
         {/* Splide component with configuration options */}
@@ -105,7 +105,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                 href={`/collections/${primaryCollection.handle}/${product.handle}`}
                 className="group block"
               >
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 w-72 tablet:w-90 mx-auto">
+                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 hover:border-white/20 transition-all duration-300 mx-auto">
                   {/* Product Image */}
                   <div 
                     className="relative aspect-square mb-4 overflow-hidden rounded-lg bg-transparent"
@@ -120,7 +120,7 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
                           src={product.featuredImage.url}
                           alt={product.featuredImage.altText || product.title}
                           fill
-                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 25vw"
+                          sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, (max-width: 1024px) 33vw, 20vw"
                           className={`object-contain drop-shadow-lg group-hover:scale-105 transition-transform duration-300 ${IMAGE_PROTECTION_ENABLED ? 'select-none' : ''}`}
                           draggable={!IMAGE_PROTECTION_ENABLED}
                           priority={index === 0}
