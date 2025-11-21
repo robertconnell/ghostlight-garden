@@ -77,20 +77,33 @@ body {
 /* Splide carousel custom styles */
 .splide__slide.is-active {
   opacity: 1;
+  transform: scale(1.02);
 }
 
 .splide__slide.is-active .splide__slide-content {
   border-color: rgba(255, 255, 255, 0.4);
   background-color: rgba(255, 255, 255, 0.1);
+  transform: scale(1.01);
 }
 
 .splide__slide:not(.is-active) {
-  opacity: 0.4;
+  opacity: 0.6;
+  transform: scale(0.98);
 }
 
 .splide__slide:not(.is-active) .splide__slide-content {
   border-color: rgba(255, 255, 255, 0.1);
   background-color: rgba(255, 255, 255, 0.05);
+  transform: scale(0.99);
+}
+
+/* Smooth transitions for all slides */
+.splide__slide {
+  transition: all 0.3s ease-in-out;
+}
+
+.splide__slide-content {
+  transition: all 0.3s ease-in-out;
 }
 
 /* Coming soon page title - ensure proper font rendering */

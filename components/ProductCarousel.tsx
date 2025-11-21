@@ -48,35 +48,36 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
   const splideOptions = {
     type: "loop", // Loop back to the beginning when reaching the end
     perPage: 5, // Number of items visible per page
+    perPage: 5, // Number of items visible per page
     perMove: 1, // Move one item at a time
     rewind: true, // Rewind to start when the end is reached
     pagination: false, // Disable pagination dots
     autoplay: true, // Enable autoplay
-    interval: 4000, // 4 seconds between slides
+    interval: 3000, // 4 seconds between slides
     pauseOnHover: true, // Pause on hover
     arrows: true, // Show navigation arrows
     gap: "0rem", // Gap between slides
     padding: "0", // No padding
     start: 0, // Start from the first slide
-    focus: "center", // Use center focus for better initial positioning
+    focus: "center", // Center the active slide
     height: "auto", // Let height adjust to content
     fixedHeight: false, // Don't force a fixed height
     breakpoints: {
       1024: {
-        perPage: 2,
-        gap: "1.5rem",
+        perPage: 3,
+        gap: "0.5rem",
         padding: "0",
-        focus: "center", // Use center focus for 2 slides on iPad Pro
+        focus: "center", // Use center focus for 3 slides on iPad Pro
       },
       768: {
         perPage: 2,
-        gap: "1rem",
+        gap: "0.75rem",
         padding: "0",
         focus: "center", // Use center focus for 2 slides on iPad Air
       },
       640: {
         perPage: 1,
-        gap: "0.75rem",
+        gap: "0.5rem",
         padding: "0",
         focus: "center", // Use center focus for 1 slide
       },
@@ -95,6 +96,12 @@ export default function ProductCarousel({ products }: ProductCarouselProps) {
     <div className="relative w-full max-w-7xl mx-auto">
       {/* Carousel Container */}
       <div className="relative overflow-hidden rounded-2xl bg-white/10 backdrop-blur-sm border border-white/20 min-h-[400px]">
+        {/* Left fade overlay */}
+        <div className="absolute left-0 top-0 bottom-0 w-[15%] bg-gradient-to-r from-white via-white/50 to-transparent z-20 pointer-events-none"></div>
+        
+        {/* Right fade overlay */}
+        <div className="absolute right-0 top-0 bottom-0 w-[15%] bg-gradient-to-l from-white via-white/50 to-transparent z-20 pointer-events-none"></div>
+        
         {/* Splide component with configuration options */}
         <Splide options={splideOptions}>
           {products.map((product, index) => {
